@@ -1299,7 +1299,7 @@ MonoBehaviour:
   m_Script: {fileID: -1002339280, guid: a2b0edc01224bc440b19678e5c817d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundOverride: 146
+  soundOverride: 9
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
@@ -8008,7 +8008,7 @@ MonoBehaviour:
   m_Script: {fileID: -1002339280, guid: a2b0edc01224bc440b19678e5c817d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundOverride: 146
+  soundOverride: 9
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
@@ -8669,7 +8669,7 @@ MonoBehaviour:
   m_Script: {fileID: -1002339280, guid: a2b0edc01224bc440b19678e5c817d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundOverride: 146
+  soundOverride: 9
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
@@ -10217,7 +10217,7 @@ MonoBehaviour:
   m_Script: {fileID: 1060559447, guid: a2b0edc01224bc440b19678e5c817d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapName: TestingMap
+  MapName: ExampleMap
   SpawnPoints: []
   CustomSkybox: {fileID: 8900000, guid: 9df8e37f42ba9124cbcba0bd3d84de21, type: 2}
   GravitySpeed: -9.8
@@ -10719,7 +10719,7 @@ MonoBehaviour:
   m_Script: {fileID: -1002339280, guid: a2b0edc01224bc440b19678e5c817d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundOverride: 146
+  soundOverride: 9
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
@@ -13251,7 +13251,7 @@ MonoBehaviour:
   m_Script: {fileID: -1002339280, guid: a2b0edc01224bc440b19678e5c817d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundOverride: 146
+  soundOverride: 9
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
@@ -15811,6 +15811,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AccessDoorPlaceholder
       objectReference: {fileID: 0}
+    - target: {fileID: 3804662313754601316, guid: 28e73fc5f01b84a4099ec961269ea92d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dbc1f859843fb4c47be24802c333f066, type: 2}
     - target: {fileID: 5631200349461030574, guid: 28e73fc5f01b84a4099ec961269ea92d,
         type: 3}
       propertyPath: m_RootOrder
@@ -17138,7 +17143,7 @@ MonoBehaviour:
   m_Script: {fileID: -1002339280, guid: a2b0edc01224bc440b19678e5c817d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundOverride: 146
+  soundOverride: 9
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
