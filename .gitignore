@@ -70,3 +70,13 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Ignore temporary lightmaps and export scene
+/[Aa]ssets/Scenes/Exported/*/*
+/[Aa]ssets/Scenes/Exported/*.unity
+/[Aa]ssets/Scenes/Exported/*.unity.meta
+/[Aa]ssets/Scenes/Exported/*.meta
+
+# Ignore exported map files
+/[Ee]xports/*.zip
+/[Ee]xports/*.manifest
