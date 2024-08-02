@@ -9482,7 +9482,7 @@ GameObject:
   - component: {fileID: 5542097339818215306}
   - component: {fileID: 5542097339818215307}
   m_Layer: 0
-  m_Name: BeginnerBlock
+  m_Name: ExampleMapRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
