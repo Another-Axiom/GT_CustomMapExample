@@ -217,7 +217,49 @@ finished you'll have a `.zip` file that's ready to upload to [Mod.io](https://mo
 
 ### Uploading to Mod.io
 
-*Coming Soon*
+After you've exported your map and have a `.zip` file ready, you can now upload your map to [Mod.io](https://mod.io/g). 
+Go to [https://mod.io/g/gorilla-tag](https://mod.io/g/gorilla-tag) and create an account if you haven't already. 
+Once you're logged in, click the `Add Level` button on the top right. 
+
+![addLevelbutton](https://github.com/user-attachments/assets/4132aec2-c760-4a1e-be1c-3dd6b4074a8a)
+
+On the following page you'll need to fill out some info about your map. 
+The required fields are:
+- Name - *try to make this unique to your map*
+- Summary - *a brief summary of your map (minimum of 10 characters)*
+- Logo - *this is the main image shown when players are browsing available maps*
+
+The other fields are all optional, but be sure to fill out any information you'd like to. 
+
+![requiredfields](https://github.com/user-attachments/assets/1d663db1-2bdf-4878-8c6b-4193a7ebc356)
+
+Once your done filling out basic information, click the `Create Level` button at the bottom of the page.
+On the next page are more optional fields. You can upload more screenshots of your map, link to a Youtube channel, or add links to Sketchfab models.
+Once you're done on that page click the `Save & next` button at the bottom of the page.
+
+![media](https://github.com/user-attachments/assets/310fb041-84d3-4272-a4eb-c667ed519c85)
+
+The next page is where you will upload your `.zip` file you exported from Unity. Click the `Select zip file` button and find the `.zip` file you exported. 
+You can also add a Version number and Changelog with this file and each additionl file you upload. Once you've selected your `.zip` file and filled out any desired fields, 
+make sure you read and agree to the mod.io Terms and Conditions and check the `I agree` box, then click the `Upload & next` button to continue.
+
+![selectfile](https://github.com/user-attachments/assets/c5efdeda-1731-4fa5-910e-b982e240d45f)
+
+The next page is for selecting any dependencies. This is currently unsupported for Gorilla Tag so you can just click the `Save & next` button at the bottom of the page to continue.
+You'll then be taken to the overview page for your map. At the top of this page are 2 important things to be aware of: Level Status and Level Visibility. 
+
+- Level Status refers to the approval status of your map. All maps must be verified and approved by a Gorilla Tag moderator before they will be available to players in-game or on the mod.io website.
+  This is an automated process and the moderator team will be notified whenever a map needs approval.
+- Level Visibility refers to the public visibility of your map. If it's hidden it will only be available to pre-existing subscribers and anyone added to the map's Team.
+
+Your map must be approved and visible to the public for players to be able to see and download it in-game. 
+
+![status](https://github.com/user-attachments/assets/e9cf21c0-9654-4aa1-81a8-0d3acf403c87)
+
+If you'd like to see what other players see when browsing mod.io, you can click the `View Level` button on the top-right of this page.
+You can also subscribe to your map on this page, just make sure to link your Steam/Oculus Mod.io account to your email-based one or subscriptions on the website won't propagate. 
+
+![subscribe](https://github.com/user-attachments/assets/4d89d3b3-3985-488d-b6d4-4f8f7b3f506f)
 
 ## Playing Your Map
 *Coming Soon*
