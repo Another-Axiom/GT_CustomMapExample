@@ -67,7 +67,11 @@ MonoBehaviour:
   m_Script: {fileID: 648501339, guid: 772e7c8a0e1af7644acf472cecec0c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReTagDelay: 2
+  triggeredByHands: 1
+  triggeredByBody: 1
+  triggeredByHead: 1
+  retriggerAfterDuration: 1
+  retriggerDelay: 2
 --- !u!1 &8586569561989505474
 GameObject:
   m_ObjectHideFlags: 0

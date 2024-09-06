@@ -292,6 +292,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!65 &405007110
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -679,6 +680,182 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
+--- !u!1001 &696707545
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 800854720}
+    m_Modifications:
+    - target: {fileID: 1009225165072757054, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: TeleportPoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1009225165072757054, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: TeleportPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 9087956551531096131}
+    - target: {fileID: 1009225165072757054, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: TeleportPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 892667901}
+    - target: {fileID: 1009225165072757054, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: TeleportPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 892667901}
+    - target: {fileID: 1009225165072757054, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: TeleportPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 892667901}
+    - target: {fileID: 2111345812125902467, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_Name
+      value: Teleporter (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.0948243
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.8796618
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.9707143
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 24.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7019777
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7121989
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266521660276052398, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266521660276052398, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266521660276052398, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266521660276052398, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266521660276052398, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266521660276052398, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266521660276052398, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266521660276052398, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266521660276052398, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266521660276052398, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266521660276052398, guid: 2cf77b5539276e14aa4ad72be7086cba,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 403144479503131113, guid: 2cf77b5539276e14aa4ad72be7086cba, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2cf77b5539276e14aa4ad72be7086cba, type: 3}
+--- !u!4 &696707546 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2772986122079406712, guid: 2cf77b5539276e14aa4ad72be7086cba,
+    type: 3}
+  m_PrefabInstance: {fileID: 696707545}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,6 +1132,7 @@ Transform:
   - {fileID: 1809819564}
   - {fileID: 1853124566}
   - {fileID: 1929052377}
+  - {fileID: 696707546}
   m_Father: {fileID: 5542097339818215306}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1080,6 +1258,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1001 &892667900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1561,6 +1740,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!4 &1578261627 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8255394145501598588, guid: 1855172944edd2c4db4d006f9595e75e,
@@ -1859,6 +2039,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &1809819564 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6824639825923260130, guid: 055ae63d45d0a4541b9e15e643eea3ac,
@@ -2026,6 +2207,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &1853124566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1040241346175368482, guid: b4f6c9a7ef95c6c47899c6f76dcb8fc2,
@@ -2083,6 +2265,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!65 &1897790546
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6758,6 +6941,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!23 &2523489985917852397
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6892,6 +7076,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!33 &2636762515753712657
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7668,6 +7853,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!1 &3285822710158171836
 GameObject:
   m_ObjectHideFlags: 0
@@ -8531,6 +8717,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!33 &3757411504500303125
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8842,6 +9029,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &4035822794981597930
 GameObject:
   m_ObjectHideFlags: 0
@@ -8949,6 +9137,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &4127651894483973226
 GameObject:
   m_ObjectHideFlags: 0
@@ -9610,6 +9799,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &4542318566976812054
 GameObject:
   m_ObjectHideFlags: 0
@@ -9878,6 +10068,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &4712140324803371805
 GameObject:
   m_ObjectHideFlags: 0
@@ -10243,6 +10434,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &4891314926217016664
 GameObject:
   m_ObjectHideFlags: 0
@@ -10279,6 +10471,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!1 &4893404954055633858
 GameObject:
   m_ObjectHideFlags: 0
@@ -10323,6 +10516,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &4947283804845580994
 GameObject:
   m_ObjectHideFlags: 0
@@ -10380,6 +10574,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &4972572566450893079
 Transform:
   m_ObjectHideFlags: 0
@@ -10593,6 +10788,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &5168139868364098496
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10899,6 +11095,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!23 &5348508186355197262
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10980,6 +11177,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &5396960281054319408
 Transform:
   m_ObjectHideFlags: 0
@@ -11256,6 +11454,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!4 &5568374726784144406
 Transform:
   m_ObjectHideFlags: 0
@@ -11287,6 +11486,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &5577629125231819010
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11728,6 +11928,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &5868103218631064621
 Transform:
   m_ObjectHideFlags: 0
@@ -11759,6 +11960,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &5900639054727952848
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11887,6 +12089,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!65 &5988115110957071765
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12018,6 +12221,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!65 &6142129213222968978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12117,6 +12321,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &6265622795687135897
 GameObject:
   m_ObjectHideFlags: 0
@@ -12317,6 +12522,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &6361952243677896234
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12451,6 +12657,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!65 &6481023661310767758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12488,6 +12695,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!23 &6489492842234309784
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12718,6 +12926,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &6619566264732356722
 GameObject:
   m_ObjectHideFlags: 0
@@ -12762,6 +12971,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &6634562056186615817
 GameObject:
   m_ObjectHideFlags: 0
@@ -12798,6 +13008,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &6654077537900787074
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12835,6 +13046,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &6655056026056392111
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -12880,6 +13092,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &6700867888582151929
 GameObject:
   m_ObjectHideFlags: 0
@@ -12916,6 +13129,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!4 &6717972806413798410
 Transform:
   m_ObjectHideFlags: 0
@@ -13168,6 +13382,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &7014121030144375207
 Transform:
   m_ObjectHideFlags: 0
@@ -13318,6 +13533,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &7116690478360240971
 GameObject:
   m_ObjectHideFlags: 0
@@ -13436,6 +13652,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!23 &7166326641333712915
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13717,6 +13934,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &7292756157813461453
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -13749,6 +13967,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &7305884022868272904
 GameObject:
   m_ObjectHideFlags: 0
@@ -13785,6 +14004,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &7312335964543844250
 GameObject:
   m_ObjectHideFlags: 0
@@ -13837,6 +14057,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!23 &7336032547891265017
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13937,6 +14158,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &7382859392424605475
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14125,6 +14347,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &7506439991037537941
 Transform:
   m_ObjectHideFlags: 0
@@ -14156,6 +14379,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &7510358674225248328
 Transform:
   m_ObjectHideFlags: 0
@@ -14229,6 +14453,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!4 &7544890721990739483
 Transform:
   m_ObjectHideFlags: 0
@@ -14260,6 +14485,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &7551808357074862517
 GameObject:
   m_ObjectHideFlags: 0
@@ -14316,6 +14542,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &7556710769418044701
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14353,6 +14580,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!23 &7574833895959583419
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14411,6 +14639,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!33 &7576816640620358132
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -14435,6 +14664,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!23 &7577582241641295246
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14521,6 +14751,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!1 &7625067822482952925
 GameObject:
   m_ObjectHideFlags: 0
@@ -14557,6 +14788,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!65 &7653331278948347348
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14671,6 +14903,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!23 &7690999337122743822
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14729,6 +14962,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!4 &7695395685251519727
 Transform:
   m_ObjectHideFlags: 0
@@ -14780,6 +15014,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &7709648518146608947
 Transform:
   m_ObjectHideFlags: 0
@@ -14847,6 +15082,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &7750824123296145505
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14969,6 +15205,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &7836432293898567626
 Transform:
   m_ObjectHideFlags: 0
@@ -15042,6 +15279,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!4 &7856211503242468340
 Transform:
   m_ObjectHideFlags: 0
@@ -15150,6 +15388,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &7887210349909697325
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15345,6 +15584,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!1 &7961650768335963972
 GameObject:
   m_ObjectHideFlags: 0
@@ -15423,6 +15663,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &8045181672282501546
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -15447,6 +15688,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!1 &8049138269337106619
 GameObject:
   m_ObjectHideFlags: 0
@@ -15506,6 +15748,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &8074354532173754883
 Transform:
   m_ObjectHideFlags: 0
@@ -15537,6 +15780,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &8074483819679689769
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -15641,6 +15885,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!4 &8113492814563798633
 Transform:
   m_ObjectHideFlags: 0
@@ -15672,6 +15917,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &8126191903371708794
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15709,6 +15955,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &8129503660448462199
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -15733,6 +15980,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &8134378678447236120
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -15757,6 +16005,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &8141577051958617600
 GameObject:
   m_ObjectHideFlags: 0
@@ -15793,6 +16042,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!23 &8150817166225848164
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15851,6 +16101,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &8171770919910702048
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -15875,6 +16126,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &8238511336682760108
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15933,6 +16185,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &8295249654638823024
 Transform:
   m_ObjectHideFlags: 0
@@ -15985,6 +16238,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!23 &8300712362468120549
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16064,6 +16318,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &8311261469377178546
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -16111,6 +16366,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!4 &8341763905666365027
 Transform:
   m_ObjectHideFlags: 0
@@ -16169,6 +16425,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &8357071814884306111
 GameObject:
   m_ObjectHideFlags: 0
@@ -16205,6 +16462,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &8367027543910535822
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -16252,6 +16510,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &8395382427563880200
 Transform:
   m_ObjectHideFlags: 0
@@ -16283,6 +16542,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &8398183624655544360
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16320,6 +16580,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &8422246341594504607
 Transform:
   m_ObjectHideFlags: 0
@@ -16387,6 +16648,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!23 &8443111609391814048
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16445,6 +16707,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &8445154587568281544
 GameObject:
   m_ObjectHideFlags: 0
@@ -16481,6 +16744,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &8455313391907302611
 GameObject:
   m_ObjectHideFlags: 0
@@ -16517,6 +16781,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &8473341378293733964
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -16541,6 +16806,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1001 &8478686628293412384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16695,6 +16961,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &8531239970965827978
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -16740,6 +17007,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!4 &8548542543264076312
 Transform:
   m_ObjectHideFlags: 0
@@ -16771,6 +17039,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &8583302202969717794
 GameObject:
   m_ObjectHideFlags: 0
@@ -16807,6 +17076,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &8584309003132521620
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -16873,6 +17143,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1001 &8609931432483213063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17005,6 +17276,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &8645754956432800338
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17042,6 +17314,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &8652674455048508932
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17066,6 +17339,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &8659855408083336842
 Transform:
   m_ObjectHideFlags: 0
@@ -17097,6 +17371,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!1 &8660697257207259420
 GameObject:
   m_ObjectHideFlags: 0
@@ -17133,6 +17408,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!23 &8660839598407540342
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17191,6 +17467,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &8665007169794105643
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17228,6 +17505,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!1 &8693968979293418675
 GameObject:
   m_ObjectHideFlags: 0
@@ -17279,6 +17557,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &8720127545516902547
 Transform:
   m_ObjectHideFlags: 0
@@ -17310,6 +17589,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &8743792165187946679
 GameObject:
   m_ObjectHideFlags: 0
@@ -17346,6 +17626,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &8751194263497743104
 GameObject:
   m_ObjectHideFlags: 0
@@ -17382,6 +17663,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &8783728321034080686
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17406,6 +17688,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!23 &8806431430764637130
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17464,6 +17747,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &8823586804720181667
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17521,6 +17805,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!1 &8852269627514561357
 GameObject:
   m_ObjectHideFlags: 0
@@ -17599,6 +17884,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &8889584639595343925
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17636,6 +17922,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!23 &8892576496404943519
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17694,6 +17981,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &8905325955476578050
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17731,6 +18019,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &8906579892959136041
 GameObject:
   m_ObjectHideFlags: 0
@@ -17767,6 +18056,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!1 &8909822378912084974
 GameObject:
   m_ObjectHideFlags: 0
@@ -17803,6 +18093,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!23 &8914601973372724730
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17861,6 +18152,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &8920682815000121046
 GameObject:
   m_ObjectHideFlags: 0
@@ -17897,6 +18189,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!1 &8929629150102032688
 GameObject:
   m_ObjectHideFlags: 0
@@ -17933,6 +18226,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!23 &8947203360932245673
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18027,6 +18321,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!65 &8970252824788137383
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18064,6 +18359,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!65 &8977033214351879628
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18101,6 +18397,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!23 &8991180260278458657
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18159,6 +18456,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!23 &9021153975772331816
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18217,6 +18515,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &9037670868099747896
 GameObject:
   m_ObjectHideFlags: 0
@@ -18295,6 +18594,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!33 &9051367112344753023
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -18319,6 +18619,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!4 &9055064890017750564
 Transform:
   m_ObjectHideFlags: 0
@@ -18350,6 +18651,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!23 &9073085964004576878
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18408,6 +18710,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &9074497748957628098
 Transform:
   m_ObjectHideFlags: 0
@@ -18439,6 +18742,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1001 &9087956551531096130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18564,6 +18868,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
 --- !u!65 &9117422375489788442
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18643,6 +18948,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &9133132882207567282
 Transform:
   m_ObjectHideFlags: 0
@@ -18674,6 +18980,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &9135996484976278033
 GameObject:
   m_ObjectHideFlags: 0
@@ -18710,6 +19017,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &9143328914971414430
 Transform:
   m_ObjectHideFlags: 0
@@ -18741,6 +19049,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!33 &9147912126438304020
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -18765,6 +19074,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!1 &9175170548899822680
 GameObject:
   m_ObjectHideFlags: 0
@@ -18801,6 +19111,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &9194199719001826699
 Transform:
   m_ObjectHideFlags: 0
@@ -18832,6 +19143,7 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: -1
+  disablePushBackEffect: 0
 --- !u!4 &9221285006279939047
 Transform:
   m_ObjectHideFlags: 0
@@ -18863,3 +19175,4 @@ MonoBehaviour:
   extraVelMultiplier: 1
   extraVelMaxMultiplier: 1
   slidePercentage: 1
+  disablePushBackEffect: 0
