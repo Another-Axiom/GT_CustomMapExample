@@ -10,14 +10,24 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
 * [Accessing Your Map](#accessing-your-map)
 * [Matching Gorilla Tag's Style](#matching-gorilla-tags-style)
 * [Lighting](#lighting)
-    + [Lighting Setup](#lighting-setup)
+    + [General Lighting Setup](#general-lighting-setup)
     + [Lighting Meshes](#lighting-meshes)
     + [Lights](#lights)
     + [Other Tips](#other-tips)
-* [Other Scripts](#other-scripts)
+* [Trigger Scripts](#trigger-scriptsprefabs)
+    + [Map Boundary](#map-boundary)
+    + [Teleporter](#teleporter)
+    + [Tag Zone](#tag-zone)
+* [Placeholder Script and Prefabs](#placeholder-script-and-prefabs)
+    + [Force Volume](#force-volume)
+    + [Leaf Glider](#leaf-glider)
+    + [Glider Wind Volume](#glider-wind-volume)
+    + [Water Volume](#water-volume)
+* [Other Scripts](#other-scriptsprefabs)
     + [Surface Override Settings](#surface-override-settings)
     + [Access Door Placeholder](#access-door-placeholder)
     + [Destroy Pre Export](#destroy-pre-export)
+    + [Teleport Point (Prefab)](#teleport-point-prefab)
 * [Exporting and Uploading to Mod.io](#exporting-and-uploading-to-modio)
     + [Exporting](#exporting)
     + [Uploading to Mod.io](#uploading-to-modio)
@@ -31,8 +41,6 @@ It's recommended to use Unity Hub to make managing versions easier.
 **MAKE SURE TO ADD ANDROID BUILD SUPPORT TO YOUR UNITY 2022.3.2f1 INSTALLATION!** This is needed to make sure your 
 bundles properly support the Quest. Instructions can be found here: 
 https://docs.unity3d.com/Manual/android-sdksetup.html
-
-**NOTE: Quest Support for custom maps is still WIP, but the exporter does build Android AssetBundles.**
 
 ## Creating a map
 For the most part, creating a map itself is the same as creating anything in Unity. However, there are a few specific 
@@ -50,16 +58,16 @@ hold everything in your map. Make sure the position is (0, 0, 0), and the scale 
 
 Next, click Add Component and add a Map Descriptor. This will hold some information about your map.
 
-![mapdescriptor](https://github.com/user-attachments/assets/6d642350-7aac-4c8b-8fb5-0d7fb6d4e2dd)
+![mapdescriptor](https://github.com/user-attachments/assets/78bed4ad-5042-4a26-a2b8-ac094ad3664c)
 
 Here's what each setting does:
 - Map name
-    - This will be used for your
+    - This will be used for your exported scene and the .zip file created by the export process.
 - Custom Skybox
     - A cubemap that will be used as the skybox on your map
-    - If this empty, it'll automatically give your map the default game's skybox
+    - If this empty, it'll automatically give your map the default game skybox
 - Export Lighting
-    - Whether or not to generate lightmaps for your map
+    - How to handle exporting lighting data for your map
     - Please read the [Lighting Section](#lighting) for more information.
 
 ## Accessing Your Map
@@ -103,17 +111,19 @@ working is a bit involved, but it's absolutely worth it.
 
 **When you SHOULDN'T use lighting:**
 - Maps that consist of mostly Unlit shaders
-    - For example, N64 maps, minecraft maps, etc
 - Maps where shadows aren't important
 - Maps that really need to save filesize
 
-If your map falls under the "SHOULDN'T USE LIGHTING" category, you can set your map's `Export Lighting` value to false 
+If your map falls under the "SHOULDN'T USE LIGHTING" category, you can set your map's `Export Lighting` value to `Off` 
 and ignore the rest of this section.
+
+![lightingoptions](https://github.com/user-attachments/assets/072dce93-dd7a-41c2-ad4e-9c80baceee0c)
 
 Otherwise, follow these steps to getting lighting looking nice on your map:
 
-### Lighting Setup
-Make sure to set your map's `Export Lighting` value to true.
+### General Lighting Setup
+Make sure to set your map's `Export Lighting` value to `Default_Unity` or `Alternative`, the rest of these instructions 
+assume you're using the `Default_Unity` option.
 
 Click on your map's GameObject, and set the `Static` value next to the name in the properties window to true.
 
@@ -161,21 +171,81 @@ If some materials look washed out ingame, try changing these settings on those m
 - Turn off Specular Highlights
 - Turn off Reflections
 
-## Other Scripts
+## Trigger Scripts/Prefabs
+The following scripts can be used for multiple purposes, but the GameObject they are attached to will always need a Collider 
+component with `Is Trigger` set to true. All trigger scripts have several common options: 
+- `Triggered By Hands` - Should the player's hands activate this trigger?
+- `Triggered By Body` - Should the player's body activate this trigger?
+- `Triggered By Head` - Should the player's head activate this trigger?
+- `Retrigger After Duration` - Should this trigger re-activate after a delay?
+- `Retrigger Delay` - If `Retrigger After Duration` is set to true, what is that duration in seconds?
+
+### Map Boundary
+This trigger script will teleport the player to a random (or specific) Transform and optionally can Tag the player when 
+triggered. It can be used in multiple ways, but the main intent was for it to be used as a way to prevent players from 
+escaping your map. This script is included in the `MapBoundary` prefab in the `Assets/MapPrefabs/` folder which uses a 
+Box Collider and includes a visual preview.
+
+**Additonal Options**
+- `Teleport Points`
+    - One or more points the player will be teleported to when activating this trigger. If more than one point is defined,
+      it will be chosen at random.
+- `Should Tag Player`
+    - Should the player be tagged when activating this trigger?
+ 
+### Teleporter
+This trigger script will teleport the player to a random (or specific) Transform. This script is included in the `Teleporter` 
+prefab in the `Assets/MapPrefabs/` folder which uses a Box Collider and includes a visual preview.
+
+**Additonal Options**
+- `Teleport Points`
+    - One or more points the player will be teleported to when activating this trigger. If more than one point is defined,
+      it will be chosen at random.
+
+### Tag Zone
+This trigger script will Tag any activating player. This script is included in the `Tag Zone` prefab in the `Assets/MapPrefabs/` 
+folder which uses a Box Collider and includes a visual preview.
+
+## Placeholder Script and Prefabs
+The `Placeholder` script defines an object that will get replaced by an existing Gorilla Tag script/object when your map is loaded 
+in-game. Each has a prefab in the `Assets/MapPrefabs/` folder that can or should be used depending on the placeholder selected for 
+the `Placeholder Object` setting.
+
+### Force Volume 
+This is used in Gorilla Tag for things like the elevator to Sky Jungle and the invisible wind barriers preventing players from 
+falling out of the that map. The `ForceVolumePlaceholder` prefab has the `Placeholder` script setup to use the `Force Volume` option 
+and includes some default settings (each of which has a tooltip when hovered that provides more info). The prefab includes a visual 
+preview and can be scaled as desired. 
+
+### Leaf Glider 
+The `LeafGliderPlaceholder` prefab has the `Placeholder` script setup to use the `Leaf Glider` option and includes a visual preview 
+to assist with placement. It's recommended to **ONLY** use this prefab when using the `Leaf Glider` option on the `Placeholder` 
+script. Scaling the placeholder will not affect the leaf glider that it get's replaced with.
+
+### Glider Wind Volume 
+This is used in Gorilla Tag in Sky Jungle to send the Leaf Gliders into the air. The `GliderWindVolumePlaceholder` prefab has the 
+`Placeholder` script setup to use the `Glider Wind Volume` option and includes some default settings. It also includes a visual 
+preview, but if you change the `Local Wind Direction` setting the arrows in the preview will not be pointed the correct way. This 
+prefab/placeholder can be scaled as desired. 
+
+### Water Volume
+The `WaterVolumePlaceholder` prefab has the `Placeholder` script setup to use the `Water Volume` option with some default settings. It includes a visual preview and can be scaled as desired.
+
+## Other Scripts/Prefabs
 
 ### Surface Override Settings
 If you want to modify how climbing works on an object, you can add a `Surface Override Settings` script to it.
 
 **Script Options:**
-- Sound Override
+- `Sound Override`
     - Used to customize what sound plays when a Player hits the object.
-- Extra Vel Multiplier
+- `Extra Vel Multiplier`
   - A number that influences how much extra velocity is gained when a player jumps off the object. 
   (Must be higher than 1)
-- Extra Vel Max Multiplier
+- `Extra Vel Max Multiplier`
   - A number that defines the maximum extra velocity multiplier applied when a player jumps off the object. 
   (Must be higher than 1)
-- Slide Percentage
+- `Slide Percentage`
     - A number that decides how "slippery" an object is when used for climbing.
     - Default value is 0.0 which is the least slippery an object can be. Higher values are more slippery with a maximum 
   of 1.0 meaning the object is unclimbable.
@@ -189,7 +259,9 @@ There should only be one `AccessDoorPlaceholder` script component in your map, i
 This is used to destroy in-editor visualization helpers and other editor-only objects to ensure they don't end up in your 
 exported map. You can attach this script to any GameObject that should **NOT** be included in your exported map.
 
-### More Coming Soon!
+### Teleport Point (Prefab)
+This is a simple prefab that is essentially just a visual preview to show where you've placed them in your map. Can be used with the 
+`MapBoundary` and `Teleporter` scripts to define teleport destinations.
 
 
 ## Exporting and Uploading to Mod.io
@@ -236,45 +308,63 @@ The other fields are all optional, but be sure to fill out any information you'd
 ![requiredfields](https://github.com/user-attachments/assets/1d663db1-2bdf-4878-8c6b-4193a7ebc356)
 
 Once your done filling out basic information, click the `Create Level` button at the bottom of the page.
-On the next page are more optional fields. You can upload more screenshots of your map, link to a Youtube channel, or add links to Sketchfab models.
+On the next page are more optional fields. You can upload more screenshots of your map, link to a Youtube channel, or add links to
+Sketchfab models.
 Once you're done on that page click the `Save & next` button at the bottom of the page.
 
 ![media](https://github.com/user-attachments/assets/310fb041-84d3-4272-a4eb-c667ed519c85)
 
-The next page is where you will upload your `.zip` file you exported from Unity. Click the `Select zip file` button and find the `.zip` file you exported. 
-You can also add a Version number and Changelog with this file and each additionl file you upload. Once you've selected your `.zip` file and filled out any desired fields, 
-make sure you read and agree to the mod.io Terms and Conditions and check the `I agree` box, then click the `Upload & next` button to continue.
+The next page is where you will upload your `.zip` file you exported from Unity. Click the `Select zip file` button and find the 
+`.zip` file you exported. You can also add a Version number and Changelog with this file and each additionl file you upload. Once 
+you've selected your `.zip` file and filled out any desired fields, make sure you read and agree to the mod.io Terms and Conditions 
+and check the `I agree` box, then click the `Upload & next` button to continue.
 
 ![selectfile](https://github.com/user-attachments/assets/c5efdeda-1731-4fa5-910e-b982e240d45f)
 
-The next page is for selecting any dependencies. This is currently unsupported for Gorilla Tag so you can just click the `Save & next` button at the bottom of the page to continue.
-You'll then be taken to the overview page for your map. At the top of this page are 2 important things to be aware of: Level Status and Level Visibility. 
+The next page is for selecting any dependencies. This is currently unsupported for Gorilla Tag so you can just click the `Save & 
+next` button at the bottom of the page to continue. You'll then be taken to the overview page for your map. At the top of this page 
+are 2 important things to be aware of: Level Status and Level Visibility. 
 
-- Level Status refers to the approval status of your map. All maps must be verified and approved by a Gorilla Tag moderator before they will be available to players in-game or on the mod.io website.
+- Level Status refers to the approval status of your map. All maps must be verified and approved by a Gorilla Tag moderator before
+  they will be available to players in-game or on the mod.io website.
   This is an automated process and the moderator team will be notified whenever a map needs approval.
-- Level Visibility refers to the public visibility of your map. If it's hidden it will only be available to pre-existing subscribers and anyone added to the map's Team.
+- Level Visibility refers to the public visibility of your map. If it's hidden it will only be available to pre-existing subscribers
+  and anyone added to the map's Team.
 
 Your map must be approved and visible to the public for players to be able to see and download it in-game. 
 
 ![status](https://github.com/user-attachments/assets/e9cf21c0-9654-4aa1-81a8-0d3acf403c87)
 
-If you'd like to see what other players see when browsing mod.io, you can click the `View Level` button on the top-right of this page.
-You can also subscribe to your map on this page, just make sure to link your Steam/Oculus Mod.io account to your email-based one or subscriptions on the website won't propagate. 
+If you'd like to see what other players see when browsing mod.io, you can click the `View Level` button on the top-right of this 
+page. You can also subscribe to your map on this page, just make sure to link and use the same mod.io account in-game or 
+subscriptions on the website won't show up in Gorilla Tag. 
 
 ![subscribe](https://github.com/user-attachments/assets/4d89d3b3-3985-488d-b6d4-4f8f7b3f506f)
 
 ## Playing Your Map
-*Coming Soon*
+Once you've created an entry on mod.io, uploaded your map, and subscribed to it on the mod.io website you're now ready to test it 
+out in-game. Keep in mind that only you and members of your map's Team on mod.io will be able to see the map in Gorilla Tag until it 
+is approved by a moderator and you must subscribe to it on the website before being able to see it in-game. 
+
+  1. Launch Gorilla Tag on Steam/Quest and head to the Arcade which can be found in the City area.
+     ![tunnel-to-arcade](https://github.com/user-attachments/assets/971da632-356a-4e45-8b25-95eefcde6f98)
+     ![ramps-to-arcade](https://github.com/user-attachments/assets/b87e0624-54ba-4566-8fa0-1cc6988c16ff)
+
+  3. Once in the Arcade, locate the green VR Game Machines and put your face up to the goggles on one of them. You'll see a short
+     countdown before being automatically logged in to mod.io using your Steam/Oculus account and sent to the Virtual Stump.
+     ![vr-machines](https://github.com/user-attachments/assets/e5bc9ef9-f9e0-4918-87e1-6cd438c23110)
+
+  5. Once in the Virtual Stump, you'll need to approach the `Mod.io Account Options` screen and press the `LINK MOD.IO ACCOUNT`
+     button to login with your pre-existing mod.io account (the same one you used to upload your map).
+     ![account-options-terminal](https://github.com/user-attachments/assets/8a654942-c709-4af7-af5f-0a5f1896d70b)
+
+  6. After successfully linking your account you can approach the large screen next to the door called the Maps Terminal. Press the
+     `TERMINAL CONTROL` button to take control of the terminal and you'll see a list of all the Approved/Public maps that are
+     available.
+     ![maps-terminal](https://github.com/user-attachments/assets/2fcd4c6a-88d8-4324-b12f-9f5456e64247)
+
+  8. Press the `OPTION` button to switch the view to `SHOW INSTALLED MAPS ONLY` and you should see your map in that list as long as
+     you are subscribed to it on the mod.io website.
+  9. Press the `SELECT` button to load your map and the doors should open to it once loading is finished.
 
 If your map doesn't look quite right in-game, read back over the [Lighting section](#lighting)
-
----
-
-This work is licensed under a
-[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
-
-[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
-
-[cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
-[cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
-[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
