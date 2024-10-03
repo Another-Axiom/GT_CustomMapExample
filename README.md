@@ -295,7 +295,8 @@ After you've exported your map and have a `.zip` file ready, you can now upload 
 Go to [https://mod.io/g/gorilla-tag](https://mod.io/g/gorilla-tag) and create an account if you haven't already. 
 Once you're logged in, click the `Add Level` button on the top right. 
 
-![addLevelbutton](https://github.com/user-attachments/assets/4132aec2-c760-4a1e-be1c-3dd6b4074a8a)
+![addLevelbutton](https://github.com/user-attachments/assets/b3d10471-e843-4442-8acc-5b85d51446d4)
+
 
 On the following page you'll need to fill out some info about your map. 
 The required fields are:
@@ -319,7 +320,8 @@ The next page is where you will upload your `.zip` file you exported from Unity.
 you've selected your `.zip` file and filled out any desired fields, make sure you read and agree to the mod.io Terms and Conditions 
 and check the `I agree` box, then click the `Upload & next` button to continue.
 
-![selectfile](https://github.com/user-attachments/assets/c5efdeda-1731-4fa5-910e-b982e240d45f)
+![selectfile](https://github.com/user-attachments/assets/ce2405e7-830d-4631-bf97-c7a9e84a19f7)
+
 
 The next page is for selecting any dependencies. This is currently unsupported for Gorilla Tag so you can just click the `Save & 
 next` button at the bottom of the page to continue. You'll then be taken to the overview page for your map. At the top of this page 
@@ -333,7 +335,7 @@ are 2 important things to be aware of: Level Status and Level Visibility.
 
 Your map must be approved and visible to the public for players to be able to see and download it in-game. 
 
-![status](https://github.com/user-attachments/assets/e9cf21c0-9654-4aa1-81a8-0d3acf403c87)
+![status](https://github.com/user-attachments/assets/e2e44113-78c2-4350-be18-ccf2b13fadcc)
 
 If you'd like to see what other players see when browsing mod.io, you can click the `View Level` button on the top-right of this 
 page. You can also subscribe to your map on this page, just make sure to link and use the same mod.io account in-game or 
