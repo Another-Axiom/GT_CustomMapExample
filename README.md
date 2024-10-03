@@ -61,14 +61,11 @@ Next, click Add Component and add a Map Descriptor. This will hold some informat
 ![mapdescriptor](https://github.com/user-attachments/assets/78bed4ad-5042-4a26-a2b8-ac094ad3664c)
 
 Here's what each setting does:
-- Map name
-    - This will be used for your exported scene and the .zip file created by the export process.
-- Custom Skybox
-    - A cubemap that will be used as the skybox on your map
-    - If this empty, it'll automatically give your map the default game skybox
-- Export Lighting
-    - How to handle exporting lighting data for your map
-    - Please read the [Lighting Section](#lighting) for more information.
+- `Map name` - This will be used for your exported scene and the .zip file created by the export process.
+- `Custom Skybox` - A cubemap that will be used as the skybox on your map. If this empty, it'll automatically give your
+  map the default game skybox
+- `Export Lighting` - How to handle exporting lighting data for your map. Please read the [Lighting Section](#lighting) for
+  more information.
 
 ## Accessing Your Map
 In order for Players to be able to access your map, it's required to include an `AccessDoorPlaceholder`.  
@@ -187,20 +184,17 @@ escaping your map. This script is included in the `MapBoundary` prefab in the `A
 Box Collider and includes a visual preview.
 
 **Additonal Options**
-- `Teleport Points`
-    - One or more points the player will be teleported to when activating this trigger. If more than one point is defined,
-      it will be chosen at random.
-- `Should Tag Player`
-    - Should the player be tagged when activating this trigger?
+- `Teleport Points` - One or more points the player will be teleported to when activating this trigger. If more than one
+  point is defined, it will be chosen at random.
+- `Should Tag Player` - Should the player be tagged when activating this trigger?
  
 ### Teleporter
 This trigger script will teleport the player to a random (or specific) Transform. This script is included in the `Teleporter` 
 prefab in the `Assets/MapPrefabs/` folder which uses a Box Collider and includes a visual preview.
 
 **Additonal Options**
-- `Teleport Points`
-    - One or more points the player will be teleported to when activating this trigger. If more than one point is defined,
-      it will be chosen at random.
+- `Teleport Points` - One or more points the player will be teleported to when activating this trigger. If more than one
+  point is defined, it will be chosen at random.
 
 ### Tag Zone
 This trigger script will Tag any activating player. This script is included in the `Tag Zone` prefab in the `Assets/MapPrefabs/` 
@@ -237,18 +231,13 @@ The `WaterVolumePlaceholder` prefab has the `Placeholder` script setup to use th
 If you want to modify how climbing works on an object, you can add a `Surface Override Settings` script to it.
 
 **Script Options:**
-- `Sound Override`
-    - Used to customize what sound plays when a Player hits the object.
-- `Extra Vel Multiplier`
-  - A number that influences how much extra velocity is gained when a player jumps off the object. 
+- `Sound Override` - Used to customize what sound plays when a Player hits the object.
+- `Extra Vel Multiplier` - A number that influences how much extra velocity is gained when a player jumps off the object.
   (Must be higher than 1)
-- `Extra Vel Max Multiplier`
-  - A number that defines the maximum extra velocity multiplier applied when a player jumps off the object. 
-  (Must be higher than 1)
-- `Slide Percentage`
-    - A number that decides how "slippery" an object is when used for climbing.
-    - Default value is 0.0 which is the least slippery an object can be. Higher values are more slippery with a maximum 
-  of 1.0 meaning the object is unclimbable.
+- `Extra Vel Max Multiplier` - A number that defines the maximum extra velocity multiplier applied when a player jumps off the
+  object. (Must be higher than 1)
+- `Slide Percentage` - A number that decides how "slippery" an object is when used for climbing. Default value is 0.0 which is
+  the least slippery an object can be. Higher values are more slippery with a maximum of 1.0 meaning the object is unclimbable.
 
 ### Access Door Placeholder
 This is used for positioning your map in the correct place so it lines up with the "Lobby" room in GorillaTag. This script
