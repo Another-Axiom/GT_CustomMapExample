@@ -327,7 +327,7 @@ are 2 important things to be aware of: Level Status and Level Visibility.
 
 - Level Status refers to the approval status of your map. All maps must be verified and approved by a Gorilla Tag moderator before
   they will be available to players in-game or on the mod.io website.
-  This is an automated process and the moderator team will be notified whenever a map needs approval.
+  In order for a map to be approved, it must go through an approval process. For more information, please visit the Community Modding Discord here: https://discord.gg/monkemod
 - Level Visibility refers to the public visibility of your map. If it's hidden it will only be available to pre-existing subscribers
   and anyone added to the map's Team.
 
