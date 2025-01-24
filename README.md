@@ -18,6 +18,7 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Map Boundary](#map-boundary)
     + [Teleporter](#teleporter)
     + [Tag Zone](#tag-zone)
+    + [Object Activation Trigger](#object-activation-trigger)
 * [Placeholder Script and Prefabs](#placeholder-script-and-prefabs)
     + [Force Volume](#force-volume)
     + [Leaf Glider](#leaf-glider)
@@ -28,6 +29,10 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Access Door Placeholder](#access-door-placeholder)
     + [Destroy Pre Export](#destroy-pre-export)
     + [Teleport Point (Prefab)](#teleport-point-prefab)
+* [Loading Zones](#loading-zones)
+    + [Multi Map Setup](#multi-map-setup)
+    + [Zone Load Trigger](#zone-load-trigger)
+    + [Multi Map Lightmapping](#multi-map-lightmapping)
 * [Exporting and Uploading to Mod.io](#exporting-and-uploading-to-modio)
     + [Exporting](#exporting)
     + [Uploading to Mod.io](#uploading-to-modio)
@@ -171,11 +176,17 @@ If some materials look washed out ingame, try changing these settings on those m
 ## Trigger Scripts/Prefabs
 The following scripts can be used for multiple purposes, but the GameObject they are attached to will always need a Collider 
 component with `Is Trigger` set to true. All trigger scripts have several common options: 
-- `Triggered By Hands` - Should the player's hands activate this trigger?
-- `Triggered By Body` - Should the player's body activate this trigger?
-- `Triggered By Head` - Should the player's head activate this trigger?
-- `Retrigger After Duration` - Should this trigger re-activate after a delay?
-- `Retrigger Delay` - If `Retrigger After Duration` is set to true, what is that duration in seconds?
+- `Synced To All Players` - Should this Trigger sync to all players, or only be processed for the person who triggered it?
+    - Generally this will sync the Trigger Activation event as well as its current `Trigger Count` (used to check against
+    `Num Allowed Triggers`).
+- `Triggered By` - Defines which parts of the player will trigger this Trigger.
+    - Options include Hands, Body, Head, BodyOrHead. Due to how Hand and Body/Head colliders work in GorillaTag, a single Trigger is
+    unable to check for both at the same time.
+- `General Retrigger Delay` - After being triggered, how long before this Trigger can be triggered again?
+- `Num Allowed Triggers` - How many times is this Trigger allowed to trigger? 0 means infinite
+- `Retrigger After Duration` - Should this Trigger re-trigger if a player stays inside it for long enough?
+- `Retrigger Stay Duration` - How long does a player need to stay inside the Trigger before it re-triggers?
+    - NOTE: If `General Retrigger Delay` is larger, that value will be used for this instead.
 
 ### Map Boundary
 This trigger script will teleport the player to a random (or specific) Transform and optionally can Tag the player when 
@@ -197,8 +208,21 @@ prefab in the `Assets/MapPrefabs/` folder which uses a Box Collider and includes
   point is defined, it will be chosen at random.
 
 ### Tag Zone
-This trigger script will Tag any activating player. This script is included in the `Tag Zone` prefab in the `Assets/MapPrefabs/` 
+This trigger script will Tag any activating player. This script is included in the `TagZone` prefab in the `Assets/MapPrefabs/` 
 folder which uses a Box Collider and includes a visual preview.
+
+### Object Activation Trigger
+This trigger script can be used to Activate and Deactivate other GameObjects in your map and Reset other Triggers. This script is 
+included in the `ObjectActivationTrigger` prefab in the `Assets/MapPrefabs` folder which uses a Box Collider and includes a visual preview.
+
+**Additional Options**
+- `Objects To Deactivate` - List of GameObjects that will be Deactivated when this Trigger is triggered. This list is processed prior
+  to `Objects To Activate`.
+- `Objects To Activate` - List of GameObjects that will be Activated when this Trigger is triggered. This list is processed after
+  `Objects To Deactivate`.
+- `Triggers To Reset` - List of Triggers that will be Reset when this Trigger is triggered
+   - Reseting a trigger means its current `Trigger Count` and `Last Trigger Time` will be reset. GameObjects in the activate/deactivate
+     lists are not affected by this. 
 
 ## Placeholder Script and Prefabs
 The `Placeholder` script defines an object that will get replaced by an existing Gorilla Tag script/object when your map is loaded 
@@ -252,6 +276,30 @@ exported map. You can attach this script to any GameObject that should **NOT** b
 This is a simple prefab that is essentially just a visual preview to show where you've placed them in your map. Can be used with the 
 `MapBoundary` and `Teleporter` scripts to define teleport destinations.
 
+## Loading Zones
+
+If you want to break up your map into multiple scenes, you can use the `ZoneLaodTigger` prefab to load and unload those scenes.
+
+### Multi Map Setup
+ALL scenes you want included in your map need to be added to the `Scenes In Build` section of the `Build Settings` window.
+To make sure all your scenes line up correctly with each other, open your main scene and then select the other scenes from the `Project`
+window and drag them into the `Hierarchy` window. The scenes should appear in the `Scene` view and you can edit them as needed.
+Add the `ZoneLoadTrigger` prefab where you a scene load/unload to occur. Make sure the prefab is in the correct scene.
+
+### Zone Load Trigger
+This is the prefab used to determine where scenes are loaded and/or unloaded. It contains the `LoadZoneSettings` script, a `Box Collider`, and
+a preview mesh to help with sizing and placement.
+All scenes added to the `Scenes In Build` section of the `Build Settings` window will be listed under the `Load Zone Settings` script in two sections:
+`Scenes to Load` and `Scenes to Unload`
+You can also set how the load zone is triggered with the `Triggered By` setting.
+
+### Multi Map Lightmapping
+Currently there are only two ways to use lightmaps with loading multiple scenes
+- Open all scenes at the same time in editor and lightmap all scenes at once
+- Create a lightmap for each scene individually
+Creating two or more lightmaps for the same scene is not supported at this time.
+
+
 
 ## Exporting and Uploading to Mod.io
 
@@ -268,12 +316,13 @@ Once your map is all done, it's time to export! First, let's run through our che
     - It's required to have an `AccessDoorPlaceholder` in your map, or you won't be able to export.
     - Brush back over the tips in the [Accessing Your Map section](#accessing-your-map) if needed
 - Did you read over the [Lighting section](#lighting) and follow all the steps?
+- Did you add all the scenes you want exported to the `Scenes In Build` section of the `Build Settings` window?
 
 If you want to use a custom skybox, import it into your Unity project as an image, set the `Texture Shape` to Cube 
 and assign it to the `Custom Skybox` property on your `Map Descriptor`
 
-Now that you've gone over the checklist, it's time to export! Select the GameObject with your `MapDescriptor` component,
-and click the `Export Map` button. 
+Now that you've gone over the checklist, it's time to export! Make sure all the scenes you want have been added to the `Build settings`
+window then in the toolbar got to `Tools > Export Maps`
 
 This opens up to the `Exports` folder, but you can select any folder to export to. Click save, and once the export is 
 finished you'll have a `.zip` file that's ready to upload to [Mod.io](https://mod.io/g)
