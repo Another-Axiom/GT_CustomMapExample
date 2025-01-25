@@ -1,0 +1,21 @@
+{
+    "luau-lsp.types.definitionFiles": [
+        "types/basic.d.lua",
+        "types/GameObject.d.lua",
+        "types/Player.d.lua"
+    ],
+    "luau-lsp.types.documentationFiles": [],
+    "luau-lsp.sourcemap.enabled": false,
+    "luau-lsp.platform.type": "standard",
+    "editor.formatOnSave": true,
+    "[lua]": {
+        "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    },
+    "[luau]": {
+        "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "stylua.targetReleaseVersion": "latest"
+}
