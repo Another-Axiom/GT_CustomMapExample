@@ -27,6 +27,7 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
 * [Other Scripts](#other-scriptsprefabs)
     + [Surface Override Settings](#surface-override-settings)
     + [Access Door Placeholder](#access-door-placeholder)
+    + [Map Orientation Point](#map-orientation-point)
     + [Destroy Pre Export](#destroy-pre-export)
     + [Teleport Point (Prefab)](#teleport-point-prefab)
 * [Loading Zones](#loading-zones)
@@ -63,17 +64,19 @@ hold everything in your map. Make sure the position is (0, 0, 0), and the scale 
 
 Next, click Add Component and add a Map Descriptor. This will hold some information about your map.
 
-![mapdescriptor](https://github.com/user-attachments/assets/78bed4ad-5042-4a26-a2b8-ac094ad3664c)
+![mapdescriptor](https://github.com/user-attachments/assets/a31c8187-1227-479d-98b7-ca28320c3291)
 
 Here's what each setting does:
-- `Map name` - This will be used for your exported scene and the .zip file created by the export process.
-- `Custom Skybox` - A cubemap that will be used as the skybox on your map. If this empty, it'll automatically give your
-  map the default game skybox
-- `Export Lighting` - How to handle exporting lighting data for your map. Please read the [Lighting Section](#lighting) for
-  more information.
+- `Is Initial Scene` - If checked, this is the scene that will be loaded first in game.
+- `Add Skybox` - Check if you want to add a skybox to your scene
+  - `Custom Skybox` - A cubemap that will be used as the skybox on your map. If this empty, it'll automatically give your map the default game skybox
+  - `Custom Skybox Tint` - what color do you want to tint the skybox
+- `Custom Gamemode` - Add file here for any gamemodes you created using LUA
+- `Lighting Export Type` - How to handle exporting lighting data for your map. Please read the Lighting Section farther down for more information.
+- `Export All Objects` - If checked, all GameObjects will be parented under the MapDescriptor prior to export. Otherwise any GameObjects not parented under the Map Descriptor will be destroyed.
 
 ## Accessing Your Map
-In order for Players to be able to access your map, it's required to include an `AccessDoorPlaceholder`.  
+In order for Players to be able to access your map, it's required to include an `AccessDoorPlaceholder` in whichever scene you have designated as your initial scene.  
 
 Under MapPrefabs, there's an `AccessDoorPlaceholder` prefab. Drag it into your scene and place it wherever you'd like. 
 This represents the `Lobby` room that Players will use to pick which map to load. The door should be able to open 
@@ -82,6 +85,8 @@ for Players trying to load into your map.
 
 Players should always be able to return to the "Lobby" room at any point to facilitate leaving your map. Don't put it 
 somewhere difficult to reach.
+
+NOTE: For any scene that is not your initial scene, use the `MapOrientationPoint` prefab.
 
 ## Matching Gorilla Tag's Style
 Although not every custom map has to look exactly like the game, making your map look similar to the base game's visuals 
@@ -264,9 +269,15 @@ If you want to modify how climbing works on an object, you can add a `Surface Ov
   the least slippery an object can be. Higher values are more slippery with a maximum of 1.0 meaning the object is unclimbable.
 
 ### Access Door Placeholder
-This is used for positioning your map in the correct place so it lines up with the "Lobby" room in GorillaTag. This script
+This is used for positioning your iniital scene in the correct place so it lines up with the "Lobby" room in GorillaTag. This script
 is already part of the `AccessDoorPlaceholder` prefab in MapPrefabs, so it's not necessary to manually add this to anything.
 There should only be one `AccessDoorPlaceholder` script component in your map, if you place multiple, only one will be valid.
+
+### Map Orientation Point
+For all scenes that are not your initial scene use the `MapOrientationPoint` prefab. It serves the same purpose as the `AccessDoorPlaceholder` in that
+it positions and orients your map. As with the `AccessDoorPlaceholder` there should only be one `MapOrientationPoint` in your scene.
+IMPORTANT: Make sure that all `MapOrientationPoint` prefabs have the same position and orientation as the `AccessDoorPlaceholder` prefab or your
+scenes won't load in correctly.
 
 ### Destroy Pre Export
 This is used to destroy in-editor visualization helpers and other editor-only objects to ensure they don't end up in your 
@@ -282,8 +293,12 @@ If you want to break up your map into multiple scenes, you can use the `ZoneLaod
 
 ### Multi Map Setup
 ALL scenes you want included in your map need to be added to the `Scenes In Build` section of the `Build Settings` window.
+Select the `MapDescriptor` object in the scene you want to load first and check `IsInitalScene` in the `Inspector` window.
+Only one scene should be marked as your initial scene otherwise the importer will grab the first initial scene it finds and load that first.
 To make sure all your scenes line up correctly with each other, open your main scene and then select the other scenes from the `Project`
 window and drag them into the `Hierarchy` window. The scenes should appear in the `Scene` view and you can edit them as needed.
+Add a `MapOrientationPoint` prefab to each scene that is not your intial scene and make sure they all have the same position and rotation
+as the `AccessDoorPlaceholder` prefab in your initial scene.
 Add the `ZoneLoadTrigger` prefab where you a scene load/unload to occur. Make sure the prefab is in the correct scene.
 
 ### Zone Load Trigger
@@ -312,9 +327,10 @@ Once your map is all done, it's time to export! First, let's run through our che
     - Avoid using too many Mesh Colliders if possible, instead use Box or Sphere colliders
   (if you know what you're doing, you can always create lower poly versions of your meshes to use for the colliders)
 - Did you completely fill out your `Map Descriptor`?
-- Did you add the `AccessDoorPlaceholder` prefab to your map?
-    - It's required to have an `AccessDoorPlaceholder` in your map, or you won't be able to export.
+- Did you add the `AccessDoorPlaceholder` prefab to your initial scene?
+    - It's required to have an `AccessDoorPlaceholder` in your initial scene, or you won't be able to export.
     - Brush back over the tips in the [Accessing Your Map section](#accessing-your-map) if needed
+- Did you add the `MapOrientationPoint` prefab to your other scenes?
 - Did you read over the [Lighting section](#lighting) and follow all the steps?
 - Did you add all the scenes you want exported to the `Scenes In Build` section of the `Build Settings` window?
 
