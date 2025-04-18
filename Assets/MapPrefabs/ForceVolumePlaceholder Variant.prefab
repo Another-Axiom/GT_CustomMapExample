@@ -638,6 +638,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4376917749089748177, guid: 080b3414ca7c312419bbba338368196e,
         type: 3}
+      propertyPath: exitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: dc5f6279029b6a041b1f79bd53d4443d, type: 3}
+    - target: {fileID: 4376917749089748177, guid: 080b3414ca7c312419bbba338368196e,
+        type: 3}
+      propertyPath: loopClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8158f0d5de3b05e448fabef6e0fddef8, type: 3}
+    - target: {fileID: 4376917749089748177, guid: 080b3414ca7c312419bbba338368196e,
+        type: 3}
+      propertyPath: enterClip
+      value: 
+      objectReference: {fileID: 8300000, guid: afb768e21d6fc5b40b70f3f14c9d372b, type: 3}
+    - target: {fileID: 4376917749089748177, guid: 080b3414ca7c312419bbba338368196e,
+        type: 3}
       propertyPath: maxSpeed_FV
       value: 30
       objectReference: {fileID: 0}
@@ -671,6 +686,11 @@ PrefabInstance:
       propertyPath: PlaceholderObject
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4376917749089748177, guid: 080b3414ca7c312419bbba338368196e,
+        type: 3}
+      propertyPath: loopCrescendoClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8158f0d5de3b05e448fabef6e0fddef8, type: 3}
     - target: {fileID: 4376917749089748177, guid: 080b3414ca7c312419bbba338368196e,
         type: 3}
       propertyPath: SpeedVSAccelCurve.m_Curve.Array.size

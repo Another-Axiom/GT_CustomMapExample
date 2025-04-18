@@ -44,8 +44,8 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.timeline": "1.7.1",
-        "com.autodesk.fbx": "4.2.1"
+        "com.autodesk.fbx": "4.2.1",
+        "com.unity.timeline": "1.7.1"
       },
       "url": "https://packages.unity.com"
     },
@@ -81,6 +81,17 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.probuilder": {
+      "version": "5.0.7",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.settings-manager": "1.0.3"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.render-pipelines.core": {
       "version": "14.0.8",
       "depth": 1,
@@ -106,6 +117,13 @@
     "com.unity.searcher": {
       "version": "4.9.2",
       "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.settings-manager": {
+      "version": "2.0.1",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -144,9 +162,9 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {
+        "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.director": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
       },
       "url": "https://packages.unity.com"
@@ -175,9 +193,9 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.modules.subsystems": "1.0.0",
         "com.unity.modules.vr": "1.0.0",
         "com.unity.modules.xr": "1.0.0",
+        "com.unity.modules.subsystems": "1.0.0",
         "com.unity.xr.legacyinputhelpers": "2.1.7"
       },
       "url": "https://packages.unity.com"

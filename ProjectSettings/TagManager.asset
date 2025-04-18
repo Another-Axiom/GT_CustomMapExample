@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - GorillaObject
+  - ZoneRoot
   layers:
   - Default
   - TransparentFX
@@ -13,29 +15,29 @@ TagManager:
   - UI
   - 
   - 
+  - Gorilla Body Collider  (Do Not Use)
+  - Gorilla Object
+  - Gorilla Hand  (Do Not Use)
+  - Gorilla Trigger
   - 
-  - Extra Collisions
+  - Gorilla Head (Do Not Use)
+  - Gorilla Tag Collider  (Do Not Use)
   - 
+  - Gorilla Spectator  (Do Not Use)
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - GorillaInteractable
   - 
   - 
   - 
-  - 
+  - MirrorOnly
   - 
   - 
   - 
   - 
+  - NoMirror
   - 
   - 
+  - Prop
   - 
   m_SortingLayers:
   - name: Default

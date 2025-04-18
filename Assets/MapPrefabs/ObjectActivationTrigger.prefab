@@ -52,14 +52,19 @@ MonoBehaviour:
   triggeredByHead: 1
   retriggerAfterDuration: 0
   retriggerStayDuration: 2
+  retriggerDelay: 2
+  onEnableTriggerDelay: 0
   generalRetriggerDelay: 0
   numAllowedTriggers: 0
+  validationDistanceOverride: -1
   triggerId: 0
+  validationDistance: 1
   syncedToAllPlayers_private: 0
   syncedToAllPlayers: 1
   objectsToActivate: []
   objectsToDeactivate: []
   triggersToReset: []
+  onlyResetTriggerCount: 0
 --- !u!65 &2629771932782340014
 BoxCollider:
   m_ObjectHideFlags: 0

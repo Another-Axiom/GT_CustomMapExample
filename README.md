@@ -6,9 +6,13 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
 **Contents**
 
 * [Setup](#setup)
+* [Functionality Overview Map](#functionality-overview-map)
 * [Creating a map](#creating-a-map)
 * [Accessing Your Map](#accessing-your-map)
 * [Matching Gorilla Tag's Style](#matching-gorilla-tags-style)
+* [UberShader and Zone Shader Settings](#ubershader-and-zone-shader-settings)
+    + [Zone Shader Settings](#zone-shader-settings)
+    + [Zone Shader Settings Trigger](#zone-shader-settings-trigger)
 * [Lighting](#lighting)
     + [General Lighting Setup](#general-lighting-setup)
     + [Lighting Meshes](#lighting-meshes)
@@ -24,12 +28,18 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Leaf Glider](#leaf-glider)
     + [Glider Wind Volume](#glider-wind-volume)
     + [Water Volume](#water-volume)
+    + [Hoverboard Area](#hoverboard-area)
+    + [Hoverboard Dispenser](#hoverboard-dispenser)
+    + [ATM](#atm)
 * [Other Scripts](#other-scriptsprefabs)
     + [Surface Override Settings](#surface-override-settings)
     + [Access Door Placeholder](#access-door-placeholder)
     + [Map Orientation Point](#map-orientation-point)
     + [Destroy Pre Export](#destroy-pre-export)
     + [Teleport Point (Prefab)](#teleport-point-prefab)
+    + [Hand Hold Settings](#hand-hold-settings)
+    + [Cameras](#cameras)
+    + [Inspector Note](#inspector-note)
 * [Loading Zones](#loading-zones)
     + [Multi Map Setup](#multi-map-setup)
     + [Zone Load Trigger](#zone-load-trigger)
@@ -47,6 +57,14 @@ It's recommended to use Unity Hub to make managing versions easier.
 **MAKE SURE TO ADD ANDROID BUILD SUPPORT TO YOUR UNITY 2022.3.2f1 INSTALLATION!** This is needed to make sure your 
 bundles properly support the Quest. Instructions can be found here: 
 https://docs.unity3d.com/Manual/android-sdksetup.html
+
+## Functionality Overview Map
+Included in this project are 3 scenes called `FunctionalityOverview_StartingZone`, `FunctionalityOverview_OceanZone`, 
+and `FunctionalityOverview_ScriptsZone`. Each of these scenes are part of the Functionality Overview map which provides
+comprehensive in-editor documentaion and examples of how most functionality avaliable for Custom Maps can be used. You 
+can also check out this map in-game by subscribing to the [Functionality Overview](https://mod.io/g/gorilla-tag/m/functionality-overview?preview=8256e9b8f815e1d6c54ec02e25766f2f)
+map on mod.io and then loading it up in Gorilla Tag. This map will continue to be updated with each new version of the 
+example project to provide examples of any new functionality we add.
 
 ## Creating a map
 For the most part, creating a map itself is the same as creating anything in Unity. However, there are a few specific 
@@ -106,6 +124,23 @@ until the model looks low poly enough for you.
 ![decimate_modifier](https://github.com/user-attachments/assets/f66907c0-132a-431b-8139-0ea3c7e7c9d1)
 
 
+## UberShader and Zone Shader Settings
+You'll find the UberShader in the `Assets/Shaders/` folder. This is the main shader used by almost everything in 
+Gorilla Tag and is provided as part of the Example Project primarily to support Zone Shader Settings which can be used
+to apply fog and underwater effects to anything using the UberShader.
+
+### Zone Shader Settings
+The `Zone Shader Settings` component is used to modify global shader variables that are used by the UberShader. Using
+this component, you can add Ground Fog and Underwater/Lava Liquid effects to your map.
+- Ground Fog has options for color, height, and distance fading
+- Using Liquid Effects you can define a Liquid Type (Water or Lava) and Shape (Plane or Cylinder) in which you can apply
+an underwater tint, underwater fog with distance fading, and underwater caustics.
+
+### Zone Shader Settings Trigger
+The `Zone Shader Settings Trigger` and prefab found in `Assets/MapPrefabs/` can be used to switch between different 
+`Zone Shader Settings`. It can be used with a Collider component with `IsTrigger` set to TRUE, or it has an option 
+called `Activate On Enable` which, if set to TRUE, can be used alongside an `Object Activation Trigger`.
+
 ## Lighting
 An important part of making a map look good is the lighting. Since Gorilla Tag bakes lighting, the process to get it 
 working is a bit involved, but it's absolutely worth it.
@@ -148,12 +183,12 @@ Go through all of your imported meshes now and make sure it's enabled for **all 
 doing and have applied Lightmap UVs in an external program)
 
 Next, go to each object with a `Mesh Renderer` in the scene, and ensure that `Contribute Global Illumination` is enabled. 
-If you want to disable an object Receiving/Casting shadows, mess with the `Cast Shadows` and `Receive Shadows` 
+If you want to disable an object Receiving/Casting shadows, you can change the `Cast Shadows` and `Receive Shadows` 
 properties - otherwise, leave them as the default values.
 
 ### Lights
-The Example Map includes a `Directional Light` by default. Don't remove this unless you know what you're doing, as it 
-(pretty accurately) recreates the base game lighting.
+The old Example Map found in `Assets/Scenes/Deprecated/` includes a `Directional Light` by default which closely recreates 
+Gorilla Tag's daytime light. An updated Lighting setup will be added to the Functionality Overview map in a future update.
 
 You can add any other sort of `Light` to your map that you want, but ensure that the type is set to `Baked`.
 
@@ -187,6 +222,7 @@ component with `Is Trigger` set to true. All trigger scripts have several common
 - `Triggered By` - Defines which parts of the player will trigger this Trigger.
     - Options include Hands, Body, Head, BodyOrHead. Due to how Hand and Body/Head colliders work in GorillaTag, a single Trigger is
     unable to check for both at the same time.
+- `On Enable Trigger Delay` - After being enabled, how long before this Trigger can be triggered? Useful when setting up overlapping Triggers.
 - `General Retrigger Delay` - After being triggered, how long before this Trigger can be triggered again?
 - `Num Allowed Triggers` - How many times is this Trigger allowed to trigger? 0 means infinite
 - `Retrigger After Duration` - Should this Trigger re-trigger if a player stays inside it for long enough?
@@ -230,29 +266,56 @@ included in the `ObjectActivationTrigger` prefab in the `Assets/MapPrefabs` fold
      lists are not affected by this. 
 
 ## Placeholder Script and Prefabs
-The `Placeholder` script defines an object that will get replaced by an existing Gorilla Tag script/object when your map is loaded 
+The `GTObjectPlaceholder` script defines an object that will get replaced by an existing Gorilla Tag script/object when your map is loaded 
 in-game. Each has a prefab in the `Assets/MapPrefabs/` folder that can or should be used depending on the placeholder selected for 
 the `Placeholder Object` setting.
 
 ### Force Volume 
 This is used in Gorilla Tag for things like the elevator to Sky Jungle and the invisible wind barriers preventing players from 
-falling out of the that map. The `ForceVolumePlaceholder` prefab has the `Placeholder` script setup to use the `Force Volume` option 
-and includes some default settings (each of which has a tooltip when hovered that provides more info). The prefab includes a visual 
+falling out of the that map. The `ForceVolumePlaceholder` prefab has the `GTObjectPlaceholder` script setup to use the `Force Volume` 
+option and includes some default settings (each of which has a tooltip when hovered that provides more info). The prefab includes a visual 
 preview and can be scaled as desired. 
+If you'd like to customize the collider shape used for a Force Volume, you can set the `Use Default Placeholder` option to FALSE, 
+and add your collider component alongside the `GTObjectPlaceholder` script.
 
 ### Leaf Glider 
-The `LeafGliderPlaceholder` prefab has the `Placeholder` script setup to use the `Leaf Glider` option and includes a visual preview 
-to assist with placement. It's recommended to **ONLY** use this prefab when using the `Leaf Glider` option on the `Placeholder` 
+The `LeafGliderPlaceholder` prefab has the `GTObjectPlaceholder` script setup to use the `Leaf Glider` option and includes a visual preview 
+to assist with placement. It's recommended to **ONLY** use this prefab when using the `Leaf Glider` option on the `GTObjectPlaceholder` 
 script. Scaling the placeholder will not affect the leaf glider that it get's replaced with.
 
 ### Glider Wind Volume 
 This is used in Gorilla Tag in Sky Jungle to send the Leaf Gliders into the air. The `GliderWindVolumePlaceholder` prefab has the 
-`Placeholder` script setup to use the `Glider Wind Volume` option and includes some default settings. It also includes a visual 
+`GTObjectPlaceholder` script setup to use the `Glider Wind Volume` option and includes some default settings. It also includes a visual 
 preview, but if you change the `Local Wind Direction` setting the arrows in the preview will not be pointed the correct way. This 
 prefab/placeholder can be scaled as desired. 
+If you'd like to customize the collider shape used for a Glider Wind Volume, you can set the `Use Default Placeholder` option to FALSE, 
+and add your collider component alongside the `GTObjectPlaceholder` script.
 
 ### Water Volume
-The `WaterVolumePlaceholder` prefab has the `Placeholder` script setup to use the `Water Volume` option with some default settings. It includes a visual preview and can be scaled as desired.
+Using this placeholder you can define a swimmable water volume. This works best when combined with `Zone Shader Settings` underwater effects.
+The `WaterVolumePlaceholder` prefab has the `GTObjectPlaceholder` script setup to use the `Water Volume` option with some default settings. 
+It includes a visual preview and can be scaled as desired.
+If you'd like to customize the collider shape used for a Water Volume, you can set the `Use Default Placeholder` option to FALSE, 
+and add your collider component alongside the `GTObjectPlaceholder` script.
+
+### Hoverboard Area
+The Hoverboard Area placeholder allows you to define an area where players are allowed to use Hoverboards. The `HoverboardArea` prefab has the 
+`GTObjectPlaceholder` script setup to use the `HoverboardArea` option and a Box Collider component. This option for the `GTObjectPlaceholder` 
+script *requires* a Collider component to function correctly. 
+
+### Hoverboard Dispenser
+For players to actually have access to Hoverboards in your map, you'll need to add some `HoverboardDispenser` placeholder prefabs. These need
+to be placed *inside* a `HoverboardArea` to function correctly. 
+It's recommended to **ONLY** use this prefab when using the `Hoverboard Dispenser` option on the `GTObjectPlaceholder` 
+script. Scaling the placeholder will not affect the Hoverboard Dispernser that it get's replaced with.
+
+### ATM
+Using the `ATMPlaceholder` prefab, you can give players access to an ATM in your map. It has an option to set a Default Creator Code.
+It's recommended to **ONLY** use this prefab when using the `ATM` option on the `GTObjectPlaceholder` 
+script. Scaling the placeholder will not affect the ATM that it get's replaced with.
+
+For more information about creator codes and how to apply, please refer to this 
+[announcement post](https://discord.com/channels/671854243510091789/804747032651628615/1352342582717452371) in the Gorilla Tag Discord.
 
 ## Other Scripts/Prefabs
 
@@ -279,13 +342,35 @@ it positions and orients your map. As with the `AccessDoorPlaceholder` there sho
 IMPORTANT: Make sure that all `MapOrientationPoint` prefabs have the same position and orientation as the `AccessDoorPlaceholder` prefab or your
 scenes won't load in correctly.
 
+### Hand Hold Settings
+This component can be used to create grab points in your map. It needs to be added to a GameObject alongside a Collider component.
+
+**Script Options:**
+- `Hand Snap Method` - Used to change if and how the players hand will snap to the mesh when they grab it.
+- `Rotate Player When Held` - Used if you want the player to be able to rotate their body while grabbing this object
+- `Allow Pre Grab` - Used to allow players to press the Grab button before actually colliding with this object, and still allow the grab.
+
+### Custom Map Eject Button Settings
+This component can be used to create a button that when pressed can either teleport them back to the Virtual Stump, or return them to the 
+Arcade or Stump (wherever they entered the Virtual Stump from).
+
+**Script Options:**
+- `Eject Type` - Used to set if the player is returned to the Virtual Stump or ejected completely.
+
 ### Destroy Pre Export
 This is used to destroy in-editor visualization helpers and other editor-only objects to ensure they don't end up in your 
 exported map. You can attach this script to any GameObject that should **NOT** be included in your exported map.
 
+### Inspector Note
+This is used extensively in the Functionality Overview scenes to provide more information on how things are setup. You can use this for any
+kind of notes you'd like to add on GameObjects. This component will be removed during the export process so it's only present while in-editor.
+
 ### Teleport Point (Prefab)
 This is a simple prefab that is essentially just a visual preview to show where you've placed them in your map. Can be used with the 
 `MapBoundary` and `Teleporter` scripts to define teleport destinations.
+
+### Cameras
+Cameras are allowed as long as they are being used for Render Textures. Any cmaeras not using Render Textures will be deleted.
 
 ## Loading Zones
 
