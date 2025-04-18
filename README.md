@@ -61,7 +61,7 @@ https://docs.unity3d.com/Manual/android-sdksetup.html
 ## Functionality Overview Map
 Included in this project are 3 scenes called `FunctionalityOverview_StartingZone`, `FunctionalityOverview_OceanZone`, 
 and `FunctionalityOverview_ScriptsZone`. Each of these scenes are part of the Functionality Overview map which provides
-comprehensive in-editor documentaion and examples of how most functionality avaliable for Custom Maps can be used. You 
+comprehensive in-editor documentation and examples of how most functionality available for Custom Maps can be used. You 
 can also check out this map in-game by subscribing to the [Functionality Overview](https://mod.io/g/gorilla-tag/m/functionality-overview?preview=8256e9b8f815e1d6c54ec02e25766f2f)
 map on mod.io and then loading it up in Gorilla Tag. This map will continue to be updated with each new version of the 
 example project to provide examples of any new functionality we add.
@@ -73,9 +73,6 @@ things that you'll need to do to ensure that Gorilla Tag can load it correctly.
 To load up the Unity project, go ahead and open up Unity or Unity Hub (Hub is recommended) and then click Open/Add and 
 navigate to the downloaded + unzipped project. Navigate to the folder that contains the `Assets`, `Packages`, and 
 `ProjectSettings` folders, then click `Select Folder`.
-
-If Unity doesn't load the Example Map upon opening you can open it by navigating to `Assets/Scenes/ExampleMap.unity`.
-You can use this map as a reference for all the available functionality and how to properly setup a Map.
 
 When creating a new map, you should first create a new Scene and load it up. Then create an empty GameObject that will 
 hold everything in your map. Make sure the position is (0, 0, 0), and the scale is (1, 1, 1).
@@ -281,7 +278,7 @@ and add your collider component alongside the `GTObjectPlaceholder` script.
 ### Leaf Glider 
 The `LeafGliderPlaceholder` prefab has the `GTObjectPlaceholder` script setup to use the `Leaf Glider` option and includes a visual preview 
 to assist with placement. It's recommended to **ONLY** use this prefab when using the `Leaf Glider` option on the `GTObjectPlaceholder` 
-script. Scaling the placeholder will not affect the leaf glider that it get's replaced with.
+script. Scaling the placeholder will not affect the leaf glider that it gets replaced with.
 
 ### Glider Wind Volume 
 This is used in Gorilla Tag in Sky Jungle to send the Leaf Gliders into the air. The `GliderWindVolumePlaceholder` prefab has the 
@@ -307,12 +304,12 @@ script *requires* a Collider component to function correctly.
 For players to actually have access to Hoverboards in your map, you'll need to add some `HoverboardDispenser` placeholder prefabs. These need
 to be placed *inside* a `HoverboardArea` to function correctly. 
 It's recommended to **ONLY** use this prefab when using the `Hoverboard Dispenser` option on the `GTObjectPlaceholder` 
-script. Scaling the placeholder will not affect the Hoverboard Dispernser that it get's replaced with.
+script. Scaling the placeholder will not affect the Hoverboard Dispenser that it gets replaced with.
 
 ### ATM
 Using the `ATMPlaceholder` prefab, you can give players access to an ATM in your map. It has an option to set a Default Creator Code.
 It's recommended to **ONLY** use this prefab when using the `ATM` option on the `GTObjectPlaceholder` 
-script. Scaling the placeholder will not affect the ATM that it get's replaced with.
+script. Scaling the placeholder will not affect the ATM that it gets replaced with.
 
 For more information about creator codes and how to apply, please refer to this 
 [announcement post](https://discord.com/channels/671854243510091789/804747032651628615/1352342582717452371) in the Gorilla Tag Discord.
