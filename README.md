@@ -371,7 +371,7 @@ Cameras are allowed as long as they are being used for Render Textures. Any cmae
 
 ## Loading Zones
 
-If you want to break up your map into multiple scenes, you can use the `ZoneLaodTigger` prefab to load and unload those scenes.
+If you want to break up your map into multiple scenes, you can use the `ZoneLoadTigger` prefab to load and unload those scenes.
 
 ### Multi Map Setup
 ALL scenes you want included in your map need to be added to the `Scenes In Build` section of the `Build Settings` window.
