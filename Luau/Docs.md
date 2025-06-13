@@ -289,8 +289,24 @@ function tick()
 	end
 end
 ```
+---
+# **Delays**
 
+> Note: As stated in the FAQ, __don't__ use `wait()` or `sleep()`
 
+If you wanted to delay something, you would use `os.clock()` to measure the amount of seconds between events.
+
+Example usage:
+```lua
+local startingTime = os.clock()
+local delay = 3
+print("now")
+function tick()
+	if (os.clock() - startingTime >= delay) then
+		print("3 seconds later")
+	end
+end
+```
 -------
 ## **FAQ**
 
