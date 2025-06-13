@@ -233,6 +233,7 @@ Shader "GorillaTag/UberShader"
         _EmissionDissolveProgress("Emission - Dissolve Progress", Range(0.0, 1.0)) = 1.0
         [Vec2] _EmissionDissolveAnimation("Emission - Dissolve Anim", Vector) = (0.0, 1.0, -0.0, -0.0)
         _EmissionDissolveEdgeSize("Emission - Dissolve Edge Size", Range(0.0001, 1.0)) = 0.1
+        _EmissionIntensityInDynamic("Emission - Intensity In Dynamic Light", Range(0.0, 1.0)) = 0.0
         [Toggle(_EMISSION_USE_UV_WAVE_WARP)] _EmissionUseUVWaveWarp("Emission - Use UV Wave Warp", Float) = 0.0
 //        [Toggle(_EMISSION_USE_FLOW_MAP)] _EmissionUseFlowMap("Emission - Use Flow Map", 2D) = "white" {}
         

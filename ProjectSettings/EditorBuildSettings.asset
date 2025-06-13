@@ -17,6 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FunctionalityOverview_ScriptsZone.unity
     guid: 29986dd208b5d7d45865fd93ff88b5f8
+  - enabled: 1
+    path: Assets/Scenes/FunctionalityOverview_DynamicLights.unity
+    guid: c91fbb8c7570acb4888a56257eaa17f5
+  - enabled: 0
+    path: Assets/Scenes/MinimalExample.unity
+    guid: 6cdfb6f90d18e2249adb8b135aa3d01b
+  - enabled: 0
+    path: Assets/Scenes/TeamTag.unity
+    guid: 3853ada55b9ae264ab04d35d938e747f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 15b99076b4e70494f9b438585587dffb,
       type: 2}

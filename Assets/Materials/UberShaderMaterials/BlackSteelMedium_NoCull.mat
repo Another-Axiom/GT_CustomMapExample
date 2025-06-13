@@ -7,16 +7,23 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MirrorBackground
+  m_Name: BlackSteelMedium_NoCull
   m_Shader: {fileID: 4800000, guid: b6656bb0c0440ff45ab019d9d854b3e3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _GT_BASE_MAP_ATLAS_SLICE_SOURCE__PROPERTY
+  - _HEIGHT_BASED_WATER_EFFECT
+  - _REFLECTIONS
+  - _REFLECTIONS_ALBEDO_TINT
   - _REFLECTIONS_MATCAP_PERSP_AWARE
+  - _REFLECTIONS_USE_NORMAL_TEX
   - _USE_TEXTURE
   - _UV_SOURCE__UV0
-  m_InvalidKeywords: []
+  - _WATER_EFFECT
+  m_InvalidKeywords:
+  - _METALLICSPECGLOSSMAP
+  - _NORMALMAP
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -29,15 +36,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: cb27980a92035f44aa006b176e84b3a7, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 265bbb414d9e7df498b3131826368c8c, type: 3}
+        m_Scale: {x: 6, y: 6}
         m_Offset: {x: 0, y: 0}
     - _BaseMap_Atlas:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: cc48be3b0236e43438bb7e7009f472d2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DayNightLightmapArray:
@@ -68,9 +75,13 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
+    - _DistortionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 0.08, y: 0.08}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap_Atlas:
         m_Texture: {fileID: 0}
@@ -81,15 +92,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 8400000, guid: 81f2fbb78c8b5fc42aa0c3db37728e0a, type: 2}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 265bbb414d9e7df498b3131826368c8c, type: 3}
+        m_Scale: {x: 1, y: 2}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 63591bdad95d0764581f263ab4ce68c0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MouthMap:
@@ -105,11 +116,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ReflectNormalTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: cc48be3b0236e43438bb7e7009f472d2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ReflectTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 76632dc1a4357c4469b10bd31e743a3a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -144,18 +155,22 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaDetailToggle: 0
-    - _AlphaDetail_Opacity: 1
+    - _AlphaDetail_Opacity: 0
     - _AlphaDetail_WorldSpace: 0
     - _AlphaToMask: 0
     - _BaseMap_AtlasSlice: 0
     - _BaseMap_AtlasSliceSource: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _BumpScale: 1
+    - _BumpScale: 1.5
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _CrystalPower: 0.32
-    - _Cull: 2
+    - _Cull: 0
+    - _Culling: 2
+    - _CustomColors: 1
+    - _CustomColorsAlbedo: 0
+    - _CustomColorsEmissive: 1
     - _Cutoff: 0.5
     - _DEBUG_PAWN_DATA: 0
     - _DayNightLightmapArray_AtlasSlice: 0
@@ -164,24 +179,27 @@ Material:
     - _DeformMap_AtlasSlice: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DistortionIntensity: 0
     - _DoTextureRotation: 0
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EmissionDissolveEdgeSize: 0.1
     - _EmissionDissolveProgress: 1
+    - _EmissionIntensityInDynamic: 0
     - _EmissionMap_AtlasSlice: 0
     - _EmissionMaskByBaseMapAlpha: 1
     - _EmissionToggle: 0
     - _EmissionUseUVWaveWarp: 0
     - _EnvironmentReflections: 1
     - _EyeOverrideUV: 0
-    - _GlossMapScale: 0
-    - _Glossiness: 0
-    - _GlossyReflections: 0
+    - _GlossMapScale: 0.361
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Glow: 0
     - _GradientMapToggle: 0
     - _GreyZoneException: 0
     - _HalfLambertToggle: 0
-    - _HeightBasedWaterEffect: 0
+    - _HeightBasedWaterEffect: 1
     - _InnerGlowOn: 0
     - _InnerGlowSine: 0
     - _InnerGlowSinePeriod: 1
@@ -195,6 +213,7 @@ Material:
     - _LiquidVolume: 0
     - _MaskMapToggle: 0
     - _Metallic: 0
+    - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _ParallaxAABias: 127
@@ -204,15 +223,15 @@ Material:
     - _ParallaxToggle: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _ReflectAlbedoTint: 0
+    - _ReflectAlbedoTint: 1
     - _ReflectBoxProjectToggle: 0
-    - _ReflectExposure: 1
+    - _ReflectExposure: 4.16
     - _ReflectMatcapPerspToggle: 1
     - _ReflectMatcapToggle: 0
-    - _ReflectNormalToggle: 0
-    - _ReflectOpacity: 1
+    - _ReflectNormalToggle: 1
+    - _ReflectOpacity: 0.598
     - _ReflectRotate: 0
-    - _ReflectToggle: 0
+    - _ReflectToggle: 1
     - _RotateAngle: 0
     - _RotateAnim: 0
     - _Smoothness: 0.5
@@ -231,6 +250,7 @@ Material:
     - _TexelSnap_Factor: 1
     - _USE_DEFORM_MAP: 0
     - _USE_TEX_ARRAY_ATLAS: 0
+    - _UVSec: 0
     - _UseCrystalEffect: 0
     - _UseDayNightLightmap: 0
     - _UseEyeTracking: 0
@@ -253,7 +273,7 @@ Material:
     - _VertexWavePhaseOffset: 0
     - _VertexWaveToggle: 0
     - _WaterCaustics: 0
-    - _WaterEffect: 0
+    - _WaterEffect: 1
     - _WaveAmplitude: 0.02
     - _WaveFrequency: 1
     - _WaveScale: 12
@@ -264,15 +284,17 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AChannelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _AlbedoColor: {r: 1, g: 1, b: 1, a: 1}
     - _AlphaDetail_ST: {r: 1, g: 1, b: 0, a: 0}
+    - _AmbientLight: {r: 0.25, g: 0.25, b: 0.25, a: 1}
     - _BChannelColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.7738964, g: 0.8313753, b: 0.8773585, a: 1}
     - _BaseMap_WH: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CrystalRimColor: {r: 0.382, g: 0.382, b: 0.382, a: 1}
     - _DeformMapObjectSpaceOffsetsU: {r: 0, g: 0, b: 0, a: -0}
     - _DeformMapObjectSpaceOffsetsV: {r: 0, g: 0, b: 0, a: -0}
-    - _DeformMapScrollSpeed: {r: 1, g: 1, b: -0, a: -0}
+    - _DeformMapScrollSpeed: {r: 0, g: 0, b: -0, a: -0}
     - _DeformMapUV0Influence: {r: 1, g: 1, b: -0, a: -0}
     - _DeformMapWorldSpaceOffsetsU: {r: 0, g: 0, b: 0, a: -0}
     - _DeformMapWorldSpaceOffsetsV: {r: 0, g: 0, b: 0, a: -0}
@@ -284,6 +306,8 @@ Material:
     - _GChannelColor: {r: 1, g: 1, b: 1, a: 1}
     - _InnerGlowColor: {r: 1, g: 0.1, b: 0.47, a: 1}
     - _InnerGlowParams: {r: 0, g: 0, b: 0, a: 1}
+    - _LightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LightDir: {r: 0, g: 1, b: 1, a: 1}
     - _LiquidFillNormal: {r: 0, g: 1, b: 0, a: 1}
     - _LiquidPlaneNormal: {r: 0, g: -1, b: 0, a: 1}
     - _LiquidPlanePosition: {r: 0, g: 0, b: 0, a: 1}
@@ -295,8 +319,10 @@ Material:
     - _ReflectBoxSize: {r: 1, g: 1, b: 1, a: 1}
     - _ReflectOffset: {r: 0, g: 0, b: 0, a: 0}
     - _ReflectScale: {r: 1, g: 1, b: 1, a: 1}
-    - _ReflectTint: {r: 1, g: 1, b: 1, a: 1}
+    - _ReflectTint: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
     - _RotateOnYAxisBySinTime: {r: 0, g: 0, b: 0, a: 0}
+    - _ScaleVecto2r: {r: 1, g: 1, b: 1, a: 1}
+    - _ScaleVector: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularDir: {r: 0, g: -1, b: 0, a: 0}
@@ -313,7 +339,7 @@ Material:
     - _VertexWaveParams: {r: 1, g: 1, b: 1, a: 16}
     - _VertexWaveSphereMask: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &2412244810140345104
+--- !u!114 &5087722187922677252
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

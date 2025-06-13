@@ -12,13 +12,14 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _EMISSION
   - _GT_BASE_MAP_ATLAS_SLICE_SOURCE__PROPERTY
   - _HEIGHT_BASED_WATER_EFFECT
   - _UV_SOURCE__UV0
   - _WATER_EFFECT
   m_InvalidKeywords:
   - _SPECULAR_SETUP
-  m_LightmapFlags: 0
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -173,7 +174,7 @@ Material:
     - _EmissionDissolveProgress: 1
     - _EmissionMap_AtlasSlice: 0
     - _EmissionMaskByBaseMapAlpha: 1
-    - _EmissionToggle: 0
+    - _EmissionToggle: 1
     - _EmissionUseUVWaveWarp: 0
     - _EnvironmentReflections: 1
     - _EyeOverrideUV: 0
@@ -278,7 +279,7 @@ Material:
     - _DeformMapUV0Influence: {r: 1, g: 1, b: -0, a: -0}
     - _DeformMapWorldSpaceOffsetsU: {r: 0, g: 0, b: 0, a: -0}
     - _DeformMapWorldSpaceOffsetsV: {r: 0, g: 0, b: 0, a: -0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.5, g: 0, b: 0, a: 1}
     - _EmissionDissolveAnimation: {r: 0, g: 1, b: -0, a: -0}
     - _EmissionUVScrollSpeed: {r: 0, g: 0, b: 1, a: -0}
     - _EyeOverrideUVTransform: {r: 1, g: 1, b: 0, a: 0}

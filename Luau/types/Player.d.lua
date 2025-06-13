@@ -9,6 +9,8 @@ declare class Player -- Read only except for playerMaterial
     leftHandRotation : Quat
     rightHandRotation : Quat
     headRotation : Quat
+    isInVStump : boolean
+    isEntityAuthority : boolean
 end
 
 
@@ -29,3 +31,20 @@ declare Players : {Player}
 declare LocalPlayer : Player
 
 declare PlayerSettings : PSettings
+
+declare class PInput
+    leftXAxis : number
+    rightXAxis : number
+    leftYAxis : number
+    rightYAxis : number
+    leftTrigger : number
+    rightTrigger : number
+    leftGrip : number
+    rightGrip : number
+    leftPrimaryButton : boolean
+    rightPrimaryButton : boolean
+    leftSecondaryButton : boolean
+    rightSecondaryButton : boolean
+end
+
+declare PlayerInput : PInput

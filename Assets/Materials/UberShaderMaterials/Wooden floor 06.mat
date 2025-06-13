@@ -270,6 +270,7 @@ Material:
     - _VertexWaveDebug: 0
     - _VertexWavePhaseOffset: 0
     - _VertexWaveToggle: 0
+    - _WaterCaustics: 0
     - _WaterEffect: 1
     - _WaveAmplitude: 0.02
     - _WaveFrequency: 1

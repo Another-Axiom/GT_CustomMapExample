@@ -12,8 +12,8 @@ Material:
   m_Parent: {fileID: 2100000, guid: 2e4d86a3cf0acc04d841a77c886e6eb8, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _GT_BASE_MAP_ATLAS_SLICE_SOURCE__PROPERTY
   - _REFLECTIONS_MATCAP_PERSP_AWARE
-  - _USE_DAY_NIGHT_LIGHTMAP
   - _USE_TEXTURE
   - _UV_SOURCE__UV0
   m_InvalidKeywords: []
@@ -29,7 +29,8 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _UseDayNightLightmap: 0
     m_Colors:
     - _BaseColor: {r: 0.73800004, g: 0.6365845, b: 0.528408, a: 1}
   m_BuildTextureStacks: []

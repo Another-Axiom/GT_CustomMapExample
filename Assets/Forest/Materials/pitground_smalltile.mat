@@ -15,7 +15,6 @@ Material:
   - _GT_BASE_MAP_ATLAS_SLICE_SOURCE__PROPERTY
   - _HEIGHT_BASED_WATER_EFFECT
   - _REFLECTIONS_MATCAP_PERSP_AWARE
-  - _USE_DAY_NIGHT_LIGHTMAP
   - _USE_TEXTURE
   - _UV_SOURCE__UV0
   - _WATER_EFFECT
@@ -264,7 +263,7 @@ Material:
     - _USE_TEX_ARRAY_ATLAS: 0
     - _UVSec: 0
     - _UseCrystalEffect: 0
-    - _UseDayNightLightmap: 1
+    - _UseDayNightLightmap: 0
     - _UseEyeTracking: 0
     - _UseGridEffect: 0
     - _UseMouthFlap: 0
@@ -288,6 +287,7 @@ Material:
     - _VertexWavePhaseOffset: 0
     - _VertexWaveStartOffset: 0
     - _VertexWaveToggle: 0
+    - _WaterCaustics: 0
     - _WaterEffect: 1
     - _WaveAmplitude: 0.02
     - _WaveFrequency: 1

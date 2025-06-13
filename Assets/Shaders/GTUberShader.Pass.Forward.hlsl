@@ -28,6 +28,15 @@
     _ \
     _ZONE_LIQUID_SHAPE__CYLINDER
 
+#pragma multi_compile \
+    _ \
+    _ZONE_DYNAMIC_LIGHTS__CUSTOMVERTEX // \
+    //_ZONE_DYNAMIC_LIGHTS__UNITYVERTEX
+
+//#pragma multi_compile \
+//    _ \
+//    _ZONE_DESATURATE_AND_TINT__ENABLE
+
 // TODO: Rename to `_BASE_MAP__ON`, and `_BASE_MAP__AS_MASK`
 #pragma shader_feature \
     _ \
@@ -156,6 +165,9 @@
 #endif
 
 #include "GTUberShader.Common.hlsl"
+//#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+//#include "UnityCG.cginc"
+//#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 
 DECLARE_ATLASABLE_TEX2D(_BaseMap);
 DECLARE_ATLASABLE_SAMPLER(sampler_BaseMap);
@@ -234,6 +246,22 @@ float _ZoneGroundFogHeightFade;
 float _ZoneGroundFogDepthFadeSq;
 half4 _ZoneGroundFogColor;
 
+#define MAX_GAME_VERTEX_LIGHTS 50
+float3 _GT_GameLight_Ambient_Color;
+float _GT_DesaturateAndTint_TintAmount;
+float3 _GT_DesaturateAndTint_TintColor;
+
+struct GameLight
+{
+    float4 position;
+    float4 color;
+    float4 direction;
+};
+StructuredBuffer<GameLight> _GT_GameLight_Lights;
+
+//half4 _AdditionalLightsSpotDir[MAX_VISIBLE_LIGHTS];
+//half4 _AdditionalLightsOcclusionProbes[MAX_VISIBLE_LIGHTS];
+//float _AdditionalLightsLayerMasks[MAX_VISIBLE_LIGHTS]; // we want uint[] but Unity api does not support it.
 
 #if _WATER_EFFECT
     //TODO: rename _Global vars to _Zone to indicate they are controlled per zone.
@@ -385,9 +413,102 @@ struct Varyings
         float2 mouthUV : TEXCOORD2;
     #endif
 
+    #if _ZONE_DYNAMIC_LIGHTS__CUSTOMVERTEX // || _ZONE_DYNAMIC_LIGHTS__UNITYVERTEX
+        float4 lightColor : TEXCOORD15;
+    #endif 
+    
     UNITY_VERTEX_INPUT_INSTANCE_ID
     UNITY_VERTEX_OUTPUT_STEREO
 };
+    
+//     
+struct Light
+{
+    half3 direction;
+    half3 color;
+    float distanceAttenuation; // full-float precision required on some platforms
+    half shadowAttenuation;
+    uint layerMask;
+};
+
+
+float DistanceAttenuation(float distanceSqr, half2 distanceAttenuation)
+{
+// We use a shared distance attenuation for additional directional and puctual lights
+// for directional lights attenuation will be 1
+    float lightAtten = rcp(distanceSqr);
+    float2 distanceAttenuationFloat = float2(distanceAttenuation);
+
+// Use the smoothing factor also used in the Unity lightmapper.
+    half factor = half(distanceSqr * distanceAttenuationFloat.x);
+    half smoothFactor = saturate(half(1.0) - factor * factor);
+    smoothFactor = smoothFactor * smoothFactor;
+
+    return lightAtten * smoothFactor;
+}
+
+half AngleAttenuation(half3 spotDirection, half3 lightDirection, half2 spotAttenuation)
+{
+// Spot Attenuation with a linear falloff can be defined as
+// (SdotL - cosOuterAngle) / (cosInnerAngle - cosOuterAngle)
+// This can be rewritten as
+// invAngleRange = 1.0 / (cosInnerAngle - cosOuterAngle)
+// SdotL * invAngleRange + (-cosOuterAngle * invAngleRange)
+// SdotL * spotAttenuation.x + spotAttenuation.y
+
+// If we precompute the terms in a MAD instruction
+    half SdotL = dot(spotDirection, lightDirection);
+    half atten = saturate(SdotL * spotAttenuation.x + spotAttenuation.y);
+    return atten * atten;
+}
+    
+Light GetGameLight(int perObjectLightIndex, float3 positionWS)
+{
+// Abstraction over Light input constants
+//#if USE_STRUCTURED_BUFFER_FOR_LIGHT_DATA
+//    float4 lightPositionWS = _AdditionalLightsBuffer[perObjectLightIndex].position;
+//    half3 color = _AdditionalLightsBuffer[perObjectLightIndex].color.rgb;
+//    half4 distanceAndSpotAttenuation = _AdditionalLightsBuffer[perObjectLightIndex].attenuation;
+//    half4 spotDirection = _AdditionalLightsBuffer[perObjectLightIndex].spotDirection;
+//    uint lightLayerMask = _AdditionalLightsBuffer[perObjectLightIndex].layerMask;
+//#else
+//    float4 lightPositionWS = _AdditionalLightsPosition[perObjectLightIndex];
+//    half3 color = _AdditionalLightsColor[perObjectLightIndex].rgb;
+//    half4 distanceAndSpotAttenuation = _AdditionalLightsAttenuation[perObjectLightIndex];
+//    half4 spotDirection = _AdditionalLightsSpotDir[perObjectLightIndex];
+//    uint lightLayerMask = asuint(_AdditionalLightsLayerMasks[perObjectLightIndex]);
+//#endif
+    
+    GameLight gameLight = _GT_GameLight_Lights[perObjectLightIndex];
+    float4 lightPositionWS = gameLight.position;
+    half3 color = gameLight.color.rgb;
+    //half4 spotDirection = gameLight.direction;
+    half4 distanceAndSpotAttenuation = half4(0.03f, 1.0f, 0.0f, 0.0f); //_AdditionalLightsAttenuation[perObjectLightIndex];
+    
+
+    //half4 distanceAndSpotAttenuation = _AdditionalLightsAttenuation[perObjectLightIndex];        
+    //uint lightLayerMask = asuint(_AdditionalLightsLayerMasks[perObjectLightIndex]);
+
+    // Directional lights store direction in lightPosition.xyz and have .w set to 0.0.
+    // This way the following code will work for both directional and punctual lights.
+    float3 lightVector = lightPositionWS.xyz - positionWS * lightPositionWS.w;
+    float distanceSqr = max(dot(lightVector, lightVector), HALF_MIN);
+
+    half3 lightDirection = half3(lightVector * rsqrt(distanceSqr));
+    // full-float precision required on some platforms
+    //float attenuation = DistanceAttenuation(distanceSqr, distanceAndSpotAttenuation.xy) * AngleAttenuation(spotDirection.xyz, lightDirection, distanceAndSpotAttenuation.zw);
+    float attenuation = DistanceAttenuation(distanceSqr, distanceAndSpotAttenuation.xy);
+
+    Light light;
+    light.direction = lightDirection;
+    light.distanceAttenuation = attenuation;
+    light.shadowAttenuation = 1.0; // This value can later be overridden in GetAdditionalLight(uint i, float3 positionWS, half4 shadowMask)
+    light.color = color;
+    //light.layerMask = lightLayerMask;
+
+    return light;
+}
+    
 
 // Vertex Shader
 Varyings vert(Attributes input)
@@ -667,8 +788,41 @@ Varyings vert(Attributes input)
         // output.glowMask.rgb = ig * (_InnerGlowTap ? ig_tap_mask : 1);
     #endif
         
-    return output;
+#if _ZONE_DYNAMIC_LIGHTS__CUSTOMVERTEX // || _ZONE_DYNAMIC_LIGHTS__UNITYVERTEX
+   
+        float3 lightColor = _GT_GameLight_Ambient_Color;
+        
+    //#if _ZONE_DYNAMIC_LIGHTS__UNITYVERTEX
+    //    // Loop for unity lights
+    //    uint pixelLightCount = 0;
+    //    pixelLightCount = GetAdditionalLightsCount();
+    //    LIGHT_LOOP_BEGIN(pixelLightCount)
+    //    Light additionalLight = GetAdditionalLight(lightIndex, output.positionWS, half4(1, 1, 1, 1));
+    //    float atten = clamp(additionalLight.distanceAttenuation, 0.0f, 1.0f);
+    //    lightColor += saturate(dot(output.normalWS, additionalLight.direction)) * additionalLight.color * atten * .2f;
+    //    LIGHT_LOOP_END
+    //#endif 
+        
+        
+        
+    #if _ZONE_DYNAMIC_LIGHTS__CUSTOMVERTEX
+        // Loop for Andrew's lights
+        for (int i = 0; i < MAX_GAME_VERTEX_LIGHTS; ++i)
+        {
+            Light additionalLight = GetGameLight(i, output.positionWS);
+            float atten = clamp(additionalLight.distanceAttenuation, 0.0f, 1.0f);
+            lightColor += saturate(dot(output.normalWS, additionalLight.direction)) * additionalLight.color * atten;
+        }
+        
+        lightColor = clamp(lightColor, float3(0.0, 0.0, 0.0), float3(2.0, 2.0, 2.0));
+        
+    #endif
+        output.lightColor = float4(lightColor, 1.0);
+        
+#endif
+        return output;
 }
+
 
 
 // Fragment Shader
@@ -930,7 +1084,12 @@ half4 frag(Varyings input, bool facing: SV_IsFrontFace) : SV_Target
             Progress(emiMap.a, _EmissionDissolveEdgeSize, _EmissionDissolveProgress)
         );
         emissionValue *= emiMap.rgb * emissionDissolveMask * (pow(abs(sin(_Time.x * _EmissionDissolveAnimation.y)), _EmissionDissolveAnimation.x));
-        color.rgb += emissionValue * lerp(1.0, color.a, _EmissionMaskByBaseMapAlpha);
+        half3 emissiveColor = emissionValue * lerp(1.0, color.a, _EmissionMaskByBaseMapAlpha);
+        
+#if !_ZONE_DYNAMIC_LIGHTS__CUSTOMVERTEX
+        color.rgb += emissiveColor;
+#endif
+        
     #endif
 
     // ========== Ground Fog ==========
@@ -1271,6 +1430,33 @@ half4 frag(Varyings input, bool facing: SV_IsFrontFace) : SV_Target
         clip(clip_mask);
     
     #endif
+        
+    //float3 lightColor = float3(.00, .00, .00);    
+    //uint pixelLightCount = GetAdditionalLightsCount();
+    //LIGHT_LOOP_BEGIN(pixelLightCount)
+    //Light additionalLight = GetAdditionalLight(lightIndex, input.positionWS, half4(1, 1, 1, 1));
+    //float atten = clamp(additionalLight.distanceAttenuation, 0.0f, 1.0f);
+    //lightColor += saturate(dot(input.normalWS, additionalLight.direction)) * additionalLight.color * atten * .33f;
+    //LIGHT_LOOP_END
     
+#if _ZONE_DYNAMIC_LIGHTS__CUSTOMVERTEX // || _ZONE_DYNAMIC_LIGHTS__UNITYVERTEX    
+    color.rgb = color.rgb * input.lightColor.rgb;
+        
+#if _EMISSION || _CRYSTAL_EFFECT
+    color.rgb += emissiveColor * _EmissionIntensityInDynamic;
+#endif
+        
+#endif
+
+//#if _ZONE_DESATURATE_AND_TINT__ENABLE        
+#if _ZONE_DYNAMIC_LIGHTS__CUSTOMVERTEX
+    float grayscale = dot(color.rgb, float3(0.299, 0.587, 0.114));
+    // Desaturate (fully)
+    float3 destaturatedColor = grayscale * float3(1, 1, 1);
+    destaturatedColor = destaturatedColor * _GT_DesaturateAndTint_TintColor;
+    destaturatedColor = (_GT_DesaturateAndTint_TintAmount * destaturatedColor) + ((1 - _GT_DesaturateAndTint_TintAmount) * color.rgb);
+    color = float4(destaturatedColor, 1.0f);
+#endif
+        
     return color;
 }

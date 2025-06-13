@@ -103,16 +103,43 @@ Networking is currently event-driven. Each client can send up to **20 events per
 
 ----------
 
+## **Game Events**
+
+Some events from Gorilla Tag will be sent to your script via the `onEvent()` function. These events include:
+
+- `taggedByEnvironment` - This indicates the local player was tagged by something in the environment rather than a player. 
+                          Only sent in Infection-style and Custom gamemodes. `data` will be `nil`.
+- `agentDestroyed` - This indicates an AIAgent was destroyed, `data` will be the AIAgent's `entityID`
+- `touchedPlayer` - This indicates the local player touched another player. `data` will be the `Player` they touched
+
+----------
+
 ## **Players**
 
 Scripts have simple access to each player in the lobby, allowing you to do things like:
 
--   Check if a player is the **master client**.
+-   Check if a player is the **master client** or **entity authority**
 -   Get their **position**, **rotation**, and **player materials**.
 
 ### **Player Materials**
 
 You can control how players appear using the `playerMaterial` property. This property is an integer corresponding to different material types (normal, tagged, infected, frozen, etc.):
+
+0 = normal
+1 = tagged
+2 = infected
+3 = frozen
+4 = blue
+5 = magenta
+6 = light blue
+7 = blue with orange splatter
+8 = orange
+9 = red
+10 = yellow
+11 = orange with blue splatter
+12 = soda infected
+13 = ghost skeleton
+14 = ice
 
 Example:
 ```lua
@@ -125,6 +152,25 @@ function tick() end
 
 When a player tags/touches another player, the `onEvent()` function receives an event named `"touchedPlayer"` with the touched player instance as data. Please see the SimpleTag example.
 
+----------
+
+## AI Agents
+
+Scripts have access to each of the AI Agents in the map. They have several properties available including:
+- `entityID` - can be used to identify an AI Agent and get a reference to them with the `getAIAgentByEntityID` function. This ID is valid when sent to other players via the `emitEvent` function
+- `agentPosition` - the AI Agent's world position, updated every tick
+- `agentRotation` - the AI Agent's world rotation, updated every tick
+
+There are also several functions available including: 
+- `tostring` support
+- `setDestination(Vec3 destination)`* - used to tell an Agent where they should try to move to.
+- `destroyAgent`* - used to remove an AI Agent from the game entirely
+- `playAgentAnimation(string animationStateName)` - used to tell all Animator components on an agent to activate the specified Animation State.
+- `getAIAgentByEntityID(number id)` - used to get an AIAgent reference from an entityID
+- `findPrePlacedAIAgentByID(number id)` - used to get a reference to a specific Pre-Placed AIAgent using their Lua_AgentID
+- `spawnAIAgent(number agentTypeID, Vec3 position, Quat rotation)`* - used to spawn a new AIAgent at the specified world position/rotation using their AgentTypeID
+
+Functions with a * next to them must be called on the Player that has EntityAuthority. Use `Player.isEntityAuthority` to check this.
 
 ----------
 

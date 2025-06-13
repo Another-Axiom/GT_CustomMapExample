@@ -49,6 +49,8 @@ declare Vec3: {
 	lerp: (a: Vec3, b: Vec3, t: number) -> Vec3,
 	distance: (a: Vec3, b: Vec3) -> number,
 	rotate: (a: Vec3, b: Quat) -> Vec3,
+	--- Checks component-wise equality with a tolerance value, 0.0001 used if not specified
+	nearlyEqual: (a: Vec3, b: Vec3, t: number) -> boolean,
 }
 
 declare class Quat

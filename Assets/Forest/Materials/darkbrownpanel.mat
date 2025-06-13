@@ -12,9 +12,9 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _GT_BASE_MAP_ATLAS_SLICE_SOURCE__PROPERTY
   - _HEIGHT_BASED_WATER_EFFECT
   - _REFLECTIONS_MATCAP_PERSP_AWARE
-  - _USE_DAY_NIGHT_LIGHTMAP
   - _USE_TEXTURE
   - _UV_SOURCE__UV0
   - _WATER_EFFECT
@@ -147,6 +147,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WeatherMap_Atlas:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -177,6 +181,7 @@ Material:
     - _AlphaDetail_WorldSpace: 0
     - _AlphaToMask: 0
     - _BaseMap_AtlasSlice: 27
+    - _BaseMap_AtlasSliceSource: 0
     - _BasicOptions: 0
     - _BumpScale: 1
     - _COLOR_MODE__: 0
@@ -209,6 +214,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _GradientMapToggle: 0
+    - _GreyZoneException: 0
     - _HalfLambertToggle: 0
     - _HeightBasedWaterEffect: 1
     - _InnerGlowOn: 0
@@ -264,6 +270,7 @@ Material:
     - _StencilReference: 0
     - _SubShaderOptions: 0
     - _Surface: 0
+    - _TexMipBias: 0
     - _TexelSnapToggle: 0
     - _TexelSnap_Factor: 1
     - _UNDERWATER_MODE_: 0
@@ -271,7 +278,7 @@ Material:
     - _USE_TEX_ARRAY_ATLAS: 0
     - _UVSec: 0
     - _UseCrystalEffect: 0
-    - _UseDayNightLightmap: 1
+    - _UseDayNightLightmap: 0
     - _UseEyeTracking: 0
     - _UseGridEffect: 0
     - _UseMouthFlap: 0
@@ -296,12 +303,14 @@ Material:
     - _VertexWavePhaseOffset: 0
     - _VertexWaveStartOffset: 0
     - _VertexWaveToggle: 0
+    - _WaterCaustics: 0
     - _WaterEffect: 1
     - _WaveAmplitude: 0.02
     - _WaveFrequency: 1
     - _WaveScale: 12
     - _WaveTimeScale: 1
     - _WeatherMapDissolveEdgeSize: 0.1
+    - _WeatherMap_AtlasSlice: 0
     - _ZWrite: 1
     - __BasicOptions__: 0
     - __DevelopmentOptions__: 0
@@ -321,6 +330,7 @@ Material:
     - _DeformMapWorldSpaceOffsetsU: {r: 0, g: 0, b: 0, a: -0}
     - _DeformMapWorldSpaceOffsetsV: {r: 0, g: 0, b: 0, a: -0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionDissolveAnimation: {r: 0, g: 1, b: -0, a: -0}
     - _EmissionUVScrollSpeed: {r: 0, g: 0, b: -0, a: -0}
     - _EyeOverrideUVTransform: {r: 1, g: 1, b: 0, a: 0}
     - _EyeTileOffsetUV: {r: 1, g: 1, b: 0, a: 0}

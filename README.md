@@ -18,6 +18,7 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Lighting Meshes](#lighting-meshes)
     + [Lights](#lights)
     + [Other Tips](#other-tips)
+* [UberShader Dynamic Lighting](#ubershader-dynamic-lighting)
 * [Trigger Scripts](#trigger-scriptsprefabs)
     + [Map Boundary](#map-boundary)
     + [Teleporter](#teleporter)
@@ -30,7 +31,10 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Water Volume](#water-volume)
     + [Hoverboard Area](#hoverboard-area)
     + [Hoverboard Dispenser](#hoverboard-dispenser)
+    + [Rope Swing](#rope-swing)
+    + [Zipline](#zipline)
     + [ATM](#atm)
+    + [Store Placeholders](#store-placeholders)
 * [Other Scripts](#other-scriptsprefabs)
     + [Surface Override Settings](#surface-override-settings)
     + [Access Door Placeholder](#access-door-placeholder)
@@ -40,6 +44,11 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Hand Hold Settings](#hand-hold-settings)
     + [Cameras](#cameras)
     + [Inspector Note](#inspector-note)
+* [AI Scripts/Prefabs](#ai-scriptsprefabs)
+    + [Nav Mesh Surface](#nav-mesh-surface)
+    + [AI Agent](#ai-agent)
+    + [AI Spawn Manager](#ai-spawn-manager)
+    + [AI Spawn Point](#ai-spawn-point)
 * [Loading Zones](#loading-zones)
     + [Multi Map Setup](#multi-map-setup)
     + [Zone Load Trigger](#zone-load-trigger)
@@ -59,10 +68,11 @@ bundles properly support the Quest. Instructions can be found here:
 https://docs.unity3d.com/Manual/android-sdksetup.html
 
 ## Functionality Overview Map
-Included in this project are 3 scenes called `FunctionalityOverview_StartingZone`, `FunctionalityOverview_OceanZone`, 
-and `FunctionalityOverview_ScriptsZone`. Each of these scenes are part of the Functionality Overview map which provides
-comprehensive in-editor documentation and examples of how most functionality available for Custom Maps can be used. You 
-can also check out this map in-game by subscribing to the [Functionality Overview](https://mod.io/g/gorilla-tag/m/functionality-overview?preview=8256e9b8f815e1d6c54ec02e25766f2f)
+Included in this project are 4 scenes called `FunctionalityOverview_StartingZone`, `FunctionalityOverview_DynamicLights`,
+`FunctionalityOverview_OceanZone`, and `FunctionalityOverview_ScriptsZone`. Each of these scenes are part of the 
+Functionality Overview map which provides comprehensive in-editor documentation and examples of how most functionality 
+available for Custom Maps can be used. You can also check out this map in-game by subscribing to the 
+[Functionality Overview](https://mod.io/g/gorilla-tag/m/functionality-overview?preview=8256e9b8f815e1d6c54ec02e25766f2f)
 map on mod.io and then loading it up in Gorilla Tag. This map will continue to be updated with each new version of the 
 example project to provide examples of any new functionality we add.
 
@@ -79,16 +89,38 @@ hold everything in your map. Make sure the position is (0, 0, 0), and the scale 
 
 Next, click Add Component and add a Map Descriptor. This will hold some information about your map.
 
-![mapdescriptor](https://github.com/user-attachments/assets/a31c8187-1227-479d-98b7-ca28320c3291)
+![mapdescriptor](https://github.com/user-attachments/assets/9988159b-9ff5-4660-93d6-30fcbd3458a0)
 
-Here's what each setting does:
-- `Is Initial Scene` - If checked, this is the scene that will be loaded first in game.
+This component holds some general info about the scene and your map.
+
+- `Is Initial Scene` - If checked, this is the scene that will be initially loaded in game when a player loads up your map.
+                       If none of your map's scenes have this option checked, the scene that comes first alphabetically will be loaded.
 - `Add Skybox` - Check if you want to add a skybox to your scene
   - `Custom Skybox` - A cubemap that will be used as the skybox on your map. If this empty, it'll automatically give your map the default game skybox
   - `Custom Skybox Tint` - what color do you want to tint the skybox
-- `Custom Gamemode` - Add file here for any gamemodes you created using LUA
 - `Lighting Export Type` - How to handle exporting lighting data for your map. Please read the Lighting Section farther down for more information.
 - `Export All Objects` - If checked, all GameObjects will be parented under the MapDescriptor prior to export. Otherwise any GameObjects not parented under the Map Descriptor will be destroyed.
+
+
+When `Is Initial Scene` is checked, you'll see some additional settings specific to the Initial Scene.
+
+![mapdescriptor_initial](https://github.com/user-attachments/assets/b0cdd3a1-4e31-4ea8-b53f-43d0929bdfda)
+
+- `Max Players` - Use this to set the maximum amount of players allowed in Public rooms for your map. This setting is ignored for Private rooms.
+- `Use Uber Shader Dynamic Lighting` - If checked, UberShader Dynamic Lighting will be enabled when the initial scene is loaded
+  - `Uber Shader Ambient Dynamic Light` - This is the ambient color applied to anything not currently lit up by an UberShader Dynamic Light.
+- `Custom Gamemode` - Add a Text Asset here for any gamemode logic you created using LUA
+- `Dev Mode` - If checked, this will enable you to reload the LUA script for your map when in the CUSTOM game mode. When `Dev Mode` is enabled
+  you can press the Secondary Face buttons on both controllers to reload the LUA script for your map. Optionally you can put a LUA script at
+  `<AppData>/LocalLow/Another Axiom/Gorilla Tag/script.luau` and if present, that script will be loaded when you reload the LUA script instead
+  of the one packaged with your map.
+- `Return to Virtual Stump Watch Button Settings` - this section contains several settings for the "Return to Virtual Stump" watch button that
+  players have on their left hand when inside a Custom Map.
+  - `Watch Hold Duration` - This controls how long the player must press the watch button before they're returned to the Virtual Stump.
+  - `Watch Should Tag Player` - If checked, when the player uses the watch button, they will be tagged.
+  - `Watch Should Kick Player` - If checked, when the player uses the watch button, they will be kicked from their current Public room. Does not kick players in Private rooms.
+  - `Watch Infection Override` - If checked, you'll see the same options listed above, but specific to the Infection Game Mode, use this if you want to specify different watch settings for Infection
+  - `Watch Custom Mode Override` - If checked, you'll see the same options listed above, but specific to the Custom Game Mode, use this if you want to specify different watch settings for Custom
 
 ## Accessing Your Map
 In order for Players to be able to access your map, it's required to include an `AccessDoorPlaceholder` in whichever scene you have designated as your initial scene.  
@@ -123,8 +155,10 @@ until the model looks low poly enough for you.
 
 ## UberShader and Zone Shader Settings
 You'll find the UberShader in the `Assets/Shaders/` folder. This is the main shader used by almost everything in 
-Gorilla Tag and is provided as part of the Example Project primarily to support Zone Shader Settings which can be used
-to apply fog and underwater effects to anything using the UberShader.
+Gorilla Tag and is provided as part of the Example Project primarily to support UberShader Dynamic Lighting and 
+Zone Shader Settings which can be used to apply fog and underwater effects to anything using the UberShader. There 
+are also some example UberShader materials in the `Assets/Materials/UberShaderMaterials` folder and the Functionality 
+Overview scenes primarily use those UberShader materials.
 
 ### Zone Shader Settings
 The `Zone Shader Settings` component is used to modify global shader variables that are used by the UberShader. Using
@@ -132,6 +166,12 @@ this component, you can add Ground Fog and Underwater/Lava Liquid effects to you
 - Ground Fog has options for color, height, and distance fading
 - Using Liquid Effects you can define a Liquid Type (Water or Lava) and Shape (Plane or Cylinder) in which you can apply
 an underwater tint, underwater fog with distance fading, and underwater caustics.
+
+It's highly recommended to check out the FunctionalityOverview scenes for examples and more information about Zone Shader Settings 
+to get a better understanding for how they work. The `FunctionalityOverview_StartingZone` scene has an example setup with Default Shader 
+Settings and Pool Shader Settings which use the Cylinder Liquid Shape option. The `FunctionalityOverview_OceanZone` scene has an example 
+Ocean Shader Settings which uses the Plane Liquid Shape and has example Fog settings. The `FunctionalityOverview_ScriptsZone` scene has an 
+example Lava Shader Settings which also uses the Plane Liquid Shape but with the Lava Liquid Type and has some different example Fog settings.
 
 ### Zone Shader Settings Trigger
 The `Zone Shader Settings Trigger` and prefab found in `Assets/MapPrefabs/` can be used to switch between different 
@@ -171,7 +211,7 @@ When ask if you'd like to enable the static flags for all the child objects, cli
 Every object on your map should be static EXCEPT for:
 - Objects that have an animation
 - Objects that will somehow change or get enabled/disabled, such as a trigger
-- Objects that should not have shadows
+- Objects that should not have shadows or lighting applied to them
 
 ### Lighting Meshes
 When you're initially importing a mesh, go to the properties and make sure that the `Generate Lightmap UVs` box is checked.
@@ -184,10 +224,8 @@ If you want to disable an object Receiving/Casting shadows, you can change the `
 properties - otherwise, leave them as the default values.
 
 ### Lights
-The old Example Map found in `Assets/Scenes/Deprecated/` includes a `Directional Light` by default which closely recreates 
-Gorilla Tag's daytime light. An updated Lighting setup will be added to the Functionality Overview map in a future update.
-
-You can add any other sort of `Light` to your map that you want, but ensure that the type is set to `Baked`.
+The `Functionality Overview` scenes are setup with baked lighting and have a `Sunlight` directional light that can be used
+as a reference. You can add any other sort of `Light` to your map that you want, but ensure that the type is set to `Baked`.
 
 ### Other Tips
 Map compile time when baking lighting for the first time may be high. There's not much of a workaround here, so just 
@@ -210,6 +248,16 @@ If some materials look washed out ingame, try changing these settings on those m
 - Turn off Specular Highlights
 - Turn off Reflections
 
+## UberShader Dynamic Lighting
+Another lighting option available for Custom Maps that utilize the UberShader is `Uber Shader Dynamic Lights`. 
+These use the same lighting system as the Ghost Reactor area in Gorilla Tag. To enable this on your map use the
+`Use Uber Shader Dynamic Lights` option on the MapDescriptor if you want to enable it as soon as your map is loaded. 
+Or you can use `Zone Load Triggers` to enable/disable UberShader Dynamic Lighting when loading or unloading a Zone. 
+Currently only Point Lights are supported by this system and any lights you want to use for `Uber Shader Dynamic Lighting` 
+need to have the `UberShaderDynamicLight` component on them. You can also use the `UberShaderDynamicLight` prefab 
+located in the `Assets/MapPrefabs/` folder. The `FunctionalityOverview_DynamicLights` scene has some examples of 
+UberShader Dynamic Light usage that you can use as reference. 
+
 ## Trigger Scripts/Prefabs
 The following scripts can be used for multiple purposes, but the GameObject they are attached to will always need a Collider 
 component with `Is Trigger` set to true. All trigger scripts have several common options: 
@@ -230,7 +278,7 @@ component with `Is Trigger` set to true. All trigger scripts have several common
 This trigger script will teleport the player to a random (or specific) Transform and optionally can Tag the player when 
 triggered. It can be used in multiple ways, but the main intent was for it to be used as a way to prevent players from 
 escaping your map. This script is included in the `MapBoundary` prefab in the `Assets/MapPrefabs/` folder which uses a 
-Box Collider and includes a visual preview.
+Box Collider and includes a visual preview. Check out each of the FunctionalityOverview scenes for some examples.
 
 **Additonal Options**
 - `Teleport Points` - One or more points the player will be teleported to when activating this trigger. If more than one
@@ -239,7 +287,8 @@ Box Collider and includes a visual preview.
  
 ### Teleporter
 This trigger script will teleport the player to a random (or specific) Transform. This script is included in the `Teleporter` 
-prefab in the `Assets/MapPrefabs/` folder which uses a Box Collider and includes a visual preview.
+prefab in the `Assets/MapPrefabs/` folder which uses a Box Collider and includes a visual preview. 
+Check out the FunctionalityOverview scenes for some examples.
 
 **Additonal Options**
 - `Teleport Points` - One or more points the player will be teleported to when activating this trigger. If more than one
@@ -252,6 +301,7 @@ folder which uses a Box Collider and includes a visual preview.
 ### Object Activation Trigger
 This trigger script can be used to Activate and Deactivate other GameObjects in your map and Reset other Triggers. This script is 
 included in the `ObjectActivationTrigger` prefab in the `Assets/MapPrefabs` folder which uses a Box Collider and includes a visual preview.
+Check out the FunctionalityOverview scenes for some examples.
 
 **Additional Options**
 - `Objects To Deactivate` - List of GameObjects that will be Deactivated when this Trigger is triggered. This list is processed prior
@@ -274,11 +324,13 @@ option and includes some default settings (each of which has a tooltip when hove
 preview and can be scaled as desired. 
 If you'd like to customize the collider shape used for a Force Volume, you can set the `Use Default Placeholder` option to FALSE, 
 and add your collider component alongside the `GTObjectPlaceholder` script.
+Check out the `FunctionalityOverview_StartingZone` scene for some examples.
 
 ### Leaf Glider 
 The `LeafGliderPlaceholder` prefab has the `GTObjectPlaceholder` script setup to use the `Leaf Glider` option and includes a visual preview 
 to assist with placement. It's recommended to **ONLY** use this prefab when using the `Leaf Glider` option on the `GTObjectPlaceholder` 
 script. Scaling the placeholder will not affect the leaf glider that it gets replaced with.
+Check out the `FunctionalityOverview_StartingZone` scene for some examples.
 
 ### Glider Wind Volume 
 This is used in Gorilla Tag in Sky Jungle to send the Leaf Gliders into the air. The `GliderWindVolumePlaceholder` prefab has the 
@@ -287,6 +339,7 @@ preview, but if you change the `Local Wind Direction` setting the arrows in the 
 prefab/placeholder can be scaled as desired. 
 If you'd like to customize the collider shape used for a Glider Wind Volume, you can set the `Use Default Placeholder` option to FALSE, 
 and add your collider component alongside the `GTObjectPlaceholder` script.
+Check out the `FunctionalityOverview_StartingZone` scene for some examples.
 
 ### Water Volume
 Using this placeholder you can define a swimmable water volume. This works best when combined with `Zone Shader Settings` underwater effects.
@@ -294,25 +347,49 @@ The `WaterVolumePlaceholder` prefab has the `GTObjectPlaceholder` script setup t
 It includes a visual preview and can be scaled as desired.
 If you'd like to customize the collider shape used for a Water Volume, you can set the `Use Default Placeholder` option to FALSE, 
 and add your collider component alongside the `GTObjectPlaceholder` script.
+Check out the `FunctionalityOverview_StartingZone` and `FunctionalityOverview_OceanZone` scenes for some examples.
 
 ### Hoverboard Area
 The Hoverboard Area placeholder allows you to define an area where players are allowed to use Hoverboards. The `HoverboardArea` prefab has the 
 `GTObjectPlaceholder` script setup to use the `HoverboardArea` option and a Box Collider component. This option for the `GTObjectPlaceholder` 
 script *requires* a Collider component to function correctly. 
+Check out the `FunctionalityOverview_StartingZone` scene for some examples.
 
 ### Hoverboard Dispenser
 For players to actually have access to Hoverboards in your map, you'll need to add some `HoverboardDispenser` placeholder prefabs. These need
 to be placed *inside* a `HoverboardArea` to function correctly. 
 It's recommended to **ONLY** use this prefab when using the `Hoverboard Dispenser` option on the `GTObjectPlaceholder` 
 script. Scaling the placeholder will not affect the Hoverboard Dispenser that it gets replaced with.
+Check out the `FunctionalityOverview_StartingZone` scene for an example.
+
+### Rope Swing
+Using the `Rope Swing` option on the `GTObjectPlaceholder` component will allow you to place Rope Swings in your map. They have a `Rope Length`
+option to customize how long the rope is and will show a preview of what to expect when your map is loaded in Gorilla Tag. 
+Check out the `FunctionalityOverview_StartingZone` scene for some examples.
+
+### Zipline 
+Use the `ZiplinePlaceholder` prefab to put ziplines in your map. The Zipline placeholder utilizes the `Bezier Spline` component to define
+the shape of the zipline. By default it starts out with only 2 spline points that you can adjust, but you can add more points by clicking the
+`Add Curve` button on the `Bezier Spline` component. Once you've adjusted the spline to your liking, you can press the `Click to generate preview mesh`
+button on the `GTObjectPlaceholder` component to see a preview of what to expect when your map is loaded in Gorilla Tag.
+Check out the `FunctionalityOverview_StartingZone` scene for some examples.
 
 ### ATM
-Using the `ATMPlaceholder` prefab, you can give players access to an ATM in your map. It has an option to set a Default Creator Code.
-It's recommended to **ONLY** use this prefab when using the `ATM` option on the `GTObjectPlaceholder` 
-script. Scaling the placeholder will not affect the ATM that it gets replaced with.
-
+Using the `ATM_CustomMesh` or `ATM_FullReplacement` prefabs, you can give players access to an ATM in your map. It has an option to set a 
+Default Creator Code. It's recommended to **ONLY** use one of these prefabs when using the `ATM` option on the `GTObjectPlaceholder` script. 
+Scaling the placeholder will not affect the ATM that it gets replaced with. Check out the `FunctionalityOverview_StartingZone` scene for an example.
 For more information about creator codes and how to apply, please refer to this 
 [announcement post](https://discord.com/channels/671854243510091789/804747032651628615/1352342582717452371) in the Gorilla Tag Discord.
+
+### Store Placeholders
+There are several placeholder options related to cosmetic shop functionality. These can be used to provide players with a way
+to purchase/try-on specific cosmetics from rotating list in your map. These include:
+- `Store_DisplayStand` - Shows a specific cosmetic from a set of 12 that are available in custom maps. The available items will change occasionally.
+- `Store_Checkout` - Gives players a place to purchase cosmetic items while in your map. Use the `Use Custom Mesh` option to allow for baked lighting
+- `Store_TryOnConsole` - Gives players a place to try-on any cosmetics currently in their cart. Use the `Use Custom Mesh` option to allow for baked lighting
+- `Store_TryOnArea` - Allows players to equip try-on cosmetics while inside this area. The Try-On console needs to be within a Try-On Area to function correctly.
+  - Try-On Areas are restricted in their size to a maximum volume of 64 (x scale * y scale * z scale), if they are too big they will not be replaced when your map is loaded.
+There are prefabs for each of these in the `Assets/MapPrefabs/` folder. Check out the MiniShop area in the `FunctionalityOverview_StartingZone` scene for some examples. 
 
 ## Other Scripts/Prefabs
 
@@ -327,6 +404,9 @@ If you want to modify how climbing works on an object, you can add a `Surface Ov
   object. (Must be higher than 1)
 - `Slide Percentage` - A number that decides how "slippery" an object is when used for climbing. Default value is 0.0 which is
   the least slippery an object can be. Higher values are more slippery with a maximum of 1.0 meaning the object is unclimbable.
+
+Each of the FunctionalityOverview scenes has examples of this, but the `FunctionalityOverview_OceanZone` scene has some specific examples of the Sound Override setting, 
+and the `FunctionalityOverview_ScriptsZone` scene has an example of the Extra Vel settings.
 
 ### Access Door Placeholder
 This is used for positioning your iniital scene in the correct place so it lines up with the "Lobby" room in GorillaTag. This script
@@ -346,6 +426,7 @@ This component can be used to create grab points in your map. It needs to be add
 - `Hand Snap Method` - Used to change if and how the players hand will snap to the mesh when they grab it.
 - `Rotate Player When Held` - Used if you want the player to be able to rotate their body while grabbing this object
 - `Allow Pre Grab` - Used to allow players to press the Grab button before actually colliding with this object, and still allow the grab.
+Check out the `FunctionalityOverview_ScriptsZone` scene for some examples.
 
 ### Custom Map Eject Button Settings
 This component can be used to create a button that when pressed can either teleport them back to the Virtual Stump, or return them to the 
@@ -353,6 +434,7 @@ Arcade or Stump (wherever they entered the Virtual Stump from).
 
 **Script Options:**
 - `Eject Type` - Used to set if the player is returned to the Virtual Stump or ejected completely.
+Check out each of the FunctionalityOverview scenes for some examples.
 
 ### Destroy Pre Export
 This is used to destroy in-editor visualization helpers and other editor-only objects to ensure they don't end up in your 
@@ -367,11 +449,59 @@ This is a simple prefab that is essentially just a visual preview to show where 
 `MapBoundary` and `Teleporter` scripts to define teleport destinations.
 
 ### Cameras
-Cameras are allowed as long as they are being used for Render Textures. Any cmaeras not using Render Textures will be deleted.
+Cameras are allowed as long as they are being used for Render Textures. Any cameras not using Render Textures will be deleted when loading your map.
+Check out the `FunctionalityOverview_StartingZone` scene to see an example of how a Camera + Render Texture can be used to create a mirror.
+
+## AI Scripts/Prefabs
+Some basic AI functionality is now supported in Custom Maps. It's highly recommended to look at the AI section of the `FunctionalityOverview_StartingZone`
+scene to get a better understanding of how these components are used. AI Support is currently limited to single-zone maps; Multi-zone maps
+may encounter problems while loading or spawning AIAgents. AI Support also relies heavily on Lua currently, check out the `FunctionalityOverview` Luau
+script for an example of AI behavior. Additonal non-Lua AI support will be added with future updates.
+
+### Nav Mesh Surface
+The `NavMeshSurface` component can be used in Custom Maps to create a navigable area for AI Agents. There are currently 4 supported NavAgent sizes 
+available for Custom Maps: Humanoid, Small, Medium, and Large. Check the `Window > AI > Navigation` window in Unity to see the specific settings for each Agent size.
+You can also check out the `SmallAgent`, `MediumAgent`, and `LargeAgent` prefabs in the `Assets/Prefabs/FunctionalityOverview/AI/` folder for a visual
+representation of 3 of the agent sizes. There is no prefab for the Humanoid NavAgent type, but you are still able to use it if desired. It is also the type
+used for Ghost Reactor. 
+To setup a new `NavMeshSurface` component, make sure to set the `AgentType` to one of the supported options, and click the `Bake` button to create the 
+Nav Mesh itself. You can use the `Show Gizmos` button on the Scene viewport to see a preview of your baked NavMesh. Check out the AI Section of the 
+`FunctionalityOverview_StartingZone` for an example NavMesh setup.
+
+![NavMesh](https://github.com/user-attachments/assets/6ad79039-231e-498a-bdab-f973d6eab6ac)
+
+### AI Agent
+The `AIAgent` component is used to define a new AI Agent. It is highly recommended that you create a Prefab for each of your AI Agent types.
+Check out the `FunctionalityOverview_StartingZone` scene's AI section for an example setup. 
+
+`AIAgent` has two important properties that handle how they are spawned:
+- `IsTemplate` - If checked, this `AIAgent` and all it's child GameObjects will be used as the base to spawn duplicated AI Agents for both pre-placed and Lua-spawned
+  agents. Each of your `AIAgent` types must have a version with `IsTemplate` set to true as a child of the `AISpawnManager` in your map or pre-placed and Lua-spawned
+  Agents of that type will not be created.
+- `AgentTypeID` - This is used to distinguish each Agent type that the `AISpawnManager` can create. Make sure each `IsTemplate` Agent you created has a unique `AgentTypeID`.
+  On pre-placed AI Agents, this is used to tell the `AISpawnManager` which Agent type to spawn in it's place.
+
+Most other options for `AIAgent` are only editable on AI Agents with `IsTemplate` set to true. These properties control various settings for Navigation and Sight.
+
+![aiagentprops](https://github.com/user-attachments/assets/e53c12c2-1001-46e8-8ca8-eb39cd316c57)
+
+There is one other setting specific to pre-placed AI Agents that is relevant if you intend on controlling the Agent with Lua scripting. This is the `Lua_AgentID`, which
+is only visible when `IsTemplate` is set to false. It is not manually editable, but can be generated by clicking `Tools > Generate Lua AI Agent IDs`. This will generate
+a unique ID for each of your pre-placed AI Agents that can be used to get a reference to the Agent in Lua. Check out the `FunctionalityOverview_StartingZone` scene and the
+`FunctionalityOverview` Luau script for an example of how this ID is used.
+
+### AI Spawn Manager
+This component is required to utilize the AI Agent support for Custom Maps. AI Agents in your scene with `IsTemplate` set to true must be children of the GameObject with the 
+`AISpawnManager` component for them to function correctly. Pre-placed AI Agents do NOT need to be children of the `AISpawnManager`.
+
+### AI Spawn Point
+There is also the `AISpawnPoint` component and the `CustomMapSpawnPoint` prefab, these aren't currently required for spawning Agents via Lua, but will be used in a future 
+update to allow for a non-Lua spawn method.
 
 ## Loading Zones
 
-If you want to break up your map into multiple scenes, you can use the `ZoneLaodTigger` prefab to load and unload those scenes.
+If you want to break up your map into multiple scenes, you can use the `ZoneLaodTigger` prefab to load and unload those scenes. Check out the FunctionalityOverview scenes 
+for an example Loading Zone setup.
 
 ### Multi Map Setup
 ALL scenes you want included in your map need to be added to the `Scenes In Build` section of the `Build Settings` window.
@@ -385,17 +515,15 @@ Add the `ZoneLoadTrigger` prefab where you a scene load/unload to occur. Make su
 
 ### Zone Load Trigger
 This is the prefab used to determine where scenes are loaded and/or unloaded. It contains the `LoadZoneSettings` script, a `Box Collider`, and
-a preview mesh to help with sizing and placement.
-All scenes added to the `Scenes In Build` section of the `Build Settings` window will be listed under the `Load Zone Settings` script in two sections:
-`Scenes to Load` and `Scenes to Unload`
-You can also set how the load zone is triggered with the `Triggered By` setting.
+a preview mesh to help with sizing and placement. All scenes added to the `Scenes In Build` section of the `Build Settings` window will be listed 
+under the `Load Zone Settings` script in two sections: `Scenes to Load` and `Scenes to Unload`. The `Use Dynamic Lighting` option allows you to 
+change the state of UberShader Dynamic Lighting via the Zone Load Trigger. 
 
 ### Multi Map Lightmapping
 Currently there are only two ways to use lightmaps with loading multiple scenes
 - Open all scenes at the same time in editor and lightmap all scenes at once
 - Create a lightmap for each scene individually
 Creating two or more lightmaps for the same scene is not supported at this time.
-
 
 
 ## Exporting and Uploading to Mod.io

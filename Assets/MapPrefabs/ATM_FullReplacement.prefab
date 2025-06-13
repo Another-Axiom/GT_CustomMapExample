@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2772986122079406712}
   - component: {fileID: 4376917749089748177}
   m_Layer: 0
-  m_Name: ATMPlaceholder
+  m_Name: ATM_FullReplacement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

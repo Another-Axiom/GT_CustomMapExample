@@ -12,6 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _GT_BASE_MAP_ATLAS_SLICE_SOURCE__PROPERTY
   - _GT_RIM_LIGHT
   - _HALF_LAMBERT_TERM
   - _REFLECTIONS
@@ -273,6 +274,7 @@ Material:
     - _VertexWavePhaseOffset: 0
     - _VertexWaveStartOffset: 0
     - _VertexWaveToggle: 0
+    - _WaterCaustics: 0
     - _WaterEffect: 0
     - _WaveAmplitude: 0.02
     - _WaveFrequency: 1

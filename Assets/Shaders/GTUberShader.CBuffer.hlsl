@@ -39,6 +39,7 @@ float3 _EmissionUVScrollSpeed;
 half _EmissionDissolveProgress;
 float3 _EmissionDissolveAnimation;
 half _EmissionDissolveEdgeSize;
+half _EmissionIntensityInDynamic;
 
 float4 _InnerGlowParams; // xyz = position, w = radius.w
 float3 _InnerGlowColor;

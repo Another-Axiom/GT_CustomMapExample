@@ -14,7 +14,6 @@ Material:
   m_ValidKeywords:
   - _GT_BASE_MAP_ATLAS_SLICE_SOURCE__PROPERTY
   - _HEIGHT_BASED_WATER_EFFECT
-  - _REFLECTIONS
   - _REFLECTIONS_MATCAP_PERSP_AWARE
   - _REFLECTIONS_USE_NORMAL_TEX
   - _USE_TEXTURE
@@ -228,7 +227,7 @@ Material:
     - _ReflectNormalToggle: 1
     - _ReflectOpacity: 0.186
     - _ReflectRotate: 0
-    - _ReflectToggle: 1
+    - _ReflectToggle: 0
     - _RotateAngle: 0
     - _RotateAnim: 0
     - _Shininess: 0.078125
@@ -270,6 +269,7 @@ Material:
     - _VertexWaveDebug: 0
     - _VertexWavePhaseOffset: 0
     - _VertexWaveToggle: 0
+    - _WaterCaustics: 0
     - _WaterEffect: 1
     - _WaveAmplitude: 0.02
     - _WaveFrequency: 1
@@ -283,7 +283,7 @@ Material:
     - _AChannelColor: {r: 1, g: 1, b: 1, a: 1}
     - _AlphaDetail_ST: {r: 1, g: 1, b: 0, a: 0}
     - _BChannelColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.85882354, g: 0.85882354, b: 0.85882354, a: 1}
     - _BaseMap_WH: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CrystalRimColor: {r: 0.382, g: 0.382, b: 0.382, a: 1}

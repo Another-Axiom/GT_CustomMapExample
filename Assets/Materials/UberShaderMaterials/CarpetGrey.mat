@@ -226,7 +226,7 @@ Material:
     - _AChannelColor: {r: 1, g: 1, b: 1, a: 1}
     - _AlphaDetail_ST: {r: 1, g: 1, b: 0, a: 0}
     - _BChannelColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 0.24385902, g: 0.2688122, b: 0.3773585, a: 1}
+    - _BaseColor: {r: 0.52156866, g: 0.52156866, b: 0.8666667, a: 1}
     - _BaseMap_WH: {r: 0, g: 0, b: 256, a: 256}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CrystalRimColor: {r: 0.382, g: 0.382, b: 0.382, a: 1}

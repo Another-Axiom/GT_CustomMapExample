@@ -1,0 +1,275 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3263347986439780112
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CarpetGrey_Small
+  m_Shader: {fileID: 4800000, guid: b6656bb0c0440ff45ab019d9d854b3e3, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _GT_BASE_MAP_ATLAS_SLICE_SOURCE__PROPERTY
+  - _HEIGHT_BASED_WATER_EFFECT
+  - _REFLECTIONS_MATCAP_PERSP_AWARE
+  - _USE_TEXTURE
+  - _UV_SOURCE__UV0
+  - _WATER_EFFECT
+  m_InvalidKeywords:
+  - _NORMALMAP
+  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+  - _SPECULARHIGHLIGHTS_OFF
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 1d9664719c5fcb146b44bcc9d004b6c8, type: 3}
+        m_Scale: {x: 32, y: 32}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap_Atlas:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DayNightLightmapArray:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DeformMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DeformMap_Atlas:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DepthMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap_Atlas:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GradientMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MouthMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MouthMap_Atlas:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ReflectNormalTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ReflectTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SingleLightmap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WeatherMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WeatherMap_Atlas:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints:
+    - _ColorSource: 1
+    - _TransparencyMode: 0
+    - _UVSource: 0
+    - _ZFightOffset: 0
+    m_Floats:
+    - _AlphaDetailToggle: 0
+    - _AlphaDetail_Opacity: 1
+    - _AlphaDetail_WorldSpace: 0
+    - _AlphaToMask: 0
+    - _BaseMap_AtlasSlice: 0
+    - _BaseMap_AtlasSliceSource: 0
+    - _CrystalPower: 0.32
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DEBUG_PAWN_DATA: 0
+    - _DayNightLightmapArray_AtlasSlice: 0
+    - _DeformMapIntensity: 1
+    - _DeformMapMaskByVertColorRAmount: 1
+    - _DeformMap_AtlasSlice: 0
+    - _DoTextureRotation: 0
+    - _DstBlend: 0
+    - _DstBlendAlpha: 0
+    - _EmissionDissolveEdgeSize: 0.1
+    - _EmissionDissolveProgress: 1
+    - _EmissionMap_AtlasSlice: 0
+    - _EmissionMaskByBaseMapAlpha: 1
+    - _EmissionToggle: 0
+    - _EmissionUseUVWaveWarp: 0
+    - _EyeOverrideUV: 0
+    - _GradientMapToggle: 0
+    - _GreyZoneException: 0
+    - _HalfLambertToggle: 0
+    - _HeightBasedWaterEffect: 1
+    - _InnerGlowOn: 0
+    - _InnerGlowSine: 0
+    - _InnerGlowSinePeriod: 1
+    - _InnerGlowSinePhaseShift: 0
+    - _InnerGlowTap: 0
+    - _LavaLampToggle: 0
+    - _LiquidContainer: 0
+    - _LiquidFill: 0.86
+    - _LiquidSwayX: 0
+    - _LiquidSwayY: 0
+    - _LiquidVolume: 0
+    - _MaskMapToggle: 0
+    - _Metallic: 0
+    - _MouthMap_AtlasSlice: 0
+    - _ParallaxAABias: 127
+    - _ParallaxAAToggle: 0
+    - _ParallaxAmplitude: 8.16
+    - _ParallaxPlanarToggle: 0
+    - _ParallaxToggle: 0
+    - _ReflectAlbedoTint: 0
+    - _ReflectBoxProjectToggle: 0
+    - _ReflectExposure: 1
+    - _ReflectMatcapPerspToggle: 1
+    - _ReflectMatcapToggle: 0
+    - _ReflectNormalToggle: 0
+    - _ReflectOpacity: 1
+    - _ReflectRotate: 0
+    - _ReflectToggle: 0
+    - _RotateAngle: 0
+    - _RotateAnim: 0
+    - _Smoothness: 0
+    - _SpecularUseDiffuseColor: 0
+    - _SrcBlend: 1
+    - _SrcBlendAlpha: 1
+    - _StealthEffectOn: 0
+    - _StencilComparison: 0
+    - _StencilPassFront: 0
+    - _StencilReference: 0
+    - _Surface: 0
+    - _TexMipBias: 0
+    - _TexelSnapToggle: 0
+    - _TexelSnap_Factor: 1
+    - _USE_DEFORM_MAP: 0
+    - _USE_TEX_ARRAY_ATLAS: 0
+    - _UseCrystalEffect: 0
+    - _UseDayNightLightmap: 0
+    - _UseEyeTracking: 0
+    - _UseGridEffect: 0
+    - _UseMouthFlap: 0
+    - _UseSpecHighlight: 0
+    - _UseSpecular: 0
+    - _UseSpecularAlphaChannel: 0
+    - _UseVertexColor: 0
+    - _UseWaveWarp: 0
+    - _UseWeatherMap: 0
+    - _UvShiftToggle: 0
+    - _VertexFlapPhaseOffset: 0
+    - _VertexFlapSpeed: 1
+    - _VertexFlapToggle: 0
+    - _VertexLightToggle: 0
+    - _VertexRotateAnim: 0
+    - _VertexRotateToggle: 0
+    - _VertexWaveDebug: 0
+    - _VertexWavePhaseOffset: 0
+    - _VertexWaveToggle: 0
+    - _WaterCaustics: 0
+    - _WaterEffect: 1
+    - _WaveAmplitude: 0.02
+    - _WaveFrequency: 1
+    - _WaveScale: 12
+    - _WaveTimeScale: 1
+    - _WeatherMapDissolveEdgeSize: 0.1
+    - _WeatherMap_AtlasSlice: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _AChannelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _AlphaDetail_ST: {r: 1, g: 1, b: 0, a: 0}
+    - _BChannelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.5206152, g: 0.5199359, b: 0.8679245, a: 1}
+    - _BaseMap_WH: {r: 0, g: 0, b: 256, a: 256}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _CrystalRimColor: {r: 0.382, g: 0.382, b: 0.382, a: 1}
+    - _DeformMapObjectSpaceOffsetsU: {r: 0, g: 0, b: 0, a: -0}
+    - _DeformMapObjectSpaceOffsetsV: {r: 0, g: 0, b: 0, a: -0}
+    - _DeformMapScrollSpeed: {r: 1, g: 1, b: -0, a: -0}
+    - _DeformMapUV0Influence: {r: 1, g: 1, b: -0, a: -0}
+    - _DeformMapWorldSpaceOffsetsU: {r: 0, g: 0, b: 0, a: -0}
+    - _DeformMapWorldSpaceOffsetsV: {r: 0, g: 0, b: 0, a: -0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionDissolveAnimation: {r: 0, g: 1, b: -0, a: -0}
+    - _EmissionUVScrollSpeed: {r: 0, g: 0, b: 1, a: -0}
+    - _EyeOverrideUVTransform: {r: 1, g: 1, b: 0, a: 0}
+    - _EyeTileOffsetUV: {r: 1, g: 1, b: 0, a: 0}
+    - _GChannelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _InnerGlowColor: {r: 1, g: 0.1, b: 0.47, a: 1}
+    - _InnerGlowParams: {r: 0, g: 0, b: 0, a: 1}
+    - _LiquidFillNormal: {r: 0, g: 1, b: 0, a: 1}
+    - _LiquidPlaneNormal: {r: 0, g: -1, b: 0, a: 1}
+    - _LiquidPlanePosition: {r: 0, g: 0, b: 0, a: 1}
+    - _LiquidSurfaceColor: {r: 0, g: 1, b: 0, a: 1}
+    - _MaskMap_WH: {r: 0, g: 0, b: 0, a: 0}
+    - _ParallaxSamplesMinMax: {r: 4, g: 64, b: 0, a: 0}
+    - _ReflectBoxCubePos: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectBoxRotation: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectBoxSize: {r: 1, g: 1, b: 1, a: 1}
+    - _ReflectOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _ReflectScale: {r: 1, g: 1, b: 1, a: 1}
+    - _ReflectTint: {r: 1, g: 1, b: 1, a: 1}
+    - _RotateOnYAxisBySinTime: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecularDir: {r: 0, g: -1, b: 0, a: 0}
+    - _SpecularPowerIntensity: {r: 16, g: 1, b: 0, a: 0}
+    - _UvShiftOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _UvShiftRate: {r: 0, g: 0, b: 0, a: 0}
+    - _UvShiftSteps: {r: 1, g: 1, b: 0, a: 0}
+    - _VertexFlapAxis: {r: 0, g: 1, b: 0, a: 1}
+    - _VertexFlapDegreesMinMax: {r: -20, g: 60, b: 1, a: 1}
+    - _VertexRotateAngles: {r: 0, g: 0, b: 0, a: 0}
+    - _VertexWaveAxes: {r: 0, g: 1, b: 0, a: 0}
+    - _VertexWaveEnd: {r: 0, g: 0, b: 0, a: 1}
+    - _VertexWaveFalloff: {r: 0, g: 1, b: 0, a: 0}
+    - _VertexWaveParams: {r: 1, g: 1, b: 1, a: 16}
+    - _VertexWaveSphereMask: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
