@@ -270,34 +270,6 @@ dataSave(dataToSave)
 
 dataToLoad = dataLoad()
 
-function tick() end
-```
-If no data has been saved yet, dataLoad() will return an empty table.
-
-----------
-
-## **Data**
-
-Scripts can save and load data locally on the device, specific to the current map.
-
--   `dataSave(t: table)` Saves a table
--   `dataLoad()` Loads a previously saved table
-
-Example usage:
-
-```lua
-dataToSave = {
-    ten = 10,
-    one = "1",
-    stuff = {
-        two = 2
-    }
-}
-
-dataSave(dataToSave)
-
-dataToLoad = dataLoad()
-
 print(dataToLoad.one) -- would output 1
 
 ```
