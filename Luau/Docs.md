@@ -182,12 +182,16 @@ Scripts can access and manipulate **GameObjects** within a custom map's scene th
 -   **rotation**: `Quat`
 -   **scale**: `Vec3`
 
-Additional methods allow you to toggle:
+Additional methods allow you to adjust:
 
 -   **Collision**: `setCollision(enabled: boolean)`
 -   **Visibility**: `setVisibility(enabled: boolean)`
+-   **Enabled**: `setActive(enabled: boolean)`
+-   **Text**: `setVisibility(text: string)`
 
 > **Note:** Static objects cannot be moved, as they are combined into a single mesh upon export.
+> **Note:** You can only set the text of a game object that has a text component.
+
 
 ### **Finding GameObjects**
 
@@ -244,6 +248,91 @@ function tick() end
 ```
 ----------
 
+## **Data**
+
+Scripts can save and load data locally on the device, specific to the current map.
+
+-   `dataSave(t: table)` Saves a table
+-   `dataLoad()` Loads a previously saved table
+
+Example usage:
+
+```lua
+dataToSave = {
+    ten = 10,
+    one = "1",
+    stuff = {
+        two = 2
+    }
+}
+
+dataSave(dataToSave)
+
+dataToLoad = dataLoad()
+
+function tick() end
+```
+If no data has been saved yet, dataLoad() will return an empty table.
+
+----------
+
+## **Data**
+
+Scripts can save and load data locally on the device, specific to the current map.
+
+-   `dataSave(t: table)` Saves a table
+-   `dataLoad()` Loads a previously saved table
+
+Example usage:
+
+```lua
+dataToSave = {
+    ten = 10,
+    one = "1",
+    stuff = {
+        two = 2
+    }
+}
+
+dataSave(dataToSave)
+
+dataToLoad = dataLoad()
+
+print(dataToLoad.one) -- would output 1
+
+```
+If no data has been saved yet, dataLoad() will return an empty table.
+
+----------
+
+## **PlayerInput**
+
+The `PlayerInput` object provides access to the input state of the local player. This includes thumbstick axes, trigger values, grip pressure, and button states.
+
+### Properties
+
+```lua
+PlayerInput.leftXAxis            -- number (0.0 to 1.0)
+PlayerInput.rightXAxis           -- number (0.0 to 1.0)
+PlayerInput.leftYAxis            -- number (0.0 to 1.0)
+PlayerInput.rightYAxis           -- number (0.0 to 1.0)
+
+PlayerInput.leftTrigger          -- number (0.0 to 1.0)
+PlayerInput.rightTrigger         -- number (0.0 to 1.0)
+
+PlayerInput.leftGrip             -- number (0.0 to 1.0)
+PlayerInput.rightGrip            -- number (0.0 to 1.0)
+
+PlayerInput.leftPrimaryButton    -- boolean
+PlayerInput.rightPrimaryButton   -- boolean
+
+PlayerInput.leftSecondaryButton  -- boolean
+PlayerInput.rightSecondaryButton -- boolean
+```
+
+These values are updated every frame and can be read during `tick()` to respond to player input.
+
+----------
 
 ## **Tick Function**
 
@@ -289,7 +378,6 @@ function tick()
 	end
 end
 ```
-
 
 -------
 ## **FAQ**

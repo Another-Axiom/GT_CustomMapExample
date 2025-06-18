@@ -4,6 +4,8 @@ declare class GameObject
 	scale: Vec3
 	function setCollision (self, enabled: boolean): nil
 	function setVisibility (self, enabled: boolean): nil 
+	function setActive (self, enabled: boolean): nil
+	function setText (self, text: string): nil 
 end
 
 declare GameObject: {

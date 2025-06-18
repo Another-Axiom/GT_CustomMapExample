@@ -84,3 +84,6 @@ declare function emitEvent(eventName: string, data: {any}) : () -- Emits event t
 
 declare function playSound(idx: number, position: Vec3, vol: number) : () -- Plays a sound at the given position
 declare function startVibration(leftHand: boolean, strength: number, duration: number) : ()
+
+declare function dataSave(data: {any}) : ()
+declare function dataLoad() : {any}
