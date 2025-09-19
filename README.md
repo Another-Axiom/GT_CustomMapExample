@@ -24,6 +24,7 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Teleporter](#teleporter)
     + [Tag Zone](#tag-zone)
     + [Object Activation Trigger](#object-activation-trigger)
+	+ [Play Animation Trigger](#play-animation-trigger)
 * [Placeholder Script and Prefabs](#placeholder-script-and-prefabs)
     + [Force Volume](#force-volume)
     + [Leaf Glider](#leaf-glider)
@@ -37,6 +38,8 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Store Placeholders](#store-placeholders)
 * [Other Scripts](#other-scriptsprefabs)
     + [Surface Override Settings](#surface-override-settings)
+	+ [Surface Mover Settings](#surface-mover-settings)
+	+ [Moving Surface Settings](#moving-surface-settings)
     + [Access Door Placeholder](#access-door-placeholder)
     + [Map Orientation Point](#map-orientation-point)
     + [Destroy Pre Export](#destroy-pre-export)
@@ -44,28 +47,33 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Hand Hold Settings](#hand-hold-settings)
     + [Cameras](#cameras)
     + [Inspector Note](#inspector-note)
-* [AI Scripts/Prefabs](#ai-scriptsprefabs)
+* [Map Entity Scripts/Prefabs](#map-entitiesprefabs)
     + [Nav Mesh Surface](#nav-mesh-surface)
     + [AI Agent](#ai-agent)
-    + [AI Spawn Manager](#ai-spawn-manager)
-    + [AI Spawn Point](#ai-spawn-point)
+    + [Grabbable Entity](#grabbable-entity)
+    + [Map Spawn Manager](#map-spawn-manager)
+    + [Map Spawn Point](#map-spawn-point)
 * [Loading Zones](#loading-zones)
     + [Multi Map Setup](#multi-map-setup)
     + [Zone Load Trigger](#zone-load-trigger)
     + [Multi Map Lightmapping](#multi-map-lightmapping)
 * [Exporting and Uploading to Mod.io](#exporting-and-uploading-to-modio)
     + [Exporting](#exporting)
+    + [Map Export Window](#map-export-window)
     + [Uploading to Mod.io](#uploading-to-modio)
 * [Playing Your Map](#playing-your-map)
 
 ## Setup
-This project is made with Unity version 2022.3.2f1. Higher or lower Unity versions may not work properly, so make sure 
+This project is made with Unity version 6000.1.9f1. Higher or lower Unity versions may not work properly, so make sure 
 to download it from the [Unity Archive](https://unity3d.com/get-unity/download/archive) if you don't have it already. 
 It's recommended to use Unity Hub to make managing versions easier.
 
-**MAKE SURE TO ADD ANDROID BUILD SUPPORT TO YOUR UNITY 2022.3.2f1 INSTALLATION!** This is needed to make sure your 
+**MAKE SURE TO ADD ANDROID BUILD SUPPORT TO YOUR UNITY 6000.1.9f1 INSTALLATION!** This is needed to make sure your 
 bundles properly support the Quest. Instructions can be found here: 
 https://docs.unity3d.com/Manual/android-sdksetup.html
+
+If you're developing on a Linux or Mac OS **MAKE SURE TO ADD WINDOWS BUILD STUPPORT TO YOUR UNITY 6000.1.9f1 INSTALLATION!** 
+This is needed to make sure your bundles properly support Steam and Meta PC builds.
 
 ## Functionality Overview Map
 Included in this project are 4 scenes called `FunctionalityOverview_StartingZone`, `FunctionalityOverview_DynamicLights`,
@@ -93,34 +101,11 @@ Next, click Add Component and add a Map Descriptor. This will hold some informat
 
 This component holds some general info about the scene and your map.
 
-- `Is Initial Scene` - If checked, this is the scene that will be initially loaded in game when a player loads up your map.
-                       If none of your map's scenes have this option checked, the scene that comes first alphabetically will be loaded.
 - `Add Skybox` - Check if you want to add a skybox to your scene
   - `Custom Skybox` - A cubemap that will be used as the skybox on your map. If this empty, it'll automatically give your map the default game skybox
   - `Custom Skybox Tint` - what color do you want to tint the skybox
 - `Lighting Export Type` - How to handle exporting lighting data for your map. Please read the Lighting Section farther down for more information.
 - `Export All Objects` - If checked, all GameObjects will be parented under the MapDescriptor prior to export. Otherwise any GameObjects not parented under the Map Descriptor will be destroyed.
-
-
-When `Is Initial Scene` is checked, you'll see some additional settings specific to the Initial Scene.
-
-![mapdescriptor_initial](https://github.com/user-attachments/assets/b0cdd3a1-4e31-4ea8-b53f-43d0929bdfda)
-
-- `Max Players` - Use this to set the maximum amount of players allowed in Public rooms for your map. This setting is ignored for Private rooms.
-- `Use Uber Shader Dynamic Lighting` - If checked, UberShader Dynamic Lighting will be enabled when the initial scene is loaded
-  - `Uber Shader Ambient Dynamic Light` - This is the ambient color applied to anything not currently lit up by an UberShader Dynamic Light.
-- `Custom Gamemode` - Add a Text Asset here for any gamemode logic you created using LUA
-- `Dev Mode` - If checked, this will enable you to reload the LUA script for your map when in the CUSTOM game mode. When `Dev Mode` is enabled
-  you can press the Secondary Face buttons on both controllers to reload the LUA script for your map. Optionally you can put a LUA script at
-  `<AppData>/LocalLow/Another Axiom/Gorilla Tag/script.luau` and if present, that script will be loaded when you reload the LUA script instead
-  of the one packaged with your map.
-- `Return to Virtual Stump Watch Button Settings` - this section contains several settings for the "Return to Virtual Stump" watch button that
-  players have on their left hand when inside a Custom Map.
-  - `Watch Hold Duration` - This controls how long the player must press the watch button before they're returned to the Virtual Stump.
-  - `Watch Should Tag Player` - If checked, when the player uses the watch button, they will be tagged.
-  - `Watch Should Kick Player` - If checked, when the player uses the watch button, they will be kicked from their current Public room. Does not kick players in Private rooms.
-  - `Watch Infection Override` - If checked, you'll see the same options listed above, but specific to the Infection Game Mode, use this if you want to specify different watch settings for Infection
-  - `Watch Custom Mode Override` - If checked, you'll see the same options listed above, but specific to the Custom Game Mode, use this if you want to specify different watch settings for Custom
 
 ## Accessing Your Map
 In order for Players to be able to access your map, it's required to include an `AccessDoorPlaceholder` in whichever scene you have designated as your initial scene.  
@@ -312,6 +297,13 @@ Check out the FunctionalityOverview scenes for some examples.
    - Reseting a trigger means its current `Trigger Count` and `Last Trigger Time` will be reset. GameObjects in the activate/deactivate
      lists are not affected by this. 
 
+## Play Animation Trigger
+This trigger script can be used to activate an animation state on all Animator components on the specified GameObjects.
+
+**Additional Options**
+- `Animated Objects` - which GameObjects should activate the specified Animation state Name
+- `Animation Name` - the name of the Animation state that will be activated 
+
 ## Placeholder Script and Prefabs
 The `GTObjectPlaceholder` script defines an object that will get replaced by an existing Gorilla Tag script/object when your map is loaded 
 in-game. Each has a prefab in the `Assets/MapPrefabs/` folder that can or should be used depending on the placeholder selected for 
@@ -366,6 +358,12 @@ Check out the `FunctionalityOverview_StartingZone` scene for an example.
 Using the `Rope Swing` option on the `GTObjectPlaceholder` component will allow you to place Rope Swings in your map. They have a `Rope Length`
 option to customize how long the rope is and will show a preview of what to expect when your map is loaded in Gorilla Tag. 
 Check out the `FunctionalityOverview_StartingZone` scene for some examples.
+If you'd like to customize the look off your ropes or want them included in your light bake, you can set the `Use Default Placeholder` option to FALSE, 
+which will then give you access to two new options: 
+- `Rope Swing Segment Prefab` - the prefab to use for your rope segments, some example prefabs are provided in the `GorillaTagAssets/RopeAndZiplineSegments/Prefabs` folder
+- `Rop Segment Generation Offset` - this controls the distance between rope segments when the `Generate Rope Swing` button is pressed.
+Once you select your prefab click the `Generate Rope Swing` button to generate your rope swing. If you'd like your rope swing to be light baked, you can then 
+modify the Rope Swing Segment prefab you're using and enable the "Contribute Global Illumination" on the Mesh object in the Prefab.
 
 ### Zipline 
 Use the `ZiplinePlaceholder` prefab to put ziplines in your map. The Zipline placeholder utilizes the `Bezier Spline` component to define
@@ -373,6 +371,12 @@ the shape of the zipline. By default it starts out with only 2 spline points tha
 `Add Curve` button on the `Bezier Spline` component. Once you've adjusted the spline to your liking, you can press the `Click to generate preview mesh`
 button on the `GTObjectPlaceholder` component to see a preview of what to expect when your map is loaded in Gorilla Tag.
 Check out the `FunctionalityOverview_StartingZone` scene for some examples.
+If you'd like to customize the look off your ziplines or want them included in your light bake, you can set the `Use Default Placeholder` option to FALSE, 
+which will then give you access to two new options: 
+- `Zipline Segment Prefab` - the prefab to use for your zipline segments, some example prefabs are provided in the `GorillaTagAssets/RopeAndZiplineSegments/Prefabs` folder
+- `Zipline Segment Generation Offset` - this controls the distance between zipline segments when the `Generate Zipline` button is pressed.
+Once you select your prefab click the `Generate Zipline` button to generate your zipline. If you'd like your zipline to be light baked, you can then 
+modify the Zipline Segment prefab you're using and enable the "Contribute Global Illumination" on the Mesh object in the Prefab.
 
 ### ATM
 Using the `ATM_CustomMesh` or `ATM_FullReplacement` prefabs, you can give players access to an ATM in your map. It has an option to set a 
@@ -407,6 +411,26 @@ If you want to modify how climbing works on an object, you can add a `Surface Ov
 
 Each of the FunctionalityOverview scenes has examples of this, but the `FunctionalityOverview_OceanZone` scene has some specific examples of the Sound Override setting, 
 and the `FunctionalityOverview_ScriptsZone` scene has an example of the Extra Vel settings.
+
+### Surface Mover Settings
+You can setup moving surfaces using the `Surface Mover Settings` script component, these are automatically synced between all players.
+
+**Script Options:**
+- `Move Type` - How should the object move, options are `Translation` and `Rotation`.
+- `Velocity` - Meters per second for `Translation` move type | Revolutions per second for `Rotation` move type
+- `Cycle Delay` - Adds a delay equal to half this value in seconds to the beginning and end of the movement cycle. 
+- `Reverse Dir` - Will reverse the movement direction 
+- `Reverse Dir On Cycle` - Will reverse the movement direction when reaching the start or end of the movement cycle 
+- `Start` (only for `Translation` move type) - The starting transform for the movement cycle
+- `End` (only for `Translation` move type) - The ending transform for the movement cycle
+- `Rotation Axis` (only for `Rotation` move type) - Which local axis should the object rotate on 
+- `Rotation Amount` (only for `Rotation` move type) - How many degrees (0-360) should the object rotate in one cycle
+- `Rotation Relative to Starting` (only for `Rotation` move type) - If TRUE the rotation starting point will be the initial rotation value of the 
+object when the map is loaded, otherwise it will start at 0"
+
+### Moving Surface Settings
+This component can be used with `Surface Mover Settings` to indicate that the player should move along with a specific moving GameObject if they are standing on it. 
+You can put this on the same GameObject as the `Surface Mover Settings` component, or any child GameObjects that are affected by the `Surface Mover Settings`.
 
 ### Access Door Placeholder
 This is used for positioning your iniital scene in the correct place so it lines up with the "Lobby" room in GorillaTag. This script
@@ -452,11 +476,12 @@ This is a simple prefab that is essentially just a visual preview to show where 
 Cameras are allowed as long as they are being used for Render Textures. Any cameras not using Render Textures will be deleted when loading your map.
 Check out the `FunctionalityOverview_StartingZone` scene to see an example of how a Camera + Render Texture can be used to create a mirror.
 
-## AI Scripts/Prefabs
-Some basic AI functionality is now supported in Custom Maps. It's highly recommended to look at the AI section of the `FunctionalityOverview_StartingZone`
-scene to get a better understanding of how these components are used. AI Support is currently limited to single-zone maps; Multi-zone maps
-may encounter problems while loading or spawning AIAgents. AI Support also relies heavily on Lua currently, check out the `FunctionalityOverview` Luau
-script for an example of AI behavior. Additonal non-Lua AI support will be added with future updates.
+## Map Entities/Prefabs
+Map Entities are objects you can create at runtime and sync across all players in the map. It's highly recommended to look at the AI And Grabbable section of the `FunctionalityOverview_StartingZone`
+scene to get a better understanding of how these components are used. Map Entity Support is currently limited to single-zone maps; Multi-zone maps
+may encounter problems while loading or spawning AIAgents and Grabbable Entities. Map Entity Support also relies heavily on Lua currently, check out the `FunctionalityOverview` Luau
+script for an example of working with Map Entities. Additonal non-Lua support will be added with future updates.
+There are currently two types of Map Entities available: AIAgents and GrabbableEntities.
 
 ### Nav Mesh Surface
 The `NavMeshSurface` component can be used in Custom Maps to create a navigable area for AI Agents. There are currently 4 supported NavAgent sizes 
@@ -472,30 +497,49 @@ Nav Mesh itself. You can use the `Show Gizmos` button on the Scene viewport to s
 
 ### AI Agent
 The `AIAgent` component is used to define a new AI Agent. It is highly recommended that you create a Prefab for each of your AI Agent types.
-Check out the `FunctionalityOverview_StartingZone` scene's AI section for an example setup. 
+Check out the `FunctionalityOverview_StartingZone` scene's AI And Grabbable section for an example setup. 
 
 `AIAgent` has two important properties that handle how they are spawned:
 - `IsTemplate` - If checked, this `AIAgent` and all it's child GameObjects will be used as the base to spawn duplicated AI Agents for both pre-placed and Lua-spawned
-  agents. Each of your `AIAgent` types must have a version with `IsTemplate` set to true as a child of the `AISpawnManager` in your map or pre-placed and Lua-spawned
+  agents. Each of your `AIAgent` types must have a version with `IsTemplate` set to true as a child of the `MapSpawnManager` in your map or pre-placed and Lua-spawned
   Agents of that type will not be created.
-- `AgentTypeID` - This is used to distinguish each Agent type that the `AISpawnManager` can create. Make sure each `IsTemplate` Agent you created has a unique `AgentTypeID`.
-  On pre-placed AI Agents, this is used to tell the `AISpawnManager` which Agent type to spawn in it's place.
+- `EntityTypeID` - This is used to distinguish each Agent type that the `MapSpawnManager` can create. Make sure each `IsTemplate` Agent you created has a unique `EntityTypeID`.
+  On pre-placed AI Agents, this is used to tell the `MapSpawnManager` which Agent type to spawn in it's place.
 
 Most other options for `AIAgent` are only editable on AI Agents with `IsTemplate` set to true. These properties control various settings for Navigation and Sight.
 
-![aiagentprops](https://github.com/user-attachments/assets/e53c12c2-1001-46e8-8ca8-eb39cd316c57)
+![aiagentprops](https://github.com/user-attachments/assets/b1435529-5ae9-4ae6-bf6b-25c7cbd261e2)
 
-There is one other setting specific to pre-placed AI Agents that is relevant if you intend on controlling the Agent with Lua scripting. This is the `Lua_AgentID`, which
-is only visible when `IsTemplate` is set to false. It is not manually editable, but can be generated by clicking `Tools > Generate Lua AI Agent IDs`. This will generate
+There is one other setting specific to pre-placed AI Agents that is relevant if you intend on controlling the Agent with Lua scripting. This is the `Lua_EntityID`, which
+is only visible when `IsTemplate` is set to false. It is not manually editable, but can be generated by clicking `Tools > Generate Lua Map Entity IDs`. This will generate
 a unique ID for each of your pre-placed AI Agents that can be used to get a reference to the Agent in Lua. Check out the `FunctionalityOverview_StartingZone` scene and the
 `FunctionalityOverview` Luau script for an example of how this ID is used.
 
-### AI Spawn Manager
-This component is required to utilize the AI Agent support for Custom Maps. AI Agents in your scene with `IsTemplate` set to true must be children of the GameObject with the 
-`AISpawnManager` component for them to function correctly. Pre-placed AI Agents do NOT need to be children of the `AISpawnManager`.
+### Grabbable Entity
+The `GrabbableEntity` component is used to define an object that players can pick up and throw. It is highly recommended that you create a Prefab for each of your Grabbable Entity types.
+Check out the `FunctionalityOverview_StartingZone` scene's AI And Grabbable section for an example setup. 
 
-### AI Spawn Point
-There is also the `AISpawnPoint` component and the `CustomMapSpawnPoint` prefab, these aren't currently required for spawning Agents via Lua, but will be used in a future 
+`GrabbableEntity` has two important properties that handle how they are spawned:
+- `IsTemplate` - If checked, this `GrabbableEntity` and all it's child GameObjects will be used as the base to spawn duplicated Grabbable Entities for both pre-placed and Lua-spawned
+  entities. Each of your `GrabbableEntity` types must have a version with `IsTemplate` set to true as a child of the `MapSpawnManager` in your map or pre-placed and Lua-spawned
+  entities of that type will not be created.
+- `EntityTypeID` - This is used to distinguish each entity type that the `MapSpawnManager` can create. Make sure each `IsTemplate` entity you created has a unique `EntityTypeID`.
+  On pre-placed Grabbable Entities, this is used to tell the `MapSpawnManager` which entity type to spawn in it's place.
+
+Most other options for `GrabbableEntity` are only editable on Grabbable Entities with `IsTemplate` set to true.
+
+![grabbableentityprops](https://github.com/user-attachments/assets/bb3f8aa6-c8a4-445b-a981-28e3e9560ff6)
+
+Like AI Agents, Grbabbable Entities have a `Lua_AgentID`, which is only visible when `IsTemplate` is set to false. It is not manually editable, but can be generated 
+by clicking `Tools > Generate Lua Map Entity IDs`. This will generate a unique ID for each of your pre-placed Grabbable Entities that can be used to get a reference to the 
+entity in Lua. Check out the `FunctionalityOverview_StartingZone` scene and the `FunctionalityOverview` Luau script for an example of how this ID is used.
+
+### Map Spawn Manager
+This component is required to utilize the AI Agent and Grabbbable Entity support for Custom Maps. AI Agents and Grabbable Entities in your scene with `IsTemplate` set to true must be children of the GameObject with the 
+`MapSpawnManager` component for them to function correctly. Pre-placed AI Agents and Grabbable Entities do NOT need to be children of the `MapSpawnManager`.
+
+### Map Spawn Point
+There is also the `MapSpawnPoint` component and the `CustomMapSpawnPoint` prefab, these aren't currently required for spawning entities via Lua, but will be used in a future 
 update to allow for a non-Lua spawn method.
 
 ## Loading Zones
@@ -542,16 +586,40 @@ Once your map is all done, it's time to export! First, let's run through our che
     - Brush back over the tips in the [Accessing Your Map section](#accessing-your-map) if needed
 - Did you add the `MapOrientationPoint` prefab to your other scenes?
 - Did you read over the [Lighting section](#lighting) and follow all the steps?
-- Did you add all the scenes you want exported to the `Scenes In Build` section of the `Build Settings` window?
 
 If you want to use a custom skybox, import it into your Unity project as an image, set the `Texture Shape` to Cube 
 and assign it to the `Custom Skybox` property on your `Map Descriptor`
 
-Now that you've gone over the checklist, it's time to export! Make sure all the scenes you want have been added to the `Build settings`
-window then in the toolbar got to `Tools > Export Maps`
+### Map Export Window
+Now that you've gone over the checklist, it's time to export! In the toolbar got to `Tools > Export Maps`
+A new window will open containing two tabs with functionality to help you export your map.
 
-This opens up to the `Exports` folder, but you can select any folder to export to. Click save, and once the export is 
+MAP EXPORT SETTINGS
+This tab contains all the export settings for your map.
+- `Is Initial Scene` - If checked, this is scene will be initially loaded in game when a player loads up your map. Multiple scenes can be set as an Initial Scene.
+- - `Dev Mode` - If checked, this will enable you to reload the LUA script for your map when in the CUSTOM game mode. When `Dev Mode` is enabled
+  you can press the Secondary Face buttons on both controllers to reload the LUA script for your map. Optionally you can put a LUA script at
+  `<AppData>/LocalLow/Another Axiom/Gorilla Tag/script.luau` and if present, that script will be loaded when you reload the LUA script instead
+  of the one packaged with your map.
+- `Max Players` - Use this to set the maximum amount of players allowed in Public rooms for your map. This setting is ignored for Private rooms.
+- `Use Uber Shader Dynamic Lighting` - If checked, UberShader Dynamic Lighting will be enabled when the initial scene is loaded
+  - `Uber Shader Ambient Dynamic Light` - This is the ambient color applied to anything not currently lit up by an UberShader Dynamic Light.
+- `Custom Gamemode` - Add a Text Asset here for any gamemode logic you created using LUA
+- `Return to Virtual Stump Watch Button Settings` - this section contains several settings for the "Return to Virtual Stump" watch button that
+  players have on their left hand when inside a Custom Map.
+  - `Watch Hold Duration` - This controls how long the player must press the watch button before they're returned to the Virtual Stump.
+  - `Watch Should Tag Player` - If checked, when the player uses the watch button, they will be tagged.
+  - `Watch Should Kick Player` - If checked, when the player uses the watch button, they will be kicked from their current Public room. Does not kick players in Private rooms.
+  - `Watch Infection Override` - If checked, you'll see the same options listed above, but specific to the Infection Game Mode, use this if you want to specify different watch settings for Infection
+  - `Watch Custom Mode Override` - If checked, you'll see the same options listed above, but specific to the Custom Game Mode, use this if you want to specify different watch settings for Custom
+- `Warnings prevent Export` - If checked, any warnings found while exporting maps will cancel the export.
+
+Clicking `Export Map` at the bottom opens up to the `Exports` folder, but you can select any folder to export to. Click save, and once the export is 
 finished you'll have a `.zip` file that's ready to upload to [Mod.io](https://mod.io/g)
+
+MAP VALIDATION
+This tab allows you run a validation check on your map(s) before exporting.
+Any Errors or Warnings will be listed here and you can click the `Select` button to select the object the warning was found on.
 
 ### Uploading to Mod.io
 
