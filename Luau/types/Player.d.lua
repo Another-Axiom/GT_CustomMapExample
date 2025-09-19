@@ -3,7 +3,9 @@ declare class Player -- Read only except for playerMaterial
     playerName : string -- Name when they join the room
     playerMaterial : number -- Used to show things like tag state, frozen, lava monkey etc.
     isMasterClient : boolean -- True when they are the master client
+    velocity : Vec3
     bodyPosition : Vec3
+    isPCVR : boolean
     leftHandPosition : Vec3
     rightHandPosition : Vec3
     leftHandRotation : Quat
@@ -13,14 +15,13 @@ declare class Player -- Read only except for playerMaterial
     isEntityAuthority : boolean
 end
 
-
 declare class PSettings
     maxJumpSpeed : number -- Between 0 and 100
     jumpMultiplier : number -- Between 0 and 100
 end
 
 declare PSettings : {
-
+    
 }
 
 declare Player : {
@@ -48,3 +49,6 @@ declare class PInput
 end
 
 declare PlayerInput : PInput
+
+declare function setPlayerVelocity(velocity: Vec3) : nil
+declare function setPlayerPosition(position: Vec3, keepVelocity: boolean) : nil

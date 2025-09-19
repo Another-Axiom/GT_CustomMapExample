@@ -78,6 +78,15 @@ declare Quat: {
 	fromDirection: (direction: Vec3) -> Quat,
 }
 
+declare class RState
+    isQuest : boolean
+    fps : number
+    isPrivate : boolean
+    code : string
+end
+
+declare Room : RState
+
 declare InRoom: boolean
 
 declare function emitEvent(eventName: string, data: {any}) : () -- Emits event to other players only
@@ -87,3 +96,4 @@ declare function startVibration(leftHand: boolean, strength: number, duration: n
 
 declare function dataSave(data: {any}) : ()
 declare function dataLoad() : {any}
+

@@ -172,6 +172,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EmissionDissolveEdgeSize: 0.1
     - _EmissionDissolveProgress: 1
+    - _EmissionIntensityInDynamic: 0
     - _EmissionMap_AtlasSlice: 0
     - _EmissionMaskByBaseMapAlpha: 1
     - _EmissionToggle: 1
@@ -316,6 +317,7 @@ Material:
     - _VertexWaveParams: {r: 1, g: 1, b: 1, a: 16}
     - _VertexWaveSphereMask: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &475301523594437387
 MonoBehaviour:
   m_ObjectHideFlags: 11

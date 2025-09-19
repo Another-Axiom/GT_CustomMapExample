@@ -1265,7 +1265,9 @@ half4 frag(Varyings input, bool facing: SV_IsFrontFace) : SV_Target
         color = facing > 0 ? color : surfColor;
     
     #endif
-    
+
+    // (2025-03-26 MattO) Disabled because this was throwing an error due to `_SAMPLE_CAMERA_TEX` not being defined.
+    /*
     #if _STEALTH_EFFECT
         float se_aspect = _ScreenParams.x / _ScreenParams.y;
         float2 se_screen_uv = input.positionVS.xy / input.positionVS.w;
@@ -1295,6 +1297,7 @@ half4 frag(Varyings input, bool facing: SV_IsFrontFace) : SV_Target
         #endif
     
     #endif
+    */
     
     #if _VERTEX_ANIM_WAVE_DEBUG
         float vw_new_pos;
@@ -1367,6 +1370,44 @@ half4 frag(Varyings input, bool facing: SV_IsFrontFace) : SV_Target
     if (_GreyZoneActive && !_GreyZoneException)
     {
         color.rgb = saturate(mul(_GT_CG_Achromatopsia, color.rgb));
+    }
+
+    if (_GTGameModes_PlayableBoundary_IsEnabled)
+    {
+        // Initialize sdf to a large positive value for a union operation (min)
+        // Use a large float constant, or FLT_MAX if defined and appropriate in your environment.
+        float signedDistResult = 1e20;
+        float nonZeroSmoothRadius = _GTGameModes_PlayableBoundary_NonZeroSmoothRadius;
+
+        for (int i = 0; i < 8; ++i)
+        {
+            float3 cyl_center = _GTGameModes_PlayableBoundary_Cylinders_Centers[i].xyz;
+            float cyl_radius = _GTGameModes_PlayableBoundary_Cylinders_RadiusHeights[i].x;
+            float cyl_height = _GTGameModes_PlayableBoundary_Cylinders_RadiusHeights[i].y;
+            float3 pos = cyl_center - input.positionWS;
+            float signedDist_of_tracked_to_cyl = length(pos.xz) - cyl_radius;
+            signedDistResult = SDFSmoothMerge(signedDistResult, signedDist_of_tracked_to_cyl, nonZeroSmoothRadius);
+        }
+
+        // TODO: make these values global and exposed to the game manager.
+        // TODO: probably should have border's peak exposed too.
+        half4 playableBoundaryOutsideColor = half4(1.0, 0.0, 1.0, 0.05);
+        half4 playableBoundaryBorderColor = half4(1.0, 0.05, 0.2, 1.0);
+        half borderNonZeroFeatherWidth = 2.0;
+        half playableBoundaryMaxDistance = 40.0f;
+
+        // Get the masks.
+        half notTooFarMask = abs(signedDistResult) < playableBoundaryMaxDistance ? 1.0f : 0.0f;
+        half outsideMask = saturate(signedDistResult);
+        half borderMask = saturate(1.0 - abs(signedDistResult / borderNonZeroFeatherWidth));
+        borderMask *= borderMask * borderMask; // pow2 for a more pleasant curve.
+
+        // Blend the result.
+        color.rgb += notTooFarMask * (
+            (outsideMask * playableBoundaryOutsideColor.xyz * playableBoundaryOutsideColor.w)
+            + (borderMask * playableBoundaryBorderColor.xyz * playableBoundaryBorderColor.w)
+            + ((borderMask * borderMask * borderMask * borderMask * borderMask) * 0.7) // peak white of border
+        );
     }
     
     //
@@ -1455,7 +1496,7 @@ half4 frag(Varyings input, bool facing: SV_IsFrontFace) : SV_Target
     float3 destaturatedColor = grayscale * float3(1, 1, 1);
     destaturatedColor = destaturatedColor * _GT_DesaturateAndTint_TintColor;
     destaturatedColor = (_GT_DesaturateAndTint_TintAmount * destaturatedColor) + ((1 - _GT_DesaturateAndTint_TintAmount) * color.rgb);
-    color = float4(destaturatedColor, 1.0f);
+    color.rgb = destaturatedColor;
 #endif
         
     return color;

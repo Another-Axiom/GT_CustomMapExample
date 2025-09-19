@@ -26,6 +26,9 @@
 # Visual Studio cache directory
 .vs/
 
+# Jetbrains Rider idea cache director
+.idea/
+
 # Gradle cache directory
 .gradle/
 
@@ -80,3 +83,7 @@ crashlytics-build.properties
 # Ignore exported map files
 /[Ee]xports/*.zip
 /[Ee]xports/*.manifest
+
+# Ignore MapExportSettings asset file
+/[Aa]ssets/MapExportSettings.asset
+/[Aa]ssets/MapExportSettings.asset.meta

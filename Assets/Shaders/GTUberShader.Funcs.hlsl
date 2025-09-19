@@ -725,7 +725,7 @@ float2 FilterNiceUV(float2 uv, float2 texelSize, float resFactor = 1.0f)
 	return uv;
 }
 
-inline half3 BoxBlur(float2 uv, half samples, half radius)
+inline half3 BoxBlur(float2 uv, half samples, half radius, TEXTURE2D_PARAM(tex, sampler_tex))
 {
 	half3 sum = 0.0h;
 		
@@ -734,7 +734,7 @@ inline half3 BoxBlur(float2 uv, half samples, half radius)
 		for (int j = -samples; j < samples; j++)
 		{
 			float2 box_uv = uv + half2(i, j) * (radius/samples);			
-			half3 box = _SAMPLE_CAMERA_TEX(box_uv).xyz;
+			half3 box = SAMPLE_TEXTURE2D(tex, sampler_tex, box_uv).xyz;
 			sum += box / pow(samples * 2.0h, 2.0h);
 		}
 	}
@@ -806,6 +806,28 @@ float sdf_box_round(float3 pos, float3 size, float radius)
 	
 	return outside + inside - radius;
 }
+
+float sdf_sphere(float3 pos, float radius)
+{
+	return length(pos) - radius;
+}
+
+
+//
+// (Has C# equivalent) Smoothly merges two signed distance field (SDF) values where `nonZeroSmoothRadius` Controls the
+// transition smoothness. Smaller values result in sharper transitions, larger values result in smoother transitions.
+// The effect depends on the proximity of signedDist1 and signedDist2. The returned value is a smoothly merged SDF
+// value.
+//
+float SDFSmoothMerge(float signedDist1, float signedDist2, float radius){
+	float2 intersection = float2(signedDist1 - radius, signedDist2 - radius);
+	intersection = min(intersection, 0);
+	float insideDistance = -length(intersection);
+	float simpleUnion = min(signedDist1, signedDist2);
+	float outsideDistance = max(simpleUnion, radius);
+	return  insideDistance + outsideDistance;
+} 
+
 
 
 #endif // GT_UBER_FUNCS_INCLUDE

@@ -7,6 +7,11 @@ purpleSkeleton = nil
 targetingRange = 5
 attackRange = 1
 
+spawnedGrabbables = {}
+grabbableSpawnType = 15
+
+grabbableSpawnPoints = {}
+
 local patrolPoints = {}
 local agentPatrolTargets = {}
 local agentPlayerTargets = {}
@@ -383,6 +388,13 @@ function onEvent(event, data) -- event handler
 		waitingForInitData = false
 		scriptInitialized = true
 	end
+
+	if event == "entityGrabbed" then
+		print("Agent with entity ID " .. tostring(data) .. " has been grabbed.")
+	end
+	if event == "entityReleased" then
+		print("Agent with entity ID " .. tostring(data) .. " has been released.")
+	end
 end
 
 function tickInput()
@@ -453,7 +465,7 @@ function initAIAgents()
 		return
 	end
 
-	purpleSkeleton = AIAgent.findPrePlacedAIAgentByID(1) -- copied from Lua_AgentID on the pre-placed AIAgent
+	purpleSkeleton = AIAgent.findPrePlacedAIAgentByID(3) -- copied from Lua_AgentID on the pre-placed AIAgent
 	if purpleSkeleton == nil then
 		print("[initAIAgents] couldn't find Agent by Lua_AgentID")
 		setTimeout(1, initAIAgents) -- retry after 1 second, pre-placed Agent may not have been spawned yet
@@ -474,10 +486,72 @@ function initAIAgents()
 	scriptInitialized = true
 end
 
-function scriptStarted()
+function spawnGrabbables()
+	if LocalPlayer == nil or InRoom == false then
+		setTimeout(1, spawnGrabbables)
+		return
+	end
 
+	if not LocalPlayer.isEntityAuthority then
+		return
+	end
+
+	local numGrabbablesToSpawn = #grabbableSpawnPoints
+	local spawnPoint = nil
+	for i = 1, numGrabbablesToSpawn, 1 do
+		spawnPoint = grabbableSpawnPoints[i]
+		if spawnPoint == nil then
+			return
+		end
+
+		local spawnedGrabbable = GrabbableEntity.spawnGrabbableEntity(15, spawnPoint.position, spawnPoint.rotation)
+		if spawnedGrabbable ~= nil then
+			table.insert(spawnedGrabbables, spawnedGrabbable)
+		end
+	end
+end
+
+function initGrabbableSpawnPoints()
+	print("initGrabbableSpawnPoints")
+	for i = 1, 100, 1 do
+		local foundSpawnPoint = GameObject.findGameObject("grabbableSpawn_" .. tostring(i))
+		if foundSpawnPoint == nil then
+			break
+		end
+		table.insert(grabbableSpawnPoints, foundSpawnPoint)
+	end
+	local numPatrolPoints = #grabbableSpawnPoints
+	print("found " .. tostring(numPatrolPoints) .. " grabbable spawn points")
+end
+
+function findPreplacedGrabbable()
+	print("findPreplacedGrabbable")
+	local preplacedGrabbable = GrabbableEntity.findPrePlacedGrabbableEntityByID(4)
+	if preplacedGrabbable == nil then
+		return
+	end
+	print("found " .. tostring(preplacedGrabbable.gameObject.name))
+end
+
+function checkGrabStatus()
+	print("getHoldingActorNumber")
+	local actorNumber = GrabbableEntity.getHoldingActorNumberByLuauID(1)
+	print("checkGrabStatus " .. tostring(actorNumber))
+	if actorNumber < 0 then
+		setTimeout(1, checkGrabStatus)
+		return
+	end
+end
+
+function scriptStarted()
+	print("luau started")
 	initPatrolPoints()
 	initAIAgents()
-	
+	initGrabbableSpawnPoints()
+	findPreplacedGrabbable()
+	print("luau spawn grabbables")
+	setTimeout(5, spawnGrabbables)
+	print("luau check grab status")
+	setTimeout(5, checkGrabStatus)
 end
 scriptStarted()

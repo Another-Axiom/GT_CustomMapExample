@@ -1,9 +1,10 @@
 {
     "luau-lsp.types.definitionFiles": [
         "types/basic.d.lua",
-        "types/GameObject.d.lua",
         "types/Player.d.lua",
-        "types/AIAgent.d.lua"
+        "types/GameObject.d.lua",
+        "types/AIAgent.d.lua",
+		"types/GrabbableEntity.d.lua
     ],
     "luau-lsp.types.documentationFiles": [],
     "luau-lsp.sourcemap.enabled": false,

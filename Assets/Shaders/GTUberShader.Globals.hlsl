@@ -15,11 +15,11 @@ int _GT_PawnActiveCount;
 int _GT_ShaderVolumesActive;
 float4x4 _GT_ShaderVolumes[16];
 
-int _GreyZoneActive;
+#include "GTUberShader.Globals.GameModes.hlsl"
 
-SCREENSPACE_TEXTURE_HALF(_CameraOpaqueTexture);
-SAMPLER(sampler_CameraOpaqueTexture);
-#define _SAMPLE_CAMERA_TEX(screen_uvs) SAMPLE_TEXTURE2D_X(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, screen_uvs)
+// SCREENSPACE_TEXTURE_HALF(_CameraOpaqueTexture);
+// SAMPLER(sampler_CameraOpaqueTexture);
+// #define _SAMPLE_CAMERA_TEX(screen_uvs) SAMPLE_TEXTURE2D_X(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, screen_uvs)
 
 // Color blindness matrices referenced from:
 // "A Physiologically-based Model for Simulation of Color Vision Deficiency"
