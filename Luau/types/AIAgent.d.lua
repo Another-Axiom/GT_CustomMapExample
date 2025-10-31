@@ -7,6 +7,8 @@ declare class AIAgent -- Read only
     function setDestination (self, destination: Vec3)
     function destroyAgent (self)
     function playAgentAnimation (self, animationStateName: string)
+    function getTargetPlayer(self) : number
+    function setTargetPlayer(self, playerID: number)
 end
 
 declare AIAgent : {

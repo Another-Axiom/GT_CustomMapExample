@@ -4,6 +4,7 @@ declare class GrabbableEntity -- Read only
     entityRotation : Quat
 
     function __toString (self) : string
+    function destroyGrabbable (self)
 end
 
 declare GrabbableEntity : {
@@ -14,4 +15,4 @@ declare GrabbableEntity : {
     spawnGrabbableEntity : (entityTypeID: number, position: Vec3, rotation: Quat) -> GrabbableEntity,
 }
 
-declare GrabbableEntity : {GrabbableEntity}
+declare GrabbableEntities : {GrabbableEntity}

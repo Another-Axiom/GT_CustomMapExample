@@ -121,6 +121,10 @@ Scripts have simple access to each player in the lobby, allowing you to do thing
 -   Check if a player is the **master client** or **entity authority**
 -   Get their **position**, **rotation**, and **player materials**.
 
+Scripts can also manipulate the local players velocity using the functions below 
+`setPlayerVelocity(velocity: Vec3)`
+`getPlayerVelocity()`
+
 ### **Player Materials**
 
 You can control how players appear using the `playerMaterial` property. This property is an integer corresponding to different material types (normal, tagged, infected, frozen, etc.):
@@ -146,6 +150,7 @@ Example:
 LocalPlayer.playerMaterial = 0
 function tick() end
 ```
+
 ----------
 
 ## **Touch Events**
@@ -187,7 +192,9 @@ Additional methods allow you to adjust:
 -   **Collision**: `setCollision(enabled: boolean)`
 -   **Visibility**: `setVisibility(enabled: boolean)`
 -   **Enabled**: `setActive(enabled: boolean)`
--   **Text**: `setVisibility(text: string)`
+-   **Text**: `setText(text: string)`
+-   **Velocity**: `setVelocity(velocity: Vec3)` or `getVelocity()`
+-   **Color**: `setColor(color: Vec3)`
 
 > **Note:** Static objects cannot be moved, as they are combined into a single mesh upon export.
 > **Note:** You can only set the text of a game object that has a text component.
@@ -195,7 +202,8 @@ Additional methods allow you to adjust:
 
 ### **Finding GameObjects**
 
-Use the `findGameObject()` function to retrieve GameObjects by name:
+Use the `findGameObject(name: string)` function to retrieve GameObjects by name
+You can also use the `findChild(name: string)` method to retrive a child by name
 
 ```lua
 local door = GameObject.findGameObject("DoorName")
@@ -203,6 +211,91 @@ door:setVisibility(false)
 function tick() end
 ```
 
+### **Clone GameObjects**
+
+Use the `clone()` method to clone a gameobject which returns a reference to the new object
+Use the `destroy()` method to destroy a cloned object, note you can only destroy cloned objects
+
+### **Touch Events**
+
+GameObjects can respond to touch or collision events if they have a **LuauTrigger** component attached.
+
+| Method | Description |
+|--------|--------------|
+| `onTouched(self, callback: () -> nil)` | Registers a function to be called whenever the GameObject is touched or triggered by another object. This only works if the GameObject has a **LuauTrigger** component. |
+
+---
+
+```lua
+local button = GameObject.findGameObject("Button")
+
+button:onTouched(function()
+    print("Button was touched!")
+end)
+```
+
+### **Components**
+
+You can find a component of a GameObject using `findComponent(name: string)` which returns a reference to that component
+---
+
+## **ParticleSystem**
+
+Controls particle effects such as smoke, fire, or sparks.
+
+### **Methods**
+
+| Method | Description |
+|--------|--------------|
+| `play(self)` | Starts emitting particles. |
+| `stop(self)` | Stops emitting new particles but keeps existing ones until they expire. |
+| `clear(self)` | Clears all active particles from the system. |
+
+---
+
+## **AudioSource**
+
+Handles audio playback attached to the GameObject. Useful for background music, sound effects, or 3D positional audio.
+
+### **Methods**
+
+| Method | Description |
+|--------|--------------|
+| `play(self)` | Plays the assigned audio clip from the beginning. |
+| `setVolume(self, volume: number)` | Sets playback volume (typically 0.0 to 1.0). |
+| `setLoop(self, loop: boolean)` | Enables or disables looping playback. |
+| `setPitch(self, pitch: number)` | Adjusts playback pitch; 1.0 is normal speed. |
+| `setMinDistance(self, distance: number)` | Sets the distance within which the audio is heard at full volume. |
+| `setMaxDistance(self, distance: number)` | Sets the maximum distance at which the audio can be heard. |
+
+---
+
+## **Light**
+
+Controls a light source in the scene (e.g., point light, spotlight).
+
+### **Methods**
+
+| Method | Description |
+|--------|--------------|
+| `setColor(self, color: Vec3)` | Sets the RGB color of the light (e.g., `Vec3.New(1, 0.9, 0.7)`). |
+| `setIntensity(self, intensity: number)` | Controls brightness of the light. |
+| `setRange(self, distance: number)` | Defines how far the light reaches. |
+
+---
+
+## **Animator**
+
+Manages animation playback on the GameObject, such as object animations.
+
+### **Methods**
+
+| Method | Description |
+|--------|--------------|
+| `setSpeed(self, speed: number)` | Sets playback speed multiplier. |
+| `startPlayback(self)` | Starts or resumes animation playback. |
+| `stopPlayback(self)` | Stops animation playback. |
+| `reset(self)` | Resets animation to its initial state. |
 
 ----------
 
