@@ -36,6 +36,14 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Zipline](#zipline)
     + [ATM](#atm)
     + [Store Placeholders](#store-placeholders)
+* [Gravity Zones](#gravity-zones)
+    + [Requirements](#requirements)
+    + [How a gravity zone is built](#how-a-gravity-zone-is-built)
+    + [Setting up a zone, step by step](#setting-up-a-zone-step-by-step)
+    + [The five zone types](#the-five-zone-types)
+    + [Settings reference](#settings-reference)
+    + [Overlapping zones](#overlapping-zones)
+    + [Tips and gotchas](#tips-and-gotchas)
 * [Other Scripts](#other-scriptsprefabs)
     + [Surface Override Settings](#surface-override-settings)
 	+ [Surface Mover Settings](#surface-mover-settings)
@@ -397,7 +405,7 @@ to purchase/try-on specific cosmetics from rotating list in your map. These incl
   - Try-On Areas are restricted in their size to a maximum volume of 64 (x scale * y scale * z scale), if they are too big they will not be replaced when your map is loaded.
 There are prefabs for each of these in the `Assets/MapPrefabs/` folder. Check out the MiniShop area in the `FunctionalityOverview_StartingZone` scene for some examples. 
 
-# Gravity Zones
+## Gravity Zones
 
 Gravity Zones let you drop regions into your map that change how gravity behaves for anyone inside them: from simple low or reversed gravity to spherical "planets," cube worlds, and donut-shaped rings. You place them entirely with components in the Unity project; no scripting is required.
 
@@ -409,13 +417,13 @@ There are five zone types:
 - **Torus Zone:** gravity pulls toward a ring, for donut-shaped worlds
 - **Consensus Gravity Zone:** gravity leans toward wherever the players inside the zone are (advanced)
 
-## Requirements
+### Requirements
 
 Gravity zone components ship with **Custom Map Support version 5 and later**. Use the latest Custom Map Example project and exporter. If the gravity components don't appear when you go to add a component, update your project's Custom Map Support runtime to the current version, then re-open the project.
 
 Gravity zones take effect in Gorilla Tag clients from the Space update onward. Always test in a current build.
 
-## How a gravity zone is built
+### How a gravity zone is built
 
 A gravity zone is two things on the same GameObject:
 
@@ -426,7 +434,7 @@ The gravity zone component only stores settings. When your map loads in-game, th
 
 > **Keep your walkable surfaces separate.** The trigger collider should not be the floor players stand on. Put the surface players walk on (a normal, non-trigger collider) on a different object. If the zone collider isn't a trigger, players will physically bump into it instead of entering it.
 
-## Setting up a zone, step by step
+### Setting up a zone, step by step
 
 1. Create an empty GameObject where you want the zone.
 2. Add a collider (Box, Sphere, Capsule, or Mesh) and turn on **Is Trigger**. Size it to cover the volume you want affected.
@@ -435,31 +443,31 @@ The gravity zone component only stores settings. When your map loads in-game, th
 5. For a **Basic Gravity Zone**, the gravity direction is the GameObject's **up axis**, so rotate the object to aim the gravity.
 6. Export your map and test it in a headset to confirm the direction and feel.
 
-## The five zone types
+### The five zone types
 
-### Basic Gravity Zone (`BasicGravityZoneSettings`)
+#### Basic Gravity Zone (`BasicGravityZoneSettings`)
 
 Uniform gravity in a single direction. The direction is the GameObject's up axis, so rotate the object to point gravity wherever you want (down, sideways, up). This is the zone to use for low gravity, heavy gravity, or reversed gravity.
 
-### Planet Zone (`PlanetZoneSettings`)
+#### Planet Zone (`PlanetZoneSettings`)
 
 Gravity pulls toward the center of the zone, so players can walk around the outside of a sphere like a small planet. Adds an optional gravity curve so the pull can change with distance from the center.
 
-### Cubic Planet Zone (`CubicPlanetZoneSettings`)
+#### Cubic Planet Zone (`CubicPlanetZoneSettings`)
 
 Like the Planet Zone, but gravity pulls toward the nearest face of a box, giving you a cube-shaped planet. Includes everything the Planet Zone has, plus a box constraint for the gravity center.
 
-### Torus Zone (`TorusZoneSettings`)
+#### Torus Zone (`TorusZoneSettings`)
 
 Gravity pulls toward a ring centered on the GameObject's up axis, letting players move around the inside or outside of a donut-shaped world.
 
-### Consensus Gravity Zone (`ConsensusGravityZoneSettings`)
+#### Consensus Gravity Zone (`ConsensusGravityZoneSettings`)
 
 An advanced zone where the gravity direction leans toward where the players currently inside the zone are, rather than a fixed direction. Best treated as experimental: tune it and test with multiple players.
 
-## Settings reference
+### Settings reference
 
-### Shared settings (on every zone type)
+#### Shared settings (on every zone type)
 
 Every zone type includes these settings, because they all build on the Basic Gravity Zone.
 
@@ -474,7 +482,7 @@ Every zone type includes these settings, because they all build on the Basic Gra
 | **Use Rotation Speed Override** | Use a custom rotation speed instead of the default. | Off |
 | **Rotation Speed Override** | The rotation speed used when the override above is on. | `10` |
 
-### Additional Planet Zone settings
+#### Additional Planet Zone settings
 
 | Setting | What it does | Default |
 |---|---|---|
@@ -483,7 +491,7 @@ Every zone type includes these settings, because they all build on the Basic Gra
 | **Use Gravity Curve** | Read gravity strength from the curve below (based on distance from center) instead of the constant Gravity Strength. | Off |
 | **Gravity Curve** | Maps distance from the center (x) to gravity strength (y). Negative y pulls toward the center; positive y pushes outward. | Constant `-9.81` |
 
-### Additional Cubic Planet Zone settings
+#### Additional Cubic Planet Zone settings
 
 Includes all Planet Zone settings, plus:
 
@@ -491,7 +499,7 @@ Includes all Planet Zone settings, plus:
 |---|---|---|
 | **Constraints** | A box (X, Y, Z) that constrains where the gravity center can be. | `(0, 0, 0)` |
 
-### Additional Torus Zone settings
+#### Additional Torus Zone settings
 
 | Setting | What it does | Default |
 |---|---|---|
@@ -499,7 +507,7 @@ Includes all Planet Zone settings, plus:
 | **Rotation Distance** | How close to the central ring before the player starts rotating. | `0` |
 | **Always Rotate** | Always rotate the player (ignores Rotation Distance). | On |
 
-### Additional Consensus Gravity Zone settings
+#### Additional Consensus Gravity Zone settings
 
 These are advanced tuning values for how the zone's gravity settles toward the players inside it. The defaults result in no activity; increase values from 0 to test.
 
@@ -511,19 +519,18 @@ These are advanced tuning values for how the zone's gravity settles toward the p
 | **Rot Min** | `-45` |
 | **Rot Max** | `45` |
 
-## Overlapping zones
+### Overlapping zones
 
 When a player is inside more than one zone at once:
 
 1. **Authority Level** is checked first: the highest authority level wins, and lower ones are ignored.
 2. If zones share the same authority level, their **Gravity Rule** (`Newest` / `Closest` / `Additive`) decides how they combine.
 
-## Tips and gotchas
+### Tips and gotchas
 
 - **The zone collider must have `Is Trigger` ON.** Otherwise players collide with it instead of entering it, and no gravity change happens.
 - **Don't use the zone collider as a floor.** Keep the surface players stand on as a separate, non-trigger collider.
 - **Default strength vs. normal gravity.** Normal Gorilla Tag gravity is around `-9.3`. A new zone defaults to `-9.81`, slightly stronger than normal, so tune Gravity Strength to taste.
-
 
 ## Other Scripts/Prefabs
 
