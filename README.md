@@ -44,6 +44,13 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Settings reference](#settings-reference)
     + [Overlapping zones](#overlapping-zones)
     + [Tips and gotchas](#tips-and-gotchas)
+* [Size Changer Zones](#size-changer-zones)
+    + [Requirements](#requirements-1)
+    + [How a size changer zone is built](#how-a-size-changer-zone-is-built)
+    + [Setting up a zone, step by step](#setting-up-a-zone-step-by-step-1)
+    + [Settings reference](#settings-reference-1)
+    + [Overlapping zones](#overlapping-zones-1)
+    + [Tips and gotchas](#tips-and-gotchas-1)
 * [Other Scripts](#other-scriptsprefabs)
     + [Surface Override Settings](#surface-override-settings)
 	+ [Surface Mover Settings](#surface-mover-settings)
@@ -531,6 +538,60 @@ When a player is inside more than one zone at once:
 - **The zone collider must have `Is Trigger` ON.** Otherwise players collide with it instead of entering it, and no gravity change happens.
 - **Don't use the zone collider as a floor.** Keep the surface players stand on as a separate, non-trigger collider.
 - **Default strength vs. normal gravity.** Normal Gorilla Tag gravity is around `-9.3`. A new zone defaults to `-9.81`, slightly stronger than normal, so tune Gravity Strength to taste.
+
+## Size Changer Zones
+
+Size Changer Zones let you drop regions into your map that change player size. Shrink tunnels, giant rooms, or gradual size transitions. You place them entirely with components in the Unity project; no scripting is required.
+
+Player size is not networked: every client computes each player's size from their position vs. the zones in the map. Everyone always agrees on who is small.
+
+### Requirements
+
+Size changer components ship with **GT_CustomMapExample v6.1 and later**. Use the latest Custom Map Example project and exporter; if the Size Changer Settings component doesn't appear when you go to add a component, update your project and re-open it.
+
+### How a size changer zone is built
+
+A size changer zone is two things on the same GameObject:
+
+1. **A trigger collider** that defines the volume of the zone. Box, Sphere, Capsule, or Mesh collider. **Its `Is Trigger` checkbox must be ON.** The collider *is* the zone.
+2. **A `SizeChangerSettings` component** that configures the size behavior.
+
+> **Keep your walkable surfaces separate.** The trigger collider should not be the floor players stand on. Put the surface players walk on (a normal, non-trigger collider) on a different object.
+
+### Setting up a zone, step by step
+
+1. Create an empty GameObject where you want the zone.
+2. Add a collider and turn on **Is Trigger**. Size it to cover the volume you want affected.
+3. Add the **Size Changer Settings** component.
+4. Set **Min Scale** and **Max Scale** first; the defaults are `0`, which is not a valid size. `1` = normal gorilla size.
+5. Pick a **Type** (see the reference below).
+6. For `Continuous` or `Radius`, create empty GameObjects for **Start Pos** (and **End Pos** for Continuous) and drag them into the fields.
+7. Export your map and test in a headset.
+
+### Settings reference
+
+| Setting | What it does | Default |
+|---|---|---|
+| **Type** | How the zone computes size. **Static:** size set by `Min Scale`, transition speed set by `Static Easing` (`Max Scale` is ignored). **Continuous:** `Max Scale` at `Start Pos` -> `Min Scale` at `End Pos`, blended along the line between them. **Radius:** distance based from `Start Pos`; `Min Scale` when within `Start Radius` -> `Max Scale` when at or beyond `End Radius`. | `Static` |
+| **Static Easing** | Static mode only. Transition speed. Bigger # = slower transition. `0` = instant. | `0` |
+| **Max Scale / Min Scale** | Size range. `1` = gorilla size \| `0.01` = smallest possible. Which one applies depends on Type. **Defaults are `0`; set these before anything else.** | `0` / `0` |
+| **Start Pos / End Pos** | Transform references (empty GameObjects). Continuous uses both; Radius uses `Start Pos` only; Static uses neither. | None |
+| **Scale Away From Point** | Optional. When set, each scale change also repositions the player relative to that point, so scaling pivots around it instead of happening in place. Stops players clipping into geometry when growing in tight spaces. | None |
+| **Always Control When Entered** | Normally a zone only takes effect while the player's head is actually inside the collider volume. ON = the zone takes effect from the moment any part of the player touches the trigger until they exit it. Turn this on for thin volumes (doorways, walls, shells) that the head only passes through; with it off, those look like the zone does nothing. | Off |
+| **Priority** | Currently does nothing; leave at `0`. Overlapping zones resolve as most-recently-entered wins. | `0` |
+| **Start Radius / End Radius** | Radius mode only. Distance from `Start Pos`: inner (`Min Scale`) and outer (`Max Scale`) edges of the transition. | `0` / `0` |
+
+### Overlapping zones
+
+When a player is inside more than one zone, the most recently entered zone that currently has control wins. There is no priority system.
+
+### Tips and gotchas
+
+- **Set Min Scale and Max Scale first.** The defaults are `0`, which is not a valid size; an untouched zone shrinks players to the smallest possible size instead of doing what you expect. `1` = normal gorilla size.
+- **The zone collider must have `Is Trigger` ON.** Otherwise players bump into it instead of entering it.
+- **Thin volumes need `Always Control When Entered`.** A shrink doorway or thin wall won't do anything without it.
+- **Don't use the zone collider as a floor.** Keep walkable surfaces separate and non-trigger.
+
 
 ## Other Scripts/Prefabs
 
