@@ -14,7 +14,7 @@ Luau support as well as this repo will recieve updates so be sure to be on the l
 Scripting is done in the **Luau** programming language and starts with a simple text file. We recommend using **VS Code** with the extensions:
 
 -   `stylua` – for code formatting.
--   `luau-lsp` – a language server providing real-time feedback.
+-   `luau-lsp` – a language server providing real-time feedback. Newer versions fail to parse our type files, so you must install version **1.38.0**
 
 Type files are provided to enhance these extensions with up-to-date bindings between Gorilla Tag and Luau. You can view these files for a full list of binded features.
 
