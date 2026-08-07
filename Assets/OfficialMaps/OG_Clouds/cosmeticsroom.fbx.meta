@@ -1,0 +1,662 @@
+fileFormatVersion: 2
+guid: 5814b449def247d4f983f2b58c296317
+ModelImporter:
+  serializedVersion: 19300
+  internalIDToNameTable:
+  - first:
+      74: -954401283668573211
+    second: cosmetics room|cosmetics roomAction
+  - first:
+      74: 2685950358096666564
+    second: cosmetics room|cosmetics roomAction.001
+  - first:
+      74: 2837640546211578204
+    second: cosmetics room entrance|cosmetics roomAction
+  - first:
+      74: -3490763685801041105
+    second: cosmetics room entrance|cosmetics roomAction.001
+  - first:
+      74: 2873318464807145082
+    second: cosmetics room|cosmetics roomAction.002
+  - first:
+      74: 8479316444318818367
+    second: cosmetics room entrance|cosmetics roomAction.002
+  - first:
+      74: -9141117808039363129
+    second: cosmetics room cover|cosmetics roomAction
+  - first:
+      74: -2434829441771767381
+    second: cosmetics room cover|cosmetics roomAction.001
+  - first:
+      74: -7267351644882429635
+    second: cosmetics room cover|cosmetics roomAction.002
+  - first:
+      74: -4540682440189390712
+    second: cosmetics room|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roo
+  - first:
+      74: -8151816210929930913
+    second: cosmetics room|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roo.001
+  - first:
+      74: -5395605729374543742
+    second: cosmetics room|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roomAct
+  - first:
+      74: 5888545942575144161
+    second: cosmetics room|cosmetics room entrance.001|cosmetics room entrance|cosmeti
+  - first:
+      74: -5189385425669117048
+    second: cosmetics room|cosmetics room entrance.001|cosmetics room entrance|cosmeti.001
+  - first:
+      74: 2334468102746668228
+    second: cosmetics room|cosmetics room entrance.001|cosmetics room entrance|cosmetics
+      r
+  - first:
+      74: 1353037942121879071
+    second: cosmetics room|cosmetics room.001|cosmetics room|cosmetics roomAction.001|cosm
+  - first:
+      74: 3676613153563431654
+    second: cosmetics room|cosmetics room.001|cosmetics room|cosmetics roomAction.002|cosm
+  - first:
+      74: -4298767875288100970
+    second: cosmetics room|cosmetics room.001|cosmetics room|cosmetics roomAction|cosmetic
+  - first:
+      74: -730098557055648254
+    second: cosmetics room entrance|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roo
+  - first:
+      74: 5163435351675385797
+    second: cosmetics room entrance|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roo.001
+  - first:
+      74: 7250032312363670274
+    second: cosmetics room entrance|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roomAct
+  - first:
+      74: 7507573990653227296
+    second: cosmetics room entrance|cosmetics room entrance.001|cosmetics room entrance|cosmeti
+  - first:
+      74: 267514503258807596
+    second: cosmetics room entrance|cosmetics room entrance.001|cosmetics room entrance|cosmeti.001
+  - first:
+      74: 2773580999684648825
+    second: cosmetics room entrance|cosmetics room entrance.001|cosmetics room entrance|cosmetics
+      r
+  - first:
+      74: 225983319898962886
+    second: cosmetics room entrance|cosmetics room.001|cosmetics room|cosmetics roomAction.001|cosm
+  - first:
+      74: 4980028257479270523
+    second: cosmetics room entrance|cosmetics room.001|cosmetics room|cosmetics roomAction.002|cosm
+  - first:
+      74: -7081722841776893572
+    second: cosmetics room entrance|cosmetics room.001|cosmetics room|cosmetics roomAction|cosmetic
+  - first:
+      74: -1011355252169791763
+    second: cosmetics room cover|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roo
+  - first:
+      74: -8024746740565961497
+    second: cosmetics room cover|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roo.001
+  - first:
+      74: -5828165992201160615
+    second: cosmetics room cover|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roomAct
+  - first:
+      74: 6887490648675064790
+    second: cosmetics room cover|cosmetics room entrance.001|cosmetics room entrance|cosmeti
+  - first:
+      74: -239766168336419355
+    second: cosmetics room cover|cosmetics room entrance.001|cosmetics room entrance|cosmeti.001
+  - first:
+      74: -4888629167134540193
+    second: cosmetics room cover|cosmetics room entrance.001|cosmetics room entrance|cosmetics
+      r
+  - first:
+      74: -1552290206500695986
+    second: cosmetics room cover|cosmetics room.001|cosmetics room|cosmetics roomAction.001|cosm
+  - first:
+      74: -2628760912962465508
+    second: cosmetics room cover|cosmetics room.001|cosmetics room|cosmetics roomAction.002|cosm
+  - first:
+      74: 257106795912509645
+    second: cosmetics room cover|cosmetics room.001|cosmetics room|cosmetics roomAction|cosmetic
+  - first:
+      74: -3102479978000077984
+    second: cosmetics room|cosmetics roomAction.003
+  - first:
+      74: 1690334964487610331
+    second: cosmetics room|cosmetics roomAction.004
+  - first:
+      74: 7556887929626952109
+    second: cosmetics room entrance|cosmetics roomAction.003
+  - first:
+      74: -23942527862825845
+    second: cosmetics room entrance|cosmetics roomAction.004
+  - first:
+      74: -3658283488845162079
+    second: cosmetics room cover|cosmetics roomAction.003
+  - first:
+      74: 2500017314901422099
+    second: cosmetics room cover|cosmetics roomAction.004
+  - first:
+      74: 2212965432427459764
+    second: cosmetics roomtemp|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roo
+  - first:
+      74: -8873781979009013319
+    second: cosmetics roomtemp|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roo.001
+  - first:
+      74: 2240768695888062013
+    second: cosmetics roomtemp|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roomAct
+  - first:
+      74: 6428673257246399191
+    second: cosmetics roomtemp|cosmetics room entrance.001|cosmetics room entrance|cosmeti
+  - first:
+      74: 6519443893855737218
+    second: cosmetics roomtemp|cosmetics room entrance.001|cosmetics room entrance|cosmeti.001
+  - first:
+      74: 8510430409214845884
+    second: cosmetics roomtemp|cosmetics room entrance.001|cosmetics room entrance|cosmetics
+      r
+  - first:
+      74: -3930477301583853416
+    second: cosmetics roomtemp|cosmetics room.001|cosmetics room|cosmetics roomAction.001|cosm
+  - first:
+      74: 1108250882697780572
+    second: cosmetics roomtemp|cosmetics room.001|cosmetics room|cosmetics roomAction.002|cosm
+  - first:
+      74: 4067711065661642902
+    second: cosmetics roomtemp|cosmetics room.001|cosmetics room|cosmetics roomAction|cosmetic
+  - first:
+      74: -5130963645311869001
+    second: cosmetics roomtemp|cosmetics roomAction
+  - first:
+      74: 5585964443493559986
+    second: cosmetics roomtemp|cosmetics roomAction.001
+  - first:
+      74: 1084711011253442989
+    second: cosmetics roomtemp|cosmetics roomAction.002
+  - first:
+      74: -1038991081429646968
+    second: cosmetics roomtemp|cosmetics roomAction.003
+  - first:
+      74: 3445817402996917906
+    second: cosmetics roomtemp|cosmetics roomAction.004
+  - first:
+      74: -1091431705258853037
+    second: cosmetics room covertemp|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roo
+  - first:
+      74: 4082309752222415456
+    second: cosmetics room covertemp|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roo.001
+  - first:
+      74: -2796949689767354215
+    second: cosmetics room covertemp|cosmetics room cover.001|cosmetics room cover|cosmetics
+      roomAct
+  - first:
+      74: 1539193567114136080
+    second: cosmetics room covertemp|cosmetics room entrance.001|cosmetics room entrance|cosmeti
+  - first:
+      74: -2929763036926345445
+    second: cosmetics room covertemp|cosmetics room entrance.001|cosmetics room entrance|cosmeti.001
+  - first:
+      74: -2899370400708957137
+    second: cosmetics room covertemp|cosmetics room entrance.001|cosmetics room entrance|cosmetics
+      r
+  - first:
+      74: -1849081769602713237
+    second: cosmetics room covertemp|cosmetics room.001|cosmetics room|cosmetics
+      roomAction.001|cosm
+  - first:
+      74: 2790429155356640228
+    second: cosmetics room covertemp|cosmetics room.001|cosmetics room|cosmetics
+      roomAction.002|cosm
+  - first:
+      74: 2006548884253488577
+    second: cosmetics room covertemp|cosmetics room.001|cosmetics room|cosmetics
+      roomAction|cosmetic
+  - first:
+      74: -6308107533346114682
+    second: cosmetics room covertemp|cosmetics roomAction
+  - first:
+      74: -6296182102531944630
+    second: cosmetics room covertemp|cosmetics roomAction.001
+  - first:
+      74: -1340967342139148110
+    second: cosmetics room covertemp|cosmetics roomAction.002
+  - first:
+      74: -8871578002579918902
+    second: cosmetics room covertemp|cosmetics roomAction.003
+  - first:
+      74: 5992526090520614189
+    second: cosmetics room covertemp|cosmetics roomAction.004
+  - first:
+      74: -5311731646075385324
+    second: cosmetics room|cosmetics roomAction.005
+  - first:
+      74: 4616197994168586740
+    second: cosmetics room entrance|cosmetics roomAction.005
+  - first:
+      74: 6393726614677264601
+    second: cosmetics room cover|cosmetics roomAction.005
+  - first:
+      74: -3250128747197313304
+    second: cosmetics roomtemp|cosmetics roomAction.005
+  - first:
+      74: -1618307325257711513
+    second: cosmetics room covertemp|cosmetics roomAction.005
+  - first:
+      74: 1857299643002363311
+    second: cosmetics room entrance slippery|cosmetics room cover.001|cosmetics room
+      cover|cosmetics roo
+  - first:
+      74: -3154463888539720452
+    second: cosmetics room entrance slippery|cosmetics room cover.001|cosmetics room
+      cover|cosmetics roo.001
+  - first:
+      74: -3713271147075252871
+    second: cosmetics room entrance slippery|cosmetics room cover.001|cosmetics room
+      cover|cosmetics roomAct
+  - first:
+      74: -7283058034174639146
+    second: cosmetics room entrance slippery|cosmetics room entrance.001|cosmetics
+      room entrance|cosmeti
+  - first:
+      74: -3498100198856058965
+    second: cosmetics room entrance slippery|cosmetics room entrance.001|cosmetics
+      room entrance|cosmeti.001
+  - first:
+      74: -542939117347943461
+    second: cosmetics room entrance slippery|cosmetics room entrance.001|cosmetics
+      room entrance|cosmetics r
+  - first:
+      74: -2723688737634072868
+    second: cosmetics room entrance slippery|cosmetics room.001|cosmetics room|cosmetics
+      roomAction.001|cosm
+  - first:
+      74: -4380820169845485094
+    second: cosmetics room entrance slippery|cosmetics room.001|cosmetics room|cosmetics
+      roomAction.002|cosm
+  - first:
+      74: 1043059008323266117
+    second: cosmetics room entrance slippery|cosmetics room.001|cosmetics room|cosmetics
+      roomAction|cosmetic
+  - first:
+      74: 3640384219749050035
+    second: cosmetics room entrance slippery|cosmetics roomAction
+  - first:
+      74: 6468665834354193115
+    second: cosmetics room entrance slippery|cosmetics roomAction.001
+  - first:
+      74: 7989312796353609341
+    second: cosmetics room entrance slippery|cosmetics roomAction.002
+  - first:
+      74: 8736861505774388208
+    second: cosmetics room entrance slippery|cosmetics roomAction.003
+  - first:
+      74: -3482372112025748200
+    second: cosmetics room entrance slippery|cosmetics roomAction.004
+  - first:
+      74: 5307952104873451807
+    second: cosmetics room entrance slippery|cosmetics roomAction.005
+  - first:
+      74: 2977356290190894822
+    second: cosmetics room|cosmetics roomAction.006
+  - first:
+      74: -1221682499987160094
+    second: cosmetics room entrance|cosmetics roomAction.006
+  - first:
+      74: -543683162231806432
+    second: cosmetics room cover|cosmetics roomAction.006
+  - first:
+      74: -6584686076196582446
+    second: cosmetics roomtemp|cosmetics roomAction.006
+  - first:
+      74: 8034705404385102818
+    second: cosmetics room covertemp|cosmetics roomAction.006
+  - first:
+      74: 2844892977640167739
+    second: cosmetics room entrance slippery|cosmetics roomAction.006
+  - first:
+      74: 6108296079673112836
+    second: cosmetics room entrance force volume|cosmetics room cover.001|cosmetics
+      room cover|cosmetics roo
+  - first:
+      74: 1941662160309049454
+    second: cosmetics room entrance force volume|cosmetics room cover.001|cosmetics
+      room cover|cosmetics roo.001
+  - first:
+      74: 6672600538934302523
+    second: cosmetics room entrance force volume|cosmetics room cover.001|cosmetics
+      room cover|cosmetics roomAct
+  - first:
+      74: -5047429261545913311
+    second: cosmetics room entrance force volume|cosmetics room entrance.001|cosmetics
+      room entrance|cosmeti
+  - first:
+      74: 1216060805040689932
+    second: cosmetics room entrance force volume|cosmetics room entrance.001|cosmetics
+      room entrance|cosmeti.001
+  - first:
+      74: 3550083099692604855
+    second: cosmetics room entrance force volume|cosmetics room entrance.001|cosmetics
+      room entrance|cosmetics r
+  - first:
+      74: 5082024102654014579
+    second: cosmetics room entrance force volume|cosmetics room.001|cosmetics room|cosmetics
+      roomAction.001|cosm
+  - first:
+      74: -5723464650255165007
+    second: cosmetics room entrance force volume|cosmetics room.001|cosmetics room|cosmetics
+      roomAction.002|cosm
+  - first:
+      74: -5907067045480650306
+    second: cosmetics room entrance force volume|cosmetics room.001|cosmetics room|cosmetics
+      roomAction|cosmetic
+  - first:
+      74: -1265046511221626228
+    second: cosmetics room entrance force volume|cosmetics roomAction
+  - first:
+      74: 2693813083713014364
+    second: cosmetics room entrance force volume|cosmetics roomAction.001
+  - first:
+      74: 4339818261514472228
+    second: cosmetics room entrance force volume|cosmetics roomAction.002
+  - first:
+      74: 7535480644402804856
+    second: cosmetics room entrance force volume|cosmetics roomAction.003
+  - first:
+      74: 814084284742425443
+    second: cosmetics room entrance force volume|cosmetics roomAction.004
+  - first:
+      74: 5804730362299368898
+    second: cosmetics room entrance force volume|cosmetics roomAction.005
+  - first:
+      74: -7991412879882001204
+    second: cosmetics room entrance force volume|cosmetics roomAction.006
+  - first:
+      74: -5727479583261242848
+    second: cosmetics room|cosmetics roomAction.007
+  - first:
+      74: -4472400266496880272
+    second: cosmetics room entrance|cosmetics roomAction.007
+  - first:
+      74: 5009261394409969366
+    second: cosmetics room cover|cosmetics roomAction.007
+  - first:
+      74: 8856892940099867223
+    second: cosmetics roomtemp|cosmetics roomAction.007
+  - first:
+      74: 8565939590569172501
+    second: cosmetics room covertemp|cosmetics roomAction.007
+  - first:
+      74: 691850744296541763
+    second: cosmetics room entrance slippery|cosmetics roomAction.007
+  - first:
+      74: -1783880435454566377
+    second: cosmetics room entrance force volume|cosmetics roomAction.007
+  - first:
+      74: 6437883542206564828
+    second: cosmetics room entrance lift|cosmetics room cover.001|cosmetics room
+      cover|cosmetics roo
+  - first:
+      74: 104773091295031571
+    second: cosmetics room entrance lift|cosmetics room cover.001|cosmetics room
+      cover|cosmetics roo.001
+  - first:
+      74: 1039242079882290477
+    second: cosmetics room entrance lift|cosmetics room cover.001|cosmetics room
+      cover|cosmetics roomAct
+  - first:
+      74: 6522050361297850094
+    second: cosmetics room entrance lift|cosmetics room entrance.001|cosmetics room
+      entrance|cosmeti
+  - first:
+      74: -6196415139846563026
+    second: cosmetics room entrance lift|cosmetics room entrance.001|cosmetics room
+      entrance|cosmeti.001
+  - first:
+      74: -722711005982187468
+    second: cosmetics room entrance lift|cosmetics room entrance.001|cosmetics room
+      entrance|cosmetics r
+  - first:
+      74: -2111001260202375960
+    second: cosmetics room entrance lift|cosmetics room.001|cosmetics room|cosmetics
+      roomAction.001|cosm
+  - first:
+      74: 8754618085561694370
+    second: cosmetics room entrance lift|cosmetics room.001|cosmetics room|cosmetics
+      roomAction.002|cosm
+  - first:
+      74: -8959301702141702384
+    second: cosmetics room entrance lift|cosmetics room.001|cosmetics room|cosmetics
+      roomAction|cosmetic
+  - first:
+      74: 3153685910277187688
+    second: cosmetics room entrance lift|cosmetics roomAction
+  - first:
+      74: 2817184422325732068
+    second: cosmetics room entrance lift|cosmetics roomAction.001
+  - first:
+      74: -7841296244059221683
+    second: cosmetics room entrance lift|cosmetics roomAction.002
+  - first:
+      74: 1747406307124977859
+    second: cosmetics room entrance lift|cosmetics roomAction.003
+  - first:
+      74: 266476687183601148
+    second: cosmetics room entrance lift|cosmetics roomAction.004
+  - first:
+      74: -8229029420696546738
+    second: cosmetics room entrance lift|cosmetics roomAction.005
+  - first:
+      74: -3807668943867513721
+    second: cosmetics room entrance lift|cosmetics roomAction.006
+  - first:
+      74: -5453517242774404969
+    second: cosmetics room entrance lift|cosmetics roomAction.007
+  - first:
+      74: 6894337922592762155
+    second: cosmetics room|cosmetics roomAction.008
+  - first:
+      74: -3369237301066649935
+    second: cosmetics room entrance|cosmetics roomAction.008
+  - first:
+      74: 887043945386188747
+    second: cosmetics room cover|cosmetics roomAction.008
+  - first:
+      74: 963786193437846383
+    second: cosmetics roomtemp|cosmetics roomAction.008
+  - first:
+      74: 1340675509546470234
+    second: cosmetics room covertemp|cosmetics roomAction.008
+  - first:
+      74: 6471916122653673550
+    second: cosmetics room entrance slippery|cosmetics roomAction.008
+  - first:
+      74: -8390760170862810952
+    second: cosmetics room entrance force volume|cosmetics roomAction.008
+  - first:
+      74: -5995143834857634488
+    second: cosmetics room entrance lift|cosmetics roomAction.008
+  - first:
+      74: 6230119015935399575
+    second: cosmetics room|cosmetics roomAction.009
+  - first:
+      74: 2972050088404459882
+    second: cosmetics room entrance|cosmetics roomAction.009
+  - first:
+      74: 5226051188254636552
+    second: cosmetics room cover|cosmetics roomAction.009
+  - first:
+      74: -3885685429360210372
+    second: cosmetics roomtemp|cosmetics roomAction.009
+  - first:
+      74: -5829231340197290452
+    second: cosmetics room covertemp|cosmetics roomAction.009
+  - first:
+      74: 1606437630799228760
+    second: cosmetics room entrance slippery|cosmetics roomAction.009
+  - first:
+      74: -4520467433295741834
+    second: cosmetics room entrance force volume|cosmetics roomAction.009
+  - first:
+      74: -7772097792647881091
+    second: cosmetics room entrance lift|cosmetics roomAction.009
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: concretewall
+    second: {fileID: 2100000, guid: c7f6307adb070a540ab72b375f713e7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: corrugatedmetal
+    second: {fileID: 2100000, guid: 7bab18cc21864054a9fdf873bb666382, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: loglowres
+    second: {fileID: 2100000, guid: bf5250768c9c0c1469b0638d47f07fbb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metalscaffolding
+    second: {fileID: 2100000, guid: cab53bd60fd05ec4d99573e7e7ed6fc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roomatlas
+    second: {fileID: 2100000, guid: ed75530536cbcb9478dcca1ad4f78297, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roomatlas.001
+    second: {fileID: 2100000, guid: ed75530536cbcb9478dcca1ad4f78297, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roomatlas.002
+    second: {fileID: 2100000, guid: ed75530536cbcb9478dcca1ad4f78297, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roomatlas.003
+    second: {fileID: 2100000, guid: ed75530536cbcb9478dcca1ad4f78297, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shoppingfloor
+    second: {fileID: 2100000, guid: 99e0158aa34691841b268e095a1337cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shoppingwall
+    second: {fileID: 2100000, guid: 6c72b21e72c13b24f8d6df1261657cb8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window
+    second: {fileID: 2100000, guid: 390b655f86a58a14cab1d4f6277b2b97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: woodplanks
+    second: {fileID: 2100000, guid: 8a2494faede7ee34f80c8bbe83ccae72, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 5
+    secondaryUVAreaDistortion: 6
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 6
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
