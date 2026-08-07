@@ -543,7 +543,6 @@ When a player is inside more than one zone at once:
 
 - **The zone collider must have `Is Trigger` ON.** Otherwise players collide with it instead of entering it, and no gravity change happens.
 - **Don't use the zone collider as a floor.** Keep the surface players stand on as a separate, non-trigger collider.
-- **Default strength vs. normal gravity.** Normal Gorilla Tag gravity is around `-9.3`. A new zone defaults to `-9.81`, slightly stronger than normal, so tune Gravity Strength to taste.
 
 ## Gravity Controllers
 
