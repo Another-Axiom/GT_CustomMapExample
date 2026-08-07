@@ -7,6 +7,7 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
 
 * [Setup](#setup)
 * [Functionality Overview Map](#functionality-overview-map)
+* [Official Maps](#official-maps)
 * [Creating a map](#creating-a-map)
 * [Accessing Your Map](#accessing-your-map)
 * [Matching Gorilla Tag's Style](#matching-gorilla-tags-style)
@@ -106,6 +107,15 @@ available for Custom Maps can be used. You can also check out this map in-game b
 [Functionality Overview](https://mod.io/g/gorilla-tag/m/functionality-overview?preview=8256e9b8f815e1d6c54ec02e25766f2f)
 map on mod.io and then loading it up in Gorilla Tag. This map will continue to be updated with each new version of the 
 example project to provide examples of any new functionality we add.
+
+## Official Maps
+Also included in this project, under `Assets/OfficialMaps`, are the Unity scenes for a selection of 
+Gorilla Tag's official maps: the OG maps (`OG_Canyon`, `OG_City`, `OG_Clouds`, `OG_Forest`, and 
+`OG_Mountains`, which includes `Day`, `Night`, `Overcast`, and `Sunrise` variants) and a set of maps 
+from the rotating playlist (`Rotating_CaveMines`, `Rotating_Crawlspace`, `Rotating_DeepMines`, 
+`Rotating_Nucleus`, `Rotating_ProtoMines`, `Rotating_Swamp`, `Rotating_Taiga`, and `Rotating_Temple`).
+
+Each map folder contains the scene along with all of its materials, meshes, and textures.
 
 ## Creating a map
 For the most part, creating a map itself is the same as creating anything in Unity. However, there are a few specific 
