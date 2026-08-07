@@ -44,6 +44,12 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Settings reference](#settings-reference)
     + [Overlapping zones](#overlapping-zones)
     + [Tips and gotchas](#tips-and-gotchas)
+* [Gravity Controllers](#gravity-controllers)
+    + [Requirements](#requirements-1)
+    + [How a gravity-controlled object is built](#how-a-gravity-controlled-object-is-built)
+    + [Setting up, step by step](#setting-up-step-by-step)
+    + [Settings reference](#settings-reference-1)
+    + [Tips and gotchas](#tips-and-gotchas-1)
 * [Size Changer Zones](#size-changer-zones)
     + [Requirements](#requirements-1)
     + [How a size changer zone is built](#how-a-size-changer-zone-is-built)
@@ -538,6 +544,68 @@ When a player is inside more than one zone at once:
 - **The zone collider must have `Is Trigger` ON.** Otherwise players collide with it instead of entering it, and no gravity change happens.
 - **Don't use the zone collider as a floor.** Keep the surface players stand on as a separate, non-trigger collider.
 - **Default strength vs. normal gravity.** Normal Gorilla Tag gravity is around `-9.3`. A new zone defaults to `-9.81`, slightly stronger than normal, so tune Gravity Strength to taste.
+
+## Gravity Controllers
+
+Gravity Zones affect players out of the box, but not your map's own physics objects. A Gravity 
+Controller fixes that: put one on anything with a Rigidbody and the object falls toward whatever 
+the zones say is down. Crates that stick to a planet, cargo that stays put in a rotating room, a 
+ball you can throw around a small moon. You place it entirely with components; no scripting is required.
+
+### Requirements
+
+Gravity Controller components ship with **GT_CustomMapExample v6.2 and later**. If the Monke Gravity 
+Controller Settings component doesn't appear when you go to add a component, update your project 
+and re-open it.
+
+### How a gravity-controlled object is built
+
+1. **A Rigidbody** (`Target Rigidbody`) that receives the gravity forces. Required; the controller 
+   won't register without one.
+2. **A collider** (`Activator Collider`) that gravity zones use to detect the object entering and 
+   leaving them.
+3. **A `MonkeGravityControllerSettings` component** that configures the behavior.
+
+Leave `Target Rigidbody`, `Target Transform`, and `Activator Collider` empty to automatically use the 
+ones on the same GameObject; you only need to assign them when they live on a different object.
+
+> While the object is inside at least one gravity zone, its Rigidbody's normal `Use Gravity` is 
+> switched off automatically and restored when it leaves the last zone. Zone gravity replaces world 
+> gravity rather than fighting it.
+
+### Setting up, step by step
+
+1. Pick or create the object. Give it a Rigidbody and a collider.
+2. Add the **Monke Gravity Controller Settings** component.
+3. If the object should permanently obey one specific zone no matter where it is, drag that gravity 
+   zone into **Always In Zone**; with that set, the activator collider is optional.
+4. Turn on **Use Rotation** if the object should also rotate to keep its up axis aligned with the 
+   zone's gravity (e.g. standing upright on a planet).
+5. Export your map and test.
+
+### Settings reference
+
+| Setting | What it does | Default |
+|---|---|---|
+| **Activator Collider** | The collider zones use to detect this object. Empty = the collider on this GameObject. Optional when `Always In Zone` is set; otherwise required. | None (auto) |
+| **Target Rigidbody** | The Rigidbody that receives gravity forces. Empty = the Rigidbody on this GameObject. Kinematic rigidbodies are tracked but receive no forces. | None (auto) |
+| **Target Transform** | The transform used as the object's position when zones compute gravity, and the thing that gets rotated. Empty = this object. | None (auto) |
+| **Use Rotation** | Rotate the object so its up axis follows the zone's gravity up. Only zones with rotation enabled contribute. | Off |
+| **Instant Rotation** | Snap to the target orientation instead of turning smoothly at the zone's rotation speed. | Off |
+| **Preferred Rotation Direction** | Only matters when the object is exactly 180° upside-down relative to the target up: which way it tips over to recover (`Forward / Backward / Left / Right`, or `None` for no preference). | `Right` |
+| **Override Force Mode** | Gravity is normally applied as `Acceleration` (mass-independent, like real gravity). Turn this on to apply it with a different ForceMode instead. | Off |
+| **Force Mode Override** | The ForceMode used when the override is on (`Force` is mass-dependent; `VelocityChange`/`Impulse` are punchier). | `Force` |
+| **Always In Zone** | A gravity zone this object is treated as permanently inside, even when its activator collider isn't. | None |
+
+### Tips and gotchas
+
+- **The Rigidbody is mandatory.** No Rigidbody on the object (or assigned in the field) means the 
+  controller logs an error and does nothing.
+- **Kinematic objects don't move.** Forces only apply to non-kinematic rigidbodies.
+- **Overlapping zones resolve the same way they do for players**; see *Overlapping zones* under 
+  Gravity Zones above.
+- **Objects outside every zone fall under default gravity**, so nothing special happens until the 
+  object enters a zone (or you set `Always In Zone`).
 
 ## Size Changer Zones
 
