@@ -5,6 +5,8 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
 
 **Contents**
 
+**Contents**
+
 * [Setup](#setup)
 * [Functionality Overview Map](#functionality-overview-map)
 * [Official Maps](#official-maps)
@@ -25,7 +27,7 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Teleporter](#teleporter)
     + [Tag Zone](#tag-zone)
     + [Object Activation Trigger](#object-activation-trigger)
-	+ [Play Animation Trigger](#play-animation-trigger)
+    + [Play Animation Trigger](#play-animation-trigger)
 * [Placeholder Script and Prefabs](#placeholder-script-and-prefabs)
     + [Force Volume](#force-volume)
     + [Leaf Glider](#leaf-glider)
@@ -38,30 +40,30 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [ATM](#atm)
     + [Store Placeholders](#store-placeholders)
 * [Gravity Zones](#gravity-zones)
-    + [Requirements](#requirements)
+    + [Gravity Zone requirements](#gravity-zone-requirements)
     + [How a gravity zone is built](#how-a-gravity-zone-is-built)
-    + [Setting up a zone, step by step](#setting-up-a-zone-step-by-step)
+    + [Setting up a gravity zone, step by step](#setting-up-a-gravity-zone-step-by-step)
     + [The five zone types](#the-five-zone-types)
-    + [Settings reference](#settings-reference)
-    + [Overlapping zones](#overlapping-zones)
-    + [Tips and gotchas](#tips-and-gotchas)
+    + [Gravity Zone settings reference](#gravity-zone-settings-reference)
+    + [Overlapping gravity zones](#overlapping-gravity-zones)
+    + [Gravity Zone tips and gotchas](#gravity-zone-tips-and-gotchas)
 * [Gravity Controllers](#gravity-controllers)
-    + [Requirements](#requirements-1)
+    + [Gravity Controller requirements](#gravity-controller-requirements)
     + [How a gravity-controlled object is built](#how-a-gravity-controlled-object-is-built)
-    + [Setting up, step by step](#setting-up-step-by-step)
-    + [Settings reference](#settings-reference-1)
-    + [Tips and gotchas](#tips-and-gotchas-1)
+    + [Setting up a gravity controller, step by step](#setting-up-a-gravity-controller-step-by-step)
+    + [Gravity Controller settings reference](#gravity-controller-settings-reference)
+    + [Gravity Controller tips and gotchas](#gravity-controller-tips-and-gotchas)
 * [Size Changer Zones](#size-changer-zones)
-    + [Requirements](#requirements-1)
+    + [Size Changer requirements](#size-changer-requirements)
     + [How a size changer zone is built](#how-a-size-changer-zone-is-built)
-    + [Setting up a zone, step by step](#setting-up-a-zone-step-by-step-1)
-    + [Settings reference](#settings-reference-1)
-    + [Overlapping zones](#overlapping-zones-1)
-    + [Tips and gotchas](#tips-and-gotchas-1)
+    + [Setting up a size changer zone, step by step](#setting-up-a-size-changer-zone-step-by-step)
+    + [Size Changer settings reference](#size-changer-settings-reference)
+    + [Overlapping size changer zones](#overlapping-size-changer-zones)
+    + [Size Changer tips and gotchas](#size-changer-tips-and-gotchas)
 * [Other Scripts](#other-scriptsprefabs)
     + [Surface Override Settings](#surface-override-settings)
-	+ [Surface Mover Settings](#surface-mover-settings)
-	+ [Moving Surface Settings](#moving-surface-settings)
+    + [Surface Mover Settings](#surface-mover-settings)
+    + [Moving Surface Settings](#moving-surface-settings)
     + [Access Door Placeholder](#access-door-placeholder)
     + [Map Orientation Point](#map-orientation-point)
     + [Hand Hold Settings](#hand-hold-settings)
@@ -69,7 +71,7 @@ A Unity project to facilitate the creation of custom maps for Gorilla Tag.
     + [Destroy Pre Export](#destroy-pre-export)
     + [Inspector Note](#inspector-note)
     + [Teleport Point (Prefab)](#teleport-point-prefab)
-	+ [Cameras](#cameras)
+    + [Cameras](#cameras)
     + [Revive Station](#custom-map-revive-station)
 * [Map Entity Scripts/Prefabs](#map-entitiesprefabs)
     + [Nav Mesh Surface](#nav-mesh-surface)
@@ -337,6 +339,24 @@ This trigger script can be used to activate an animation state on all Animator c
 - `Animated Objects` - which GameObjects should activate the specified Animation state Name
 - `Animation Name` - the name of the Animation state that will be activated 
 
+**Re-triggering an animation**
+
+The trigger tells each Animator to play the named state. If the Animator is still sitting in that 
+state, which is where it ends up after a one-shot animation finishes unless it transitions away, 
+telling it to play the same state again does nothing. This is why a trigger can appear to work once 
+and then never again until the object is disabled and re-enabled.
+
+To make an animation re-triggerable, give the state somewhere to go when it finishes:
+
+1. In your Animator Controller, create a new empty state (right click > Create State > Empty) and 
+   leave it with no motion.
+2. Add a transition from your animation state to the empty state, with `Has Exit Time` checked and 
+   no conditions.
+3. Leave the trigger's `Animation Name` pointing at your animation state.
+
+When the animation finishes, the Animator moves to the empty state, and the next trigger plays the 
+animation from the start.
+
 ## Placeholder Script and Prefabs
 The `GTObjectPlaceholder` script defines an object that will get replaced by an existing Gorilla Tag script/object when your map is loaded 
 in-game. Each has a prefab in the `Assets/MapPrefabs/` folder that can or should be used depending on the placeholder selected for 
@@ -373,6 +393,13 @@ It includes a visual preview and can be scaled as desired.
 If you'd like to customize the collider shape used for a Water Volume, you can set the `Use Default Placeholder` option to FALSE, 
 and add your collider component alongside the `GTObjectPlaceholder` script.
 Check out the `FunctionalityOverview_StartingZone` and `FunctionalityOverview_OceanZone` scenes for some examples.
+
+**Custom water meshes and rotation**
+
+When using your own mesh for the water surface, keep the water object's rotation at (0, 0, 0). 
+Rotated water objects are not reliably supported. If your water needs to slope or face a different 
+direction, build that orientation into the mesh itself in your modeling tool instead of rotating 
+the object in the scene.
 
 ### Hoverboard Area
 The Hoverboard Area placeholder allows you to define an area where players are allowed to use Hoverboards. The `HoverboardArea` prefab has the 
@@ -440,7 +467,7 @@ There are five zone types:
 - **Torus Zone:** gravity pulls toward a ring, for donut-shaped worlds
 - **Consensus Gravity Zone:** gravity leans toward wherever the players inside the zone are (advanced)
 
-### Requirements
+### Gravity Zone requirements
 
 Gravity zone components ship with **Custom Map Support version 5 and later**. Use the latest Custom Map Example project and exporter. If the gravity components don't appear when you go to add a component, update your project's Custom Map Support runtime to the current version, then re-open the project.
 
@@ -457,7 +484,7 @@ The gravity zone component only stores settings. When your map loads in-game, th
 
 > **Keep your walkable surfaces separate.** The trigger collider should not be the floor players stand on. Put the surface players walk on (a normal, non-trigger collider) on a different object. If the zone collider isn't a trigger, players will physically bump into it instead of entering it.
 
-### Setting up a zone, step by step
+### Setting up a gravity zone, step by step
 
 1. Create an empty GameObject where you want the zone.
 2. Add a collider (Box, Sphere, Capsule, or Mesh) and turn on **Is Trigger**. Size it to cover the volume you want affected.
@@ -488,7 +515,7 @@ Gravity pulls toward a ring centered on the GameObject's up axis, letting player
 
 An advanced zone where the gravity direction leans toward where the players currently inside the zone are, rather than a fixed direction. Best treated as experimental: tune it and test with multiple players.
 
-### Settings reference
+### Gravity Zone settings reference
 
 #### Shared settings (on every zone type)
 
@@ -542,14 +569,14 @@ These are advanced tuning values for how the zone's gravity settles toward the p
 | **Rot Min** | `-45` |
 | **Rot Max** | `45` |
 
-### Overlapping zones
+### Overlapping gravity zones
 
 When a player is inside more than one zone at once:
 
 1. **Authority Level** is checked first: the highest authority level wins, and lower ones are ignored.
 2. If zones share the same authority level, their **Gravity Rule** (`Newest` / `Closest` / `Additive`) decides how they combine.
 
-### Tips and gotchas
+### Gravity Zone tips and gotchas
 
 - **The zone collider must have `Is Trigger` ON.** Otherwise players collide with it instead of entering it, and no gravity change happens.
 - **Don't use the zone collider as a floor.** Keep the surface players stand on as a separate, non-trigger collider.
@@ -561,7 +588,7 @@ Controller fixes that: put one on anything with a Rigidbody and the object falls
 the zones say is down. Crates that stick to a planet, cargo that stays put in a rotating room, a 
 ball you can throw around a small moon. You place it entirely with components; no scripting is required.
 
-### Requirements
+### Gravity Controller requirements
 
 Gravity Controller components ship with **GT_CustomMapExample v6.2 and later**. If the Monke Gravity 
 Controller Settings component doesn't appear when you go to add a component, update your project 
@@ -582,7 +609,7 @@ ones on the same GameObject; you only need to assign them when they live on a di
 > switched off automatically and restored when it leaves the last zone. Zone gravity replaces world 
 > gravity rather than fighting it.
 
-### Setting up, step by step
+### Setting up a gravity controller, step by step
 
 1. Pick or create the object. Give it a Rigidbody and a collider.
 2. Add the **Monke Gravity Controller Settings** component.
@@ -592,7 +619,7 @@ ones on the same GameObject; you only need to assign them when they live on a di
    zone's gravity (e.g. standing upright on a planet).
 5. Export your map and test.
 
-### Settings reference
+### Gravity Controller settings reference
 
 | Setting | What it does | Default |
 |---|---|---|
@@ -606,13 +633,13 @@ ones on the same GameObject; you only need to assign them when they live on a di
 | **Force Mode Override** | The ForceMode used when the override is on (`Force` is mass-dependent; `VelocityChange`/`Impulse` are punchier). | `Force` |
 | **Always In Zone** | A gravity zone this object is treated as permanently inside, even when its activator collider isn't. | None |
 
-### Tips and gotchas
+### Gravity Controller tips and gotchas
 
 - **The Rigidbody is mandatory.** No Rigidbody on the object (or assigned in the field) means the 
   controller logs an error and does nothing.
 - **Kinematic objects don't move.** Forces only apply to non-kinematic rigidbodies.
-- **Overlapping zones resolve the same way they do for players**; see *Overlapping zones* under 
-  Gravity Zones above.
+- **Overlapping zones resolve the same way they do for players**; see *Overlapping gravity zones* 
+  above.
 - **Objects outside every zone fall under default gravity**, so nothing special happens until the 
   object enters a zone (or you set `Always In Zone`).
 
@@ -622,7 +649,7 @@ Size Changer Zones let you drop regions into your map that change player size. S
 
 Player size is not networked: every client computes each player's size from their position vs. the zones in the map. Everyone always agrees on who is small.
 
-### Requirements
+### Size Changer requirements
 
 Size changer components ship with **GT_CustomMapExample v6.1 and later**. Use the latest Custom Map Example project and exporter; if the Size Changer Settings component doesn't appear when you go to add a component, update your project and re-open it.
 
@@ -635,7 +662,7 @@ A size changer zone is two things on the same GameObject:
 
 > **Keep your walkable surfaces separate.** The trigger collider should not be the floor players stand on. Put the surface players walk on (a normal, non-trigger collider) on a different object.
 
-### Setting up a zone, step by step
+### Setting up a size changer zone, step by step
 
 1. Create an empty GameObject where you want the zone.
 2. Add a collider and turn on **Is Trigger**. Size it to cover the volume you want affected.
@@ -645,7 +672,7 @@ A size changer zone is two things on the same GameObject:
 6. For `Continuous` or `Radius`, create empty GameObjects for **Start Pos** (and **End Pos** for Continuous) and drag them into the fields.
 7. Export your map and test in a headset.
 
-### Settings reference
+### Size Changer settings reference
 
 | Setting | What it does | Default |
 |---|---|---|
@@ -658,11 +685,11 @@ A size changer zone is two things on the same GameObject:
 | **Priority** | Currently does nothing; leave at `0`. Overlapping zones resolve as most-recently-entered wins. | `0` |
 | **Start Radius / End Radius** | Radius mode only. Distance from `Start Pos`: inner (`Min Scale`) and outer (`Max Scale`) edges of the transition. | `0` / `0` |
 
-### Overlapping zones
+### Overlapping size changer zones
 
 When a player is inside more than one zone, the most recently entered zone that currently has control wins. There is no priority system.
 
-### Tips and gotchas
+### Size Changer tips and gotchas
 
 - **Set Min Scale and Max Scale first.** The defaults are `0`, which is not a valid size; an untouched zone shrinks players to the smallest possible size instead of doing what you expect. `1` = normal gorilla size.
 - **The zone collider must have `Is Trigger` ON.** Otherwise players bump into it instead of entering it.
