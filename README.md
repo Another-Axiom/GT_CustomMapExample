@@ -197,6 +197,7 @@ example Lava Shader Settings which also uses the Plane Liquid Shape but with the
 The `Zone Shader Settings Trigger` and prefab found in `Assets/MapPrefabs/` can be used to switch between different 
 `Zone Shader Settings`. It can be used with a Collider component with `IsTrigger` set to TRUE, or it has an option 
 called `Activate On Enable` which, if set to TRUE, can be used alongside an `Object Activation Trigger`.
+When used as a trigger collider, it fires on the player's **body** collider.
 
 ## Lighting
 An important part of making a map look good is the lighting. Since Gorilla Tag bakes lighting, the process to get it 
@@ -293,6 +294,13 @@ component with `Is Trigger` set to true. All trigger scripts have several common
 - `Retrigger After Duration` - Should this Trigger re-trigger if a player stays inside it for long enough?
 - `Retrigger Stay Duration` - How long does a player need to stay inside the Trigger before it re-triggers?
     - NOTE: If `General Retrigger Delay` is larger, that value will be used for this instead.
+- `Validation Distance` - Only used when `Synced To All Players` is on. When another player's device reports this 
+  trigger firing, your client only accepts it if you're within this distance of the trigger (2m minimum). Leave it 
+  at the default unless synced triggers misfire across a large map.
+
+> **Note:** a trigger with a finite `Num Allowed Triggers` disables its own colliders once it reaches the limit, and 
+> stops responding until something resets it. An `Object Activation Trigger`'s `Triggers To Reset` turns the colliders 
+> back on. If a capped trigger seems to "die," this is why.
 
 ### Map Boundary
 This trigger script will teleport the player to a random (or specific) Transform and optionally can Tag the player when 
@@ -313,6 +321,10 @@ Check out the FunctionalityOverview scenes for some examples.
 **Additonal Options**
 - `Teleport Points` - One or more points the player will be teleported to when activating this trigger. If more than one
   point is defined, it will be chosen at random.
+- `Match Teleport Point Rotation` - If on, the player is rotated to face the same direction as the teleport point 
+  they land on. Useful for gravity-zone maps and for aiming the player after a teleport.
+- `Maintain Velocity` - If on, the player keeps their current velocity through the teleport instead of having it 
+  zeroed. Use this for launch pads and momentum tubes; leave it off for a normal "stop and place" teleport.
 
 ### Tag Zone
 This trigger script will Tag any activating player. This script is included in the `TagZone` prefab in the `Assets/MapPrefabs/` 
@@ -331,6 +343,8 @@ Check out the FunctionalityOverview scenes for some examples.
 - `Triggers To Reset` - List of Triggers that will be Reset when this Trigger is triggered
    - Reseting a trigger means its current `Trigger Count` and `Last Trigger Time` will be reset. GameObjects in the activate/deactivate
      lists are not affected by this. 
+- `Only Reset Trigger Count` - When resetting the triggers above, only reset their trigger count and leave their 
+  last trigger time alone. Off by default, which resets both.
 
 ## Play Animation Trigger
 This trigger script can be used to activate an animation state on all Animator components on the specified GameObjects.
@@ -363,13 +377,36 @@ in-game. Each has a prefab in the `Assets/MapPrefabs/` folder that can or should
 the `Placeholder Object` setting.
 
 ### Force Volume 
-This is used in Gorilla Tag for things like the elevator to Sky Jungle and the invisible wind barriers preventing players from 
-falling out of the that map. The `ForceVolumePlaceholder` prefab has the `GTObjectPlaceholder` script setup to use the `Force Volume` 
-option and includes some default settings (each of which has a tooltip when hovered that provides more info). The prefab includes a visual 
-preview and can be scaled as desired. 
-If you'd like to customize the collider shape used for a Force Volume, you can set the `Use Default Placeholder` option to FALSE, 
-and add your collider component alongside the `GTObjectPlaceholder` script.
-Check out the `FunctionalityOverview_StartingZone` scene for some examples.
+This is used in Gorilla Tag for things like the elevator to Clouds and the invisible wind barriers preventing players 
+from falling out of that map. The `ForceVolumePlaceholder` prefab has the `GTObjectPlaceholder` script setup to use the 
+`Force Volume` option and includes some default settings. The prefab includes a visual preview and can be scaled as desired.
+
+A Force Volume pushes the player along the **Y-axis (up axis) of the volume**, so rotate the object to aim the force. If you'd 
+like to customize the collider shape, set `Use Default Placeholder` to FALSE and add your own collider component alongside the 
+`GTObjectPlaceholder` script.
+
+The settings fall into three groups:
+
+**Speed**
+- `Acceleration` (m/s^2, 0-120) - How quickly the player accelerates toward the max speed. Example: an acceleration of 10 
+  reaches a max speed of 50 over 5 seconds. Very low accelerations can cause VR discomfort, so test them.
+- `Max Speed` (m/s, 0-120) - The fastest the player can move along the volume's Y-axis.
+- `Max Depth` (-1 to 100) - How far toward the center of the volume the player can travel before their closing velocity is 
+  forced to 0. Set to `-1` to disable.
+
+**Friction** (dampens the player's existing velocity, like a time-scaled spring)
+- `Override Gorilla Slip to 100%` - While inside the volume, all surfaces become maximally slippery.
+- `Dampen On X-Axis %` (0-100) - How much to cut the player's existing velocity on the volume's X axis.
+- `Dampen On Z-Axis %` (0-100) - How much to cut the player's existing velocity on the volume's Z axis.
+
+**Pull To Center** (drags the player toward the volume's Y-axis line)
+- `Apply Pull To Center` - Enables the centering pull.
+- `Acceleration` (m/s^2, 0-500) - How hard the player is pulled toward the center.
+- `Max Speed` (m/s, 0-500) - The fastest the centering pull can move the player.
+- `Min Distance` (0.0001-0.5) - The player must be at least this far from the center line before the centering force kicks in.
+
+You can also assign Enter, Exit, Loop, and Loop Crescendo audio clips to play as the player enters, stays in, and leaves the 
+volume. Check out the `FunctionalityOverview_StartingZone` scene for some examples.
 
 ### Leaf Glider 
 The `LeafGliderPlaceholder` prefab has the `GTObjectPlaceholder` script setup to use the `Leaf Glider` option and includes a visual preview 
@@ -378,7 +415,7 @@ script. Scaling the placeholder will not affect the leaf glider that it gets rep
 Check out the `FunctionalityOverview_StartingZone` scene for some examples.
 
 ### Glider Wind Volume 
-This is used in Gorilla Tag in Sky Jungle to send the Leaf Gliders into the air. The `GliderWindVolumePlaceholder` prefab has the 
+This is used in Gorilla Tag in Clouds to send the Leaf Gliders into the air. The `GliderWindVolumePlaceholder` prefab has the 
 `GTObjectPlaceholder` script setup to use the `Glider Wind Volume` option and includes some default settings. It also includes a visual 
 preview, but if you change the `Local Wind Direction` setting the arrows in the preview will not be pointed the correct way. This 
 prefab/placeholder can be scaled as desired. 
@@ -710,6 +747,7 @@ If you want to modify how climbing works on an object, you can add a `Surface Ov
   object. (Must be higher than 1)
 - `Slide Percentage` - A number that decides how "slippery" an object is when used for climbing. Default value is 0.0 which is
   the least slippery an object can be. Higher values are more slippery with a maximum of 1.0 meaning the object is unclimbable.
+- `Disable Push Back Effect` - Turns off the small push-back the surface normally applies when a player contacts it. Off by default.
 
 Each of the FunctionalityOverview scenes has examples of this, but the `FunctionalityOverview_OceanZone` scene has some specific examples of the Sound Override setting, 
 and the `FunctionalityOverview_ScriptsZone` scene has an example of the Extra Vel settings.
@@ -749,7 +787,9 @@ scenes won't load in correctly.
 This component can be used to create grab points in your map. It needs to be added to a GameObject alongside a Collider component.
 
 **Script Options:**
-- `Hand Snap Method` - Used to change if and how the players hand will snap to the mesh when they grab it.
+- `Hand Snap Method` - How the player's hand snaps to the mesh when they grab it. Options: `None` (no snap), 
+  `SnapToCenterPoint`, `SnapToNearestEdge`, and `SnapToXAxisPoint` / `SnapToYAxisPoint` / `SnapToZAxisPoint` (snap along a 
+  single local axis).
 - `Rotate Player When Held` - Used if you want the player to be able to rotate their body while grabbing this object
 - `Allow Pre Grab` - Used to allow players to press the Grab button before actually colliding with this object, and still allow the grab.
 Check out the `FunctionalityOverview_ScriptsZone` scene for some examples.
@@ -805,6 +845,9 @@ To setup a new `NavMeshSurface` component, make sure to set the `AgentType` to o
 Nav Mesh itself. You can use the `Show Gizmos` button on the Scene viewport to see a preview of your baked NavMesh. Check out the AI Section of the 
 `FunctionalityOverview_StartingZone` for an example NavMesh setup.
 
+> **Note:** the per-type Nav Agent settings (and any new agent types you add) are ignored once your map is loaded in-game; 
+> Gorilla Tag uses its own built-in agent-type settings. Pick the type that best fits your agent rather than retuning them.
+
 ![NavMesh](https://github.com/user-attachments/assets/6ad79039-231e-498a-bdab-f973d6eab6ac)
 
 ### AI Agent
@@ -818,8 +861,50 @@ Check out the `FunctionalityOverview_StartingZone` scene's AI And Grabbable sect
 - `EntityTypeID` - This is used to distinguish each Agent type that the `MapSpawnManager` can create. Make sure each `IsTemplate` Agent you created has a unique `EntityTypeID`.
   On pre-placed AI Agents, this is used to tell the `MapSpawnManager` which Agent type to spawn in it's place.
 
-Most other options for `AIAgent` are only editable on AI Agents with `IsTemplate` set to true. These properties control various settings for navigation and 
-behavior-specific options for the Search, Chase, and Attack behaviors.
+Most other options are only editable on AI Agents with `IsTemplate` set to true, and control navigation, targeting, and the 
+Search / Chase / Attack behaviors.
+
+**Behaviors**
+- `Agent Behaviours` - The behaviors this agent uses (Search, Chase, Attack) and their priority. **Priority is the list order: 
+  if the first behavior in the list can execute, every behavior after it is skipped.** Only one instance of each behavior is 
+  used; duplicates are ignored. An empty list means the agent does nothing unless driven by a Luau script.
+
+**Navigation**
+- `Nav Agent Type` - Which NavMesh agent type (Humanoid, Small, Medium, Large) the agent uses. Your scene must contain a baked 
+  NavMesh for that type; check `Window > AI > Navigation > Agents` for each type's settings.
+- `Movement Speed` - The agent's max movement speed.
+- `Acceleration` - How quickly it reaches max speed.
+- `Turn Speed` - How quickly it can turn.
+
+**Searching for targets**
+- `Sight Dist` - How close a player must be before the agent considers them a target.
+- `Lose Sight Dist` - The distance at which the agent loses sight of a player and stops targeting them.
+- `Sight FOV` - The agent's field of view when searching for players (360 max).
+- `Allow Targeting Tagged Players` - If on, the agent can target already-tagged players in non-custom game modes; if off, it 
+  ignores tagged players in those modes.
+- `Remember Lose Sight Position` - If on, the agent keeps moving to the target's last known position after losing sight; if 
+  off, it stops the moment it loses sight.
+
+**Chasing**
+- `Stop Dist` - How close the agent gets to a player when chasing. Setting this too small can leave players stuck inside the 
+  agent's colliders.
+
+**Attacking**
+- `Attack Dist` - The distance at which the agent starts attacking.
+- `Use Colliders` - If on, attacks are driven by trigger colliders on the agent (keep them small and attached to "damaging" 
+  parts like hands or a weapon; oversized colliders break attacks). If off, attacks are driven purely by `Attack Dist`.
+- `Stop Moving To Attack` - If on, the agent stops the instant it starts an attack; if off, it finishes its current move while 
+  attacking.
+- `Damage Amount` - Damage dealt per attack.
+- `Time Between Attacks` - Seconds between attacks.
+- `Attack Anim Name` - The animation state to play when attacking.
+- `Anim Blend Time` - Seconds to blend into the attack animation (`0` switches instantly).
+- `Damage Delay After Playing Anim` - Seconds to delay the damage event after the attack animation starts. Only used when 
+  `Use Colliders` is off; useful when your attack animation has a long windup.
+- `Attack Type` - How a hit is handled:
+    - `Tag` - No damage; the agent tags the player instead. In the Custom game mode this sends a `taggedByAI` event to your Luau script.
+    - `UseGT` - Deals damage through Gorilla Tag's built-in health, death, and revive systems.
+    - `UseLuau` - Sends a `playerHit` event with the damage amount to Luau, so you control what happens (but you can't use GT's built-in systems).
 
 <img width="405" height="485" alt="ai_agent" src="https://github.com/user-attachments/assets/ef369ae5-9b70-4b3e-900c-f0638fc71e1e" />
 
@@ -840,6 +925,9 @@ Check out the `FunctionalityOverview_StartingZone` scene's AI And Grabbable sect
   On pre-placed Grabbable Entities, this is used to tell the `MapSpawnManager` which entity type to spawn in it's place.
 
 Most other options for `GrabbableEntity` are only editable on Grabbable Entities with `IsTemplate` set to true.
+
+These include optional grab and throw sounds: `Catch Sound` (and `Catch Sound Volume`) play when a player grabs the entity, 
+and `Throw Sound` (and `Throw Sound Volume`) play when they throw it. Assign an `Audio Source` on the entity for these to play.
 
 ![grabbableentityprops](https://github.com/user-attachments/assets/bb3f8aa6-c8a4-445b-a981-28e3e9560ff6)
 
@@ -875,6 +963,8 @@ This is the prefab used to determine where scenes are loaded and/or unloaded. It
 a preview mesh to help with sizing and placement. All scenes added to the `Scenes In Build` section of the `Build Settings` window will be listed 
 under the `Load Zone Settings` script in two sections: `Scenes to Load` and `Scenes to Unload`. The `Use Dynamic Lighting` option allows you to 
 change the state of UberShader Dynamic Lighting via the Zone Load Trigger. 
+
+> **Note:** a Zone Load Trigger only fires on the player's **body** collider, regardless of any Triggered By setting.
 
 ### Multi Map Lightmapping
 Currently there are only two ways to use lightmaps with loading multiple scenes
