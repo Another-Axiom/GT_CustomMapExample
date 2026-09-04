@@ -399,6 +399,32 @@ These values are updated every frame and can be read during `tick()` to respond 
 
 ----------
 
+### **Player Scale**
+
+You can resize players using the `scaleMultiplier` property. This works like a Size Changer zone, `1` is normal size, `0.5` is half size, `2` is double size. Values are clamped between `0.3` and `10`.
+
+-   Scale is **not networked**. Setting it only changes what the local client sees, so send it with `emitEvent()` and have every client apply it in `onEvent()`.
+-   It multiplies with any Size Changer zone the player is standing in.
+-   Changes apply instantly. Setting it back to `1` eases the player back to normal size.
+
+Example:
+```lua
+function onEvent(tag, data)
+	if tag == "touchedPlayer" then
+		emitEvent("shrink", { data })
+		onEvent("shrink", { data })
+	elseif tag == "shrink" then
+		data[1].scaleMultiplier = 0.5
+	end
+end
+
+function tick() end
+```
+
+> **Note:** Players who join later see everyone at `1`, so re-send sizes when the player count changes.
+
+----------
+
 ## **Tick Function**
 
 The `tick()` function is called every frame, making it essential for continuous processing. Use this function to handle tasks like:
