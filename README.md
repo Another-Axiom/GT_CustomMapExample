@@ -1005,6 +1005,7 @@ This tab contains all the export settings for your map.
   `<AppData>/LocalLow/Another Axiom/Gorilla Tag/script.luau` and if present, that script will be loaded when you reload the LUA script instead
   of the one packaged with your map.
 - `Max Players` - Use this to set the maximum amount of players allowed in Public rooms for your map. This setting is ignored for Private rooms.
+- `Allow Twenty Player Rooms` - If checked, your map supports rooms of up to 20 players. `Max Players` is ignored when this is enabled.
 - `Available Game Modes` - This list controls which Game Modes will be playable on your map in Gorilla Tag. Select up to 4. Casual is always available and cannot be added here.
 - `Default Game Mode` - This is the Default Game Mode that your map will switch to when loaded in Gorilla Tag
 - `Use Uber Shader Dynamic Lighting` - If checked, UberShader Dynamic Lighting will be enabled when the initial scene is loaded
