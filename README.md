@@ -944,9 +944,11 @@ The green death effect isn't a material property you set. When the local player 
 - `_GT_DesaturateAndTint_TintColor` - the green tint color
 - `_GT_GameLight_Ambient_Color` - darkened while dead
 
-Only materials using the UberShader react to these, and only while [UberShader Dynamic Lighting](#ubershader-dynamic-lighting) is enabled
-(`Use Uber Shader Dynamic Lighting` on the MapDescriptor, or `Use Dynamic Lighting` on a Zone Load Trigger). Materials using other shaders,
-or any material while Dynamic Lighting is off, won't show the death tint.
+Where the tint shows up depends on what's being rendered:
+- Gorilla Tag's own assets (the Virtual Stump, player rigs) always show the tint.
+- Materials in your map using the UberShader only show it while [UberShader Dynamic Lighting](#ubershader-dynamic-lighting) is enabled
+  (`Use Uber Shader Dynamic Lighting` on the MapDescriptor, or `Use Dynamic Lighting` on a Zone Load Trigger).
+- Materials using other shaders never show it.
 
 **Tips**
 - Test in a room. Players who aren't in a room can't die; GT keeps them alive.
