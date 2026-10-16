@@ -1,0 +1,57 @@
+name: Release
+
+# Builds the three release zips (Full / Minimal / UpdatesOnly) and publishes a
+# GitHub Release. No Unity or DLL build is needed - the DLLs are committed, so
+# this only packages tracked files from the tagged commit.
+#
+# Trigger: push a tag like v6.4  ->  git push origin v6.4
+# Or run manually from the Actions tab for an existing tag (workflow_dispatch).
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to (re)build a release for, e.g. v6.4'
+        required: true
+      draft:
+        description: 'Create the release as a draft (edit before publishing)'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve tag
+        id: vars
+        run: echo "tag=${{ github.event.inputs.tag || github.ref_name }}" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout tag (full history for diff/describe)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.vars.outputs.tag }}
+          fetch-depth: 0
+
+      - name: Build release zips
+        run: bash .github/release/pack.sh "${{ steps.vars.outputs.tag }}" "" dist
+
+      - name: Generate release notes
+        run: bash .github/release/release-body.sh "${{ steps.vars.outputs.tag }}" "" > dist/BODY.md
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DRAFT_FLAG: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.draft == 'false') && ' ' || '--draft' }}
+        run: |
+          gh release create "${{ steps.vars.outputs.tag }}" \
+            --repo "${{ github.repository }}" \
+            --title "${{ steps.vars.outputs.tag }}" \
+            --notes-file dist/BODY.md \
+            $DRAFT_FLAG \
+            dist/*.zip
