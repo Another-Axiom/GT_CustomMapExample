@@ -111,6 +111,34 @@ Some events from Gorilla Tag will be sent to your script via the `onEvent()` fun
                           Only sent in Infection-style and Custom gamemodes. `data` will be `nil`.
 - `agentDestroyed` - This indicates an AIAgent was destroyed, `data` will be the AIAgent's `entityID`
 - `touchedPlayer` - This indicates the local player touched another player. `data` will be the `Player` they touched
+- `entityGrabbed` - This indicates a Grabbable Entity was picked up, `data` will be the entity's `entityID`
+- `entityReleased` - This indicates a Grabbable Entity was let go, `data` will be the entity's `entityID`
+- `entityDestroyed` - This indicates a Grabbable Entity was destroyed, `data` will be the entity's ID
+
+### **AI Agent Attack Events**
+
+These are sent based on an AI Agent's `Attack Type`. They're only sent on the hit player's own client, and `data` is a **table**
+rather than a single value:
+
+- `taggedByAI` - Sent when an agent with `Attack Type` set to `Tag` hits the local player in the Custom gamemode.
+  - `data[1]` - the agent's `entityID`
+  - `data[2]` - the hit player's `playerID`
+- `playerHit` - Sent when an agent with `Attack Type` set to `UseLuau` hits the local player.
+  - `data[1]` - the agent's `entityID`
+  - `data[2]` - the hit player's `playerID`
+  - `data[3]` - the agent's `Damage Amount`
+
+Agents using `UseGT` don't send an event; damage, death and revive are handled by Gorilla Tag (see "GT Health System" in the README).
+
+```lua
+function onEvent(tag, data)
+    if tag == "playerHit" then
+        local agent = AIAgent.getAIAgentByEntityID(data[1])
+        local damage = data[3]
+        -- apply your own health logic here
+    end
+end
+```
 
 ----------
 
